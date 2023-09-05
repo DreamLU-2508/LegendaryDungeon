@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0750f86984fd14cacdd94fb6a7628a, type: 3}
+  m_Name: RoomNodeListType
+  m_EditorClassIdentifier: 
+  list:
+  - disPlayInRoomNodeGraph: 1
+    type: 0
+    RoomName: None
+  - disPlayInRoomNodeGraph: 1
+    type: 4
+    RoomName: Boss Room
+  - disPlayInRoomNodeGraph: 1
+    type: 1
+    RoomName: Small Room
+  - disPlayInRoomNodeGraph: 1
+    type: 2
+    RoomName: Medium Room
+  - disPlayInRoomNodeGraph: 1
+    type: 3
+    RoomName: Large Room
+  - disPlayInRoomNodeGraph: 1
+    type: 5
+    RoomName: Entrance
+  - disPlayInRoomNodeGraph: 1
+    type: 6
+    RoomName: Corridor
+  - disPlayInRoomNodeGraph: 1
+    type: 7
+    RoomName: Corridor EW
+  - disPlayInRoomNodeGraph: 1
+    type: 8
+    RoomName: Corridor NS
+  - disPlayInRoomNodeGraph: 1
+    type: 9
+    RoomName: Chess Room
+  - disPlayInRoomNodeGraph: 1
+    type: 10
+    RoomName: Upgrade Room
+  - disPlayInRoomNodeGraph: 1
+    type: 11
+    RoomName: Exchange Room
+  - disPlayInRoomNodeGraph: 1
+    type: 12
+    RoomName: Special Exchange Room
