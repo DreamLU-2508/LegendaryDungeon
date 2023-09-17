@@ -28,6 +28,22 @@ namespace DreamLU
 
         private void HandleMovement()
         {
+            float hor = Input.GetAxisRaw("Horizontal");
+            float ver = Input.GetAxisRaw("Vertical");
+
+            Vector2 dir = new Vector2(hor, ver);
+
+            if(hor != 0 && ver != 0)
+            {
+                dir *= 0.7f;
+            }
+
+            if(dir != Vector2.zero)
+            {
+                character.SetMovement(dir);
+                return;
+            }
+
             character.SetIdle();
         }
 

@@ -11,4 +11,7 @@ public static class Settings
     public static int aimLeft = Animator.StringToHash("aimLeft");
     public static int isIdle = Animator.StringToHash("isIdle");
     public static int isMoving = Animator.StringToHash("isMoving");
+
+    // Move speed
+    public static int baseMoveSpeed = 1400;
 }
