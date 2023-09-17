@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7908390483017211164}
   - component: {fileID: 4960037636922054148}
   - component: {fileID: 6997311086476929694}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5881606760628547175}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: WeaponShootPostion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5269480160091145436}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: WeaponEffectPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 559273547284775187}
   - component: {fileID: 768537363901608343}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: HandNoWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8855253412979901735}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: WeaponRotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6306089774559008041}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: WeaponAnchorPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,9 +342,9 @@ GameObject:
   - component: {fileID: 3751238802339075810}
   - component: {fileID: 6035685984503909904}
   - component: {fileID: 5527635431544836369}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TheGeneral
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4031315086190042892}
   - component: {fileID: 5528427621633914732}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
