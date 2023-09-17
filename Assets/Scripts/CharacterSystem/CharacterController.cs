@@ -12,11 +12,13 @@ namespace DreamLU
 
         private Character character;
         private Camera _camera;
+        private FireWeapon fireWeapon;
 
         private void Awake()
         {
             character = GetComponent<Character>();
             _camera = Camera.main;
+            fireWeapon = GetComponent<FireWeapon>();
         }
 
         private void Update()
@@ -60,7 +62,16 @@ namespace DreamLU
 
             character.SetAimAnimation(playerAimDir);
             aimController.Aim(playerAimDir, weaponAngle);
+
+            ShootWeapon(weaponDirection, weaponAngle, playerAngle, playerAimDir);
+        }
+
+        private void ShootWeapon(Vector3 weaponDirection, float weaponAngle, float playerAngle, AimDirection playerAimDir)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                fireWeapon.OnFire(playerAngle, weaponAngle, weaponDirection);
+            }
         }
     }
-
 }

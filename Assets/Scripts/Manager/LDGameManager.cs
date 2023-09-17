@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 namespace DreamLU
 {
     [DefaultExecutionOrder(-101)]
-    public class LDGameManager : MonoBehaviour
+    public class LDGameManager : MonoBehaviour, IGameStateProvider
     {
         [SerializeField] private CharacterData defaultHeroData;
         [SerializeField] private GameStateMachine gameStateMachine;
@@ -16,11 +16,14 @@ namespace DreamLU
         [SerializeField] private Camera _camera;
 
         [SerializeField] private GameConfig _gameConfig;
+        [SerializeField] private WeaponDataManifest _weaponDataManifest;
 
         public static LDGameManager Instance;
 
         private Character _character;
         private Transform targetTransform;
+
+        public GameConfig GameConfig { get { return _gameConfig; } }
 
         private void Awake()
         {
@@ -79,6 +82,16 @@ namespace DreamLU
             targetTransform = _character.transform;
             SetCameraFollow(targetTransform, 0);
             SetVirtualCameraDamping(1, 1, 1);
+
+            // init wepon
+            if(_weaponDataManifest.TryGetWeapon(defaultHeroData.weaponID, out var wpData))
+            {
+                _character.SetWeapon(wpData);
+            }
+            else
+            {
+                Debug.LogError("Set Wp Error");
+            }
         }
 
         /// <summary>

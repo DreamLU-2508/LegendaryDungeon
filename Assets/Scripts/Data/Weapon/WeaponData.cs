@@ -19,5 +19,7 @@ namespace DreamLU
         // Thời gian delay bắn của vũ khí
         public float weaponPrechargeTime = 0f;
 
+        [Header("Ammo Prefab")]
+        public AmmoData ammoData;
     }
 }

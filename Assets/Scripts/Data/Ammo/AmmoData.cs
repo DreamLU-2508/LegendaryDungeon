@@ -22,6 +22,9 @@ namespace DreamLU
         public float rotationSpeed = 1f;
         public Vector2 minMaxSpread;
         public Vector2 minMaxSpawnAmount;
+
+        [Header("prefab")]
+        public GameObject prefab;
     }
 
 }

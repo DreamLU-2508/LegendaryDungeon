@@ -12,5 +12,7 @@ namespace DreamLU
     public class GameConfig : ScriptableObject
     {
         public PlayTarget target;
+
+        public float fireRateCoolDown = 0.2f;
     }
 }
