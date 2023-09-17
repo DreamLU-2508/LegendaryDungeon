@@ -6,6 +6,13 @@ using UnityEngine.TextCore.Text;
 
 namespace DreamLU
 {
+    public enum StatsAniamtion
+    {
+        None,
+        Idle,
+        Move
+    }
+
     [RequireComponent(typeof(SortingGroup))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
@@ -18,6 +25,7 @@ namespace DreamLU
     {
         private Animator animator;
         private Rigidbody2D rigidbody2D;
+        private StatsAniamtion statsAniamtion = StatsAniamtion.None;
 
         private void Awake()
         {
@@ -28,6 +36,7 @@ namespace DreamLU
         private void Start()
         {
             ResetAimAnimation();
+            SetIdle();
         }
 
         private void ResetAimAnimation()
@@ -42,9 +51,26 @@ namespace DreamLU
 
         public void SetIdle()
         {
-            animator.SetBool(Settings.isMoving, false);
-            animator.SetBool(Settings.isIdle, true);
+            if(statsAniamtion != StatsAniamtion.Idle)
+            {
+                animator.SetBool(Settings.isMoving, false);
+                animator.SetBool(Settings.isIdle, true);
+                statsAniamtion = StatsAniamtion.Idle;
+            }
             rigidbody2D.velocity = Vector3.zero;
+        }
+
+        public void SetMovement(Vector2 moveDir)
+        {
+            if (statsAniamtion != StatsAniamtion.Move)
+            {
+                animator.SetBool(Settings.isMoving, true);
+                animator.SetBool(Settings.isIdle, false);
+                statsAniamtion = StatsAniamtion.Move;
+            }
+
+            rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed * Time.deltaTime;
+            //rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed;
         }
 
         public void SetAimAnimation(AimDirection direction)
