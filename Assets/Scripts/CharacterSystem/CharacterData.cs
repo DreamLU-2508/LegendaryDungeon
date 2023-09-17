@@ -18,6 +18,8 @@ namespace DreamLU
         public Sprite handSprite;
         public AssetReference characterPrefab;
 
+        [Header("Starting Weapon")]
+        public WeaponID weaponID;
     }
 
 }

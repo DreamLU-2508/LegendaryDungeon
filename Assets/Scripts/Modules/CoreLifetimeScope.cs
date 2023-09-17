@@ -18,8 +18,10 @@ namespace DreamLU
             _Instance = this;
 
             CharacterManager characterManager = FindObjectOfType<CharacterManager>();
+            LDGameManager gameManager = FindObjectOfType<LDGameManager>();
 
             builder.RegisterInstance(characterManager).AsImplementedInterfaces();
+            builder.RegisterInstance(gameManager).AsImplementedInterfaces();
         }
     }
 

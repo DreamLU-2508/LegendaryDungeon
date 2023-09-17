@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolArray:
   - poolSize: 30
-    prefab: {fileID: 8650751078005071167, guid: b6c1389f7c301484dba7abe5a7a7d37e, type: 3}
-    componentType: DreamLU.TestAnimation
+    prefab: {fileID: 2496300576252047035, guid: d2f8ac5de29879f4283e4d915a25798f, type: 3}
+    componentType: DreamLU.IAmmo

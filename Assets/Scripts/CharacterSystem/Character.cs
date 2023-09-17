@@ -23,9 +23,16 @@ namespace DreamLU
 
     public class Character : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer wpSprite;
+        [SerializeField] private Transform weaponShootPosition;
+
         private Animator animator;
         private Rigidbody2D rigidbody2D;
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
+
+        private WeaponData _weaponData;
+
+        public WeaponData WeaponData => _weaponData;
 
         private void Awake()
         {
@@ -102,6 +109,19 @@ namespace DreamLU
                     animator.SetBool(Settings.aimDown, true);
                     break;
             }
+        }
+
+        public void SetWeapon(WeaponData weaponData)
+        {
+            this._weaponData = weaponData;
+
+            wpSprite.sprite = weaponData.weaponSprite;
+            weaponShootPosition.localPosition = weaponData.weaponShootPosition;
+        }
+
+        public Vector3 GetWeaponShootPosition()
+        {
+            return weaponShootPosition.position;
         }
     }
 }

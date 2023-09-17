@@ -14,4 +14,6 @@ public static class Settings
 
     // Move speed
     public static int baseMoveSpeed = 1400;
+
+    public static float useAimAngleDistance = 3.5f;
 }

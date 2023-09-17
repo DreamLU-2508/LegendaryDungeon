@@ -344,6 +344,7 @@ MonoBehaviour:
   _trackingCamera: {fileID: 814665132}
   _camera: {fileID: 519420031}
   _gameConfig: {fileID: 11400000, guid: 599419ad193059d42b6e2967a23dc4b6, type: 2}
+  _weaponDataManifest: {fileID: 11400000, guid: d2faabbdd05baed4ebc7b95a56420cd7, type: 2}
 --- !u!1 &462333678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,10 +1052,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2357596396467934924, guid: 6fa12913843cc454996efdddbb389d49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3354430686454141106, guid: 6fa12913843cc454996efdddbb389d49, type: 3}
-      propertyPath: poolArray.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
