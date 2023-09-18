@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453947a6ddd974e4a8d1de7de42e9a7f, type: 3}
   m_Name: Enemey_GrimonkBrown
   m_EditorClassIdentifier: 
-  enemeyID: 0
-  enemyName: 
-  prefab: {fileID: 0}
+  enemeyID: 1
+  enemyName: Grimonk Brown
+  prefab: {fileID: 1663180384312432028, guid: 7aa32e1e602ef5e4b8420a61696ff0ca, type: 3}
