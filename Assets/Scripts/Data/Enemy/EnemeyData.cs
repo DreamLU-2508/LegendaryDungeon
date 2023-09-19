@@ -10,6 +10,8 @@ namespace DreamLU
         public EnemeyID enemeyID;
         public string enemyName;
         public GameObject prefab;
+
+        public float enemySpeed;
     }
 
 }

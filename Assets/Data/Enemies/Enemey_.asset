@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453947a6ddd974e4a8d1de7de42e9a7f, type: 3}
-  m_Name: Enemey_GrimonkBrown
+  m_Name: Enemey_
   m_EditorClassIdentifier: 
   enemeyID: 1
   enemyName: Grimonk Brown
