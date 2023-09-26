@@ -15,6 +15,7 @@ namespace DreamLU
         public bool isUnavailable = false;
     }
 
+    [System.Serializable]
     public struct DoorwayCopy
     {
         public Vector2Int position;

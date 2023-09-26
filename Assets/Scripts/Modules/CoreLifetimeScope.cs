@@ -19,9 +19,11 @@ namespace DreamLU
 
             CharacterManager characterManager = FindObjectOfType<CharacterManager>();
             LDGameManager gameManager = FindObjectOfType<LDGameManager>();
+            DungeonBuilder dungeonBuilder = FindObjectOfType<DungeonBuilder>();
 
             builder.RegisterInstance(characterManager).AsImplementedInterfaces();
             builder.RegisterInstance(gameManager).AsImplementedInterfaces();
+            builder.RegisterInstance(dungeonBuilder).AsImplementedInterfaces();
         }
     }
 
