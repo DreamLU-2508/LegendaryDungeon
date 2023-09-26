@@ -14,5 +14,6 @@ namespace DreamLU
         public PlayTarget target;
 
         public float fireRateCoolDown = 0.2f;
+        public float distanceFollowCharacter = 10f;
     }
 }
