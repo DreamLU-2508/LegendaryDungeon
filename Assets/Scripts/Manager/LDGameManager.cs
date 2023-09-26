@@ -1,13 +1,14 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace DreamLU
 {
     [DefaultExecutionOrder(-101)]
-    public class LDGameManager : MonoBehaviour, IGameStateProvider
+    public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider
     {
         [SerializeField] private CharacterData defaultHeroData;
         [SerializeField] private GameStateMachine gameStateMachine;
@@ -117,6 +118,16 @@ namespace DreamLU
                 cinemachineTransposer.m_YDamping = yDamping;
                 cinemachineTransposer.m_ZDamping = zDamping;
             }
+        }
+
+        public Vector3 GetTargetPosition()
+        {
+            if (_character == null)
+            {
+                return Vector3.zero;
+            }
+
+            return _character.transform.position;
         }
     }
 }
