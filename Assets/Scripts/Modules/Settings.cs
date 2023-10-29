@@ -12,6 +12,11 @@ public static class Settings
     public static int isIdle = Animator.StringToHash("isIdle");
     public static int isMoving = Animator.StringToHash("isMoving");
 
+    public static int rollUp = Animator.StringToHash("rollUp");
+    public static int rollRight = Animator.StringToHash("rollRight");
+    public static int rollLeft = Animator.StringToHash("rollLeft");
+    public static int rollDown = Animator.StringToHash("rollDown");
+
     // Move speed
     public static int baseMoveSpeed = 10;
 

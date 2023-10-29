@@ -27,6 +27,11 @@ namespace DreamLU
         private Transform targetTransform;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
+        public Transform HeroTransform => targetTransform;
+        public StateID CurrentMasterGameState => gameStateMachine?.CurrentState ?? StateID.None;
+
+        // event
+        public event System.Action OnInitializeCharacter;
 
         private void Awake()
         {
@@ -121,6 +126,8 @@ namespace DreamLU
             {
                 Debug.LogError("Set Wp Error");
             }
+
+            OnInitializeCharacter?.Invoke();
         }
 
         /// <summary>

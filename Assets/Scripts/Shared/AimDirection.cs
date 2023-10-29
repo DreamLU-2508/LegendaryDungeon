@@ -9,4 +9,9 @@ namespace DreamLU
         Left,
         Down,
     }
+
+    public enum Direction
+    {
+        Up, Down, Left, Right,
+    }
 }

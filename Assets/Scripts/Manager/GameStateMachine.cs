@@ -8,6 +8,7 @@ namespace DreamLU
 {
     public enum StateID
     {
+        None,
         GameStart = 0,
         Normal,
         Pause,
