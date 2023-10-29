@@ -24,6 +24,7 @@ namespace DreamLU
         private bool _isMovementLocked;
         private bool _isActionLocked = false;
         private bool _characterInitialized = false;
+        private CharacterSkill _characterSkill;
 
         public Transform CharacterTransform => characterTransform;
 
@@ -58,7 +59,7 @@ namespace DreamLU
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    ActivateAction(CharacterActionID.Dash);
+                    ActivateAction(_characterSkill.defaultSkill);
                 }
 
                 //if (_heroInvulnerableTimer > 0)
@@ -84,6 +85,8 @@ namespace DreamLU
                 CoreLifetimeScope.SharedContainer.Inject(actionDef.action);
                 actionDef.action.Setup();
             }
+
+            _characterSkill = gameManager.CharacterSkill;
         }
 
         void ActivateAction(CharacterActionID actionID)
