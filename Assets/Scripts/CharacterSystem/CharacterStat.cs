@@ -9,5 +9,6 @@ namespace DreamLU
     {
         public int maxHealth;
         public int maxMana;
+        public int shield;
     }
 }
