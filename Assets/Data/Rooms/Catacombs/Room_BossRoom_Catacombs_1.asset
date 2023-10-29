@@ -32,7 +32,7 @@ MonoBehaviour:
     orientation: 2
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
-      position: {x: 2, y: -2}
+      position: {x: 2, y: 3}
       width: 5
       height: 6
     isConnected: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
     orientation: 4
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
-      position: {x: 29, y: 33}
-      width: 6
+      position: {x: 31, y: 33}
+      width: 4
       height: 8
     isConnected: 0
     isUnavailable: 0
@@ -51,11 +51,9 @@ MonoBehaviour:
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
       position: {x: -24, y: 33}
-      width: 6
+      width: 4
       height: 8
     isConnected: 0
     isUnavailable: 0
-  spawnPositionArray:
-  - {x: -6, y: 28}
-  - {x: 5, y: 27}
-  - {x: 19, y: 27}
+  spawnPositionArray: []
+  enemyAmount: 0

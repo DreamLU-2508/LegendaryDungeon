@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,9 +28,12 @@ namespace DreamLU
         [TableList]
         [SerializeField] public List<Doorway> doorwayList;
         public Vector2Int[] spawnPositionArray;
-        public List<Doorway> GetDoorwayList()
+
+        public int enemyAmount = 0;
+
+        public List<Doorway> CloneDoorwayList()
         {
-            return doorwayList;
+            return this.doorwayList.Select(item => item.Clone()).ToList();
         }
 
         #region Validation

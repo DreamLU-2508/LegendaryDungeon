@@ -20,7 +20,7 @@ MonoBehaviour:
   upperBounds: {x: 18, y: 32}
   doorwayList:
   - position: {x: 7, y: 32}
-    orientation: 0
+    orientation: 1
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
       position: {x: 4, y: 32}
@@ -32,9 +32,9 @@ MonoBehaviour:
     orientation: 2
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
-      position: {x: 4, y: -3}
-      width: 5
-      height: 11
+      position: {x: 2, y: 10}
+      width: 9
+      height: 14
     isConnected: 0
     isUnavailable: 0
   - position: {x: 18, y: 17}
@@ -60,3 +60,4 @@ MonoBehaviour:
   - {x: 11, y: 22}
   - {x: 4, y: 12}
   - {x: 13, y: 12}
+  enemyAmount: 0

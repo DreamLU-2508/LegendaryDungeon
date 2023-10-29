@@ -76,8 +76,9 @@ namespace DreamLU
                 statsAniamtion = StatsAniamtion.Move;
             }
 
-            rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed * Time.deltaTime;
-            //rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed;
+            //rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed * Time.deltaTime;
+            rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed;
+            //rigidbody2D.MovePosition(rigidbody2D.position + moveDir * Settings.baseMoveSpeed * Time.deltaTime);
         }
 
         public void SetAimAnimation(AimDirection direction)

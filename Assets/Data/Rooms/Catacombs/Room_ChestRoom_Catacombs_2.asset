@@ -32,9 +32,9 @@ MonoBehaviour:
     orientation: 2
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
-      position: {x: 19, y: 6}
-      width: 5
-      height: 3
+      position: {x: 17, y: 9}
+      width: 9
+      height: 4
     isConnected: 0
     isUnavailable: 0
   - position: {x: 37, y: 15}

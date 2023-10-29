@@ -32,7 +32,7 @@ MonoBehaviour:
     orientation: 2
     doorPrefab: {fileID: 0}
     doorwayStartCopy:
-      position: {x: 16, y: 5}
+      position: {x: 16, y: 9}
       width: 5
       height: 5
     isConnected: 0
@@ -63,3 +63,4 @@ MonoBehaviour:
   - {x: 30, y: 18}
   - {x: 12, y: 11}
   - {x: 26, y: 11}
+  enemyAmount: 5

@@ -27,11 +27,12 @@ namespace DreamLU
             float distance = Vector3.Distance(this.transform.position, _positionProvider.GetTargetPosition());
             if (!isFollowCharacter && distance > _gameStateProvider.GameConfig.distanceFollowCharacter)
             {
+                enemy.CanFire = false;
                 return;
             }
 
             if(!isFollowCharacter) isFollowCharacter = true;
-
+            enemy.CanFire = true;
             this.transform.position = Vector3.MoveTowards(this.transform.position, _positionProvider.GetTargetPosition(), enemy.Data.enemySpeed * Time.deltaTime);
             enemy.SetAnimationMovement(this.transform.position, _positionProvider.GetTargetPosition());
         }

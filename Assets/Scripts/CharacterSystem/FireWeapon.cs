@@ -7,24 +7,24 @@ namespace DreamLU
 {
     public class FireWeapon : MonoBehaviour
     {
-        private Character character;
+        protected Character character;
 
-        private float fireRateCoolDown = 0;
+        protected float fireRateCoolDown = 0;
 
-        private IGameStateProvider gameStateProvider;
+        protected IGameStateProvider gameStateProvider;
 
-        private void Awake()
+        protected void Awake()
         {
             character = GetComponent<Character>();
             gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
         }
 
-        private void Update()
+        protected void Update()
         {
             fireRateCoolDown -= Time.deltaTime;
         }
 
-        public void OnFire(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector)
+        public virtual void OnFire(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector)
         {
             if(character.WeaponData == null) return;
 
@@ -44,7 +44,7 @@ namespace DreamLU
             }
         }
 
-        public void ResetCooldown()
+        public virtual void ResetCooldown()
         {
             fireRateCoolDown = gameStateProvider.GameConfig.fireRateCoolDown;
         }

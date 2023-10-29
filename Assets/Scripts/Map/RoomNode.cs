@@ -198,6 +198,24 @@ namespace DreamLU
 
             return false;
         }
+
+        public IEnumerable<RoomNode> GetChildRoomNode()
+        {
+            foreach(var childID  in childRoomNodeIDList)
+            {
+                yield return GetChildRoomNodeByID(childID);
+            }
+        }
+
+        private RoomNode GetChildRoomNodeByID(string childId)
+        {
+            if(roomNodeGraph.roomNodesDictionary.TryGetValue(childId, out var childRoomNode))
+            {
+                return childRoomNode;
+            }
+
+            return null;
+        }
     }
 
 }

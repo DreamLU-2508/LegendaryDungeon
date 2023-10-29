@@ -13,6 +13,24 @@ namespace DreamLU
 
         public bool isConnected = false;
         public bool isUnavailable = false;
+
+        public Doorway Clone()
+        {
+            return new Doorway()
+            {
+                position = this.position,
+                orientation = this.orientation,
+                doorPrefab = this.doorPrefab,
+                doorwayStartCopy = new DoorwayCopy()
+                {
+                    position = doorwayStartCopy.position,
+                    width = doorwayStartCopy.width,
+                    height = doorwayStartCopy.height
+                },
+                isConnected = this.isConnected,
+                isUnavailable = this.isUnavailable
+            };
+        }
     }
 
     [System.Serializable]
