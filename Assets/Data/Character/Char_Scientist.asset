@@ -27,3 +27,5 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   weaponID: 1
+  defaultAction: 1
+  ultimateAction: 4

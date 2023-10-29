@@ -7,6 +7,12 @@ using UnityEngine.AddressableAssets;
 
 namespace DreamLU
 {
+    public struct CharacterSkill
+    {
+        public CharacterActionID defaultSkill;
+        public CharacterActionID ultimateSkill;
+    }
+
     [DefaultExecutionOrder(-101)]
     public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider
     {
@@ -25,10 +31,24 @@ namespace DreamLU
 
         private Character _character;
         private Transform targetTransform;
+        private CharacterSkill _characterSkill;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         public Transform HeroTransform => targetTransform;
-        public StateID CurrentMasterGameState => gameStateMachine?.CurrentState ?? StateID.None;
+        public StateID CurrentMasterGameState 
+        {
+            get
+            {
+                if(gameStateMachine != null)
+                {
+                    return gameStateMachine.CurrentState;
+                }
+
+                return StateID.None;
+            }
+        }
+
+        public CharacterSkill CharacterSkill => _characterSkill;
 
         // event
         public event System.Action OnInitializeCharacter;
@@ -126,6 +146,13 @@ namespace DreamLU
             {
                 Debug.LogError("Set Wp Error");
             }
+
+            // int Skill
+            _characterSkill = new CharacterSkill()
+            {
+                defaultSkill = selectedCharacter.defaultAction,
+                ultimateSkill = selectedCharacter.ultimateAction
+            };
 
             OnInitializeCharacter?.Invoke();
         }

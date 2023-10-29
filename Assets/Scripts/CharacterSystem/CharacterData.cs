@@ -20,6 +20,10 @@ namespace DreamLU
 
         [Header("Starting Weapon")]
         public WeaponID weaponID;
+
+        [Header("Skill")]
+        public CharacterActionID defaultAction;
+        public CharacterActionID ultimateAction;
     }
 
 }
