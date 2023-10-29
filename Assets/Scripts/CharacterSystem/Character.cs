@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
+using VContainer;
 
 namespace DreamLU
 {
@@ -10,7 +11,8 @@ namespace DreamLU
     {
         None,
         Idle,
-        Move
+        Move,
+        Dash
     }
 
     [RequireComponent(typeof(SortingGroup))]
@@ -26,6 +28,8 @@ namespace DreamLU
         [SerializeField] private SpriteRenderer wpSprite;
         [SerializeField] private Transform weaponShootPosition;
 
+        private ICharacterActor _characterActor;
+
         private Animator animator;
         private Rigidbody2D rigidbody2D;
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
@@ -38,11 +42,13 @@ namespace DreamLU
         {
             animator = GetComponent<Animator>();
             rigidbody2D = GetComponent<Rigidbody2D>();
+            _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
         }
 
         private void Start()
         {
             ResetAimAnimation();
+            ResetDashAnimation();
             SetIdle();
         }
 
@@ -56,9 +62,19 @@ namespace DreamLU
             animator.SetBool(Settings.aimDown, false);
         }
 
+        public void ResetDashAnimation()
+        {
+            animator.SetBool(Settings.rollDown, false);
+            animator.SetBool(Settings.rollLeft, false);
+            animator.SetBool(Settings.rollRight, false);
+            animator.SetBool(Settings.rollUp, false);
+        }
+
         public void SetIdle()
         {
-            if(statsAniamtion != StatsAniamtion.Idle)
+            if (statsAniamtion == StatsAniamtion.Dash) return;
+
+            if (statsAniamtion != StatsAniamtion.Idle)
             {
                 animator.SetBool(Settings.isMoving, false);
                 animator.SetBool(Settings.isIdle, true);
@@ -69,16 +85,41 @@ namespace DreamLU
 
         public void SetMovement(Vector2 moveDir)
         {
+            if (_characterActor.IsMovementLocked) return;
+
             if (statsAniamtion != StatsAniamtion.Move)
             {
                 animator.SetBool(Settings.isMoving, true);
                 animator.SetBool(Settings.isIdle, false);
+                ResetDashAnimation();
                 statsAniamtion = StatsAniamtion.Move;
             }
 
-            //rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed * Time.deltaTime;
             rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed;
-            //rigidbody2D.MovePosition(rigidbody2D.position + moveDir * Settings.baseMoveSpeed * Time.deltaTime);
+        }
+
+        public void SetDash(Direction Dir)
+        {
+            animator.SetBool(Settings.isMoving, false);
+            animator.SetBool(Settings.isIdle, false);
+            ResetDashAnimation();
+            statsAniamtion = StatsAniamtion.Dash;
+
+            switch (Dir)
+            {
+                case Direction.Left:
+                    animator.SetBool(Settings.rollLeft, true);
+                    break;
+                case Direction.Right:
+                    animator.SetBool(Settings.rollRight, true);
+                    break;
+                case Direction.Up:
+                    animator.SetBool(Settings.rollUp, true);
+                    break;
+                case Direction.Down:
+                    animator.SetBool(Settings.rollDown, true);
+                    break;
+            }
         }
 
         public void SetAimAnimation(AimDirection direction)
@@ -123,6 +164,11 @@ namespace DreamLU
         public Vector3 GetWeaponShootPosition()
         {
             return weaponShootPosition.position;
+        }
+
+        public void SetStatsAniamtion(StatsAniamtion stats)
+        {
+            statsAniamtion = stats;
         }
     }
 }
