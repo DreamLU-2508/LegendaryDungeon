@@ -14,6 +14,8 @@ namespace DreamLU
 
         protected SpriteRenderer spriteRenderer;
         protected AmmoData ammoData;
+        private Vector3 positonTarget;
+        private bool isTargetChar = false;
 
         protected virtual void Awake()
         {
@@ -22,7 +24,14 @@ namespace DreamLU
 
         protected virtual void Update()
         {
-            
+            if(isTargetChar)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, positonTarget, this.ammoSpeed * Time.deltaTime);
+                if(transform.position == positonTarget)
+                {
+                    DisableAmmo();
+                }
+            }
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -44,6 +53,18 @@ namespace DreamLU
             this.ammoSpeed = Random.Range(data.minMaxSpeed.x, data.minMaxSpeed.y);
             this.overrideAmmoMovement = overrideAmmoMovement;
 
+            this.gameObject.SetActive(true);
+        }
+
+        public virtual void OnCreateAmmo(AmmoData data, Vector3 target)
+        {
+            this.ammoData = data;
+            spriteRenderer.sprite = data.ammoSprite;
+            this.ammoRange = data.range;
+            this.ammoSpeed = Random.Range(data.minMaxSpeed.x, data.minMaxSpeed.y);
+
+            isTargetChar = true;
+            positonTarget = target;
             this.gameObject.SetActive(true);
         }
 

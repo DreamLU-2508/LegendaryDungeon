@@ -12,6 +12,7 @@ namespace DreamLU
         public GameObject prefab;
 
         public float enemySpeed;
+        public AmmoData ammoData;
     }
 
 }

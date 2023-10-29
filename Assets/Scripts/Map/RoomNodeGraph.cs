@@ -31,6 +31,22 @@ namespace DreamLU
             }
         }
 
+        public RoomNode GetRoomNodeByType(RoomType roomType)
+        {
+            if(roomNodes != null && roomNodes.Count > 0)
+            {
+                foreach(var roomNode in roomNodes)
+                {
+                    if(roomNode.roomNodeType.type == roomType)
+                    {
+                        return roomNode;
+                    }
+                }
+            }
+
+            return null;
+        }
+
 #if UNITY_EDITOR
 
         public RoomNode roomNodeStartDrawLine = null;

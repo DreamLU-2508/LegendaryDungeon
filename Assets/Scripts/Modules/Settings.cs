@@ -13,7 +13,7 @@ public static class Settings
     public static int isMoving = Animator.StringToHash("isMoving");
 
     // Move speed
-    public static int baseMoveSpeed = 1400;
+    public static int baseMoveSpeed = 10;
 
     public static float useAimAngleDistance = 3.5f;
 }

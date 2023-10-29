@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DreamLU
@@ -15,6 +15,11 @@ namespace DreamLU
             }
 
             return false;
+        }
+
+        public static List<T> Clone<T>(List<T> listToClone) where T : System.ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
         }
     }
 }

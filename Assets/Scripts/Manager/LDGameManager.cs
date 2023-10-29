@@ -15,6 +15,8 @@ namespace DreamLU
         [SerializeField] private List<Transform> autoInitializationList;
         [SerializeField] private CinemachineVirtualCamera _trackingCamera;
         [SerializeField] private Camera _camera;
+        [SerializeField] private DungeonBuilder _dungeonBuilder;
+        [SerializeField] private EnemyManager _enemyManager;
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
@@ -56,9 +58,12 @@ namespace DreamLU
         {
             if (_gameConfig.target == PlayTarget.Demo)
             {
-                // If PlayTarget is Demo, init character
-                gameStateMachine.ChangeState(StateID.Normal);
-                InitializeCharacter();
+                if (_dungeonBuilder.GenerateDungeon())
+                {
+                    // If PlayTarget is Demo, init character
+                    gameStateMachine.ChangeState(StateID.Normal);
+                    InitializeCharacter();
+                }
             }
         }
 
@@ -66,6 +71,28 @@ namespace DreamLU
         void Update()
         {
             //CharacterUtilities.GetMouseWorldPosition(_camera);
+            if (_gameConfig.target == PlayTarget.Demo)
+            {
+                if (Input.GetKeyDown(KeyCode.G) && Input.GetKey(KeyCode.LeftControl))
+                {
+                    if (_dungeonBuilder.GenerateDungeon())
+                    {
+                        // If PlayTarget is Demo, init character
+                        gameStateMachine.ChangeState(StateID.Normal);
+                        if (_character != null)
+                        {
+                            _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
+                            SetCameraFollow(targetTransform, 1);
+                        }
+                        else
+                        {
+                            InitializeCharacter();
+                        }
+                        _enemyManager.OnStopSpawnEnemy();
+                    }
+                }
+                    
+            }
         }
 
         void InitializeCharacter()
@@ -81,6 +108,7 @@ namespace DreamLU
 
             _character = fxObj.GetComponent<Character>();
             targetTransform = _character.transform;
+            _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
             SetCameraFollow(targetTransform, 0);
             SetVirtualCameraDamping(1, 1, 1);
 

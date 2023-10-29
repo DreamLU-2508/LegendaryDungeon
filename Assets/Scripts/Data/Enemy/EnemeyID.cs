@@ -3,7 +3,9 @@ namespace DreamLU
     public enum EnemeyID
     {
        None,
-       GrimonkBrown
+       GrimonkBrown,
+       Hedusa,
+       Orc
     }
 
 }

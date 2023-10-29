@@ -15,5 +15,7 @@ namespace DreamLU
 
         public float fireRateCoolDown = 0.2f;
         public float distanceFollowCharacter = 10f;
+        public float maxSpawnEnemyInRoom = 10;
+
     }
 }

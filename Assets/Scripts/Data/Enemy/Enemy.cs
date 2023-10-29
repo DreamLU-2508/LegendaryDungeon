@@ -20,8 +20,14 @@ namespace DreamLU
 
         private EnemeyData _enemeyData;
         private bool isDie = true;
+        private bool canFire = false;
 
         public EnemeyData Data => _enemeyData;
+        public bool CanFire
+        {
+            get { return canFire; }
+            set { canFire = value; }
+        }
         public bool IsDie => isDie;
 
         private int health = 10;
@@ -120,6 +126,7 @@ namespace DreamLU
         {
             this.gameObject.SetActive(false);
             isDie = true;
+            Destroy(this.gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
