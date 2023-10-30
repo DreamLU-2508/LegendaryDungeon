@@ -13,6 +13,8 @@ namespace DreamLU
         [SerializeField] private float teleportDuration = 0.25f;
         [SerializeField] private Ease teleportEase = Ease.Linear;
         [SerializeField] private float dashWaitDelay = 0.2f;
+        [SerializeField] private GameObject vfxSkill;
+        [SerializeField] private float offsetHeight;
 
         private Animator _animator;
         private Vector3 _teleportDirection;
@@ -60,6 +62,11 @@ namespace DreamLU
 
             _targetPosition = tf.position + (_teleportDirection * teleportDistance);
             _characterActor.IsMovementLocked = true;
+
+            var pos = _targetPosition;
+            var explosionObj = GameObject.Instantiate(vfxSkill, null);
+            explosionObj.transform.position = pos + new Vector3(0, offsetHeight, 0);
+            GameObject.Destroy(explosionObj, 2);
 
             var holdX = false;
             float lastX = 0;
