@@ -37,11 +37,26 @@ namespace DreamLU
                 float ammoSpeed = Random.Range(ammoData.minMaxSpeed.x, ammoData.minMaxSpeed.y);
 
                 IAmmo ammo = (IAmmo)PoolManager.Instance.ReuseComponent(ammoPrefab, character.GetWeaponShootPosition(), Quaternion.identity);
-
                 ammo.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+
+                if (character.UseSkillDoubleGun)
+                {
+                    StartCoroutine(WaitShot(() =>
+                    {
+                        IAmmo ammo2 = (IAmmo)PoolManager.Instance.ReuseComponent(ammoPrefab, character.GetWeaponSecondShootPosition(), Quaternion.identity);
+                        ammo2.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+                    }));
+                }
 
                 ResetCooldown();
             }
+        }
+
+        IEnumerator WaitShot(System.Action callback)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            callback?.Invoke();
         }
 
         public virtual void ResetCooldown()

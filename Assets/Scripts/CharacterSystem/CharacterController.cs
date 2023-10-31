@@ -8,6 +8,7 @@ namespace DreamLU
     public class CharacterController : MonoBehaviour
     {
         [SerializeField] private Transform weaponShootPosition;
+        [SerializeField] private Transform weaponSecondShootPosition;
         [SerializeField] private CharacterAimController aimController;
 
         private Character character;
@@ -25,7 +26,12 @@ namespace DreamLU
         {
             HandleMovement();
 
-            HandleAim();
+            HandleAim(weaponShootPosition);
+
+            if(character.UseSkillDoubleGun)
+            {
+                HandleAim(weaponSecondShootPosition);
+            }
         }
 
         private void HandleMovement()
@@ -49,7 +55,7 @@ namespace DreamLU
             character.SetIdle();
         }
 
-        private void HandleAim()
+        private void HandleAim(Transform weaponShootPosition)
         {
             Vector3 mouseWorldPos = CharacterUtilities.GetMouseWorldPosition(_camera);
             Vector3 weaponDirection = mouseWorldPos - weaponShootPosition.position;
@@ -61,7 +67,11 @@ namespace DreamLU
             AimDirection playerAimDir = CharacterUtilities.GetAimDirection(playerAngle);
 
             character.SetAimAnimation(playerAimDir);
-            aimController.Aim(playerAimDir, weaponAngle);
+            aimController.Aim1(playerAimDir, weaponAngle);
+            if (character.UseSkillDoubleGun)
+            {
+                aimController.Aim2(playerAimDir, weaponAngle);
+            }
 
             ShootWeapon(weaponDirection, weaponAngle, playerAngle, playerAimDir);
         }
