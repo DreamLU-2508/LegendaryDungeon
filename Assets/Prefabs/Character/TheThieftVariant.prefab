@@ -11,6 +11,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1582739124, guid: 6e4f14aaaaa95c140bc70001e091a079, type: 3}
+    - target: {fileID: 2679652470407990253, guid: 295d24a008de3e2469176acf6cdd65a7, type: 3}
+      propertyPath: m_Size.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679652470407990253, guid: 295d24a008de3e2469176acf6cdd65a7, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679652470407990253, guid: 295d24a008de3e2469176acf6cdd65a7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a8c352369ed75924d84743672d1ab512, type: 3}
+    - target: {fileID: 2679652470407990253, guid: 295d24a008de3e2469176acf6cdd65a7, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3080359548076543047, guid: 295d24a008de3e2469176acf6cdd65a7, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
       value: 0.38

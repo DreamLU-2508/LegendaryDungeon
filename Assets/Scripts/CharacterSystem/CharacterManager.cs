@@ -62,6 +62,10 @@ namespace DreamLU
                     ActivateAction(_characterSkill.defaultSkill);
                 }
 
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    ActivateAction(_characterSkill.ultimateSkill);
+                }
                 //if (_heroInvulnerableTimer > 0)
                 //{
                 //    _heroInvulnerableTimer -= Time.deltaTime;

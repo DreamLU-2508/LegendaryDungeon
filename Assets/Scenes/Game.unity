@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9f08d0dabeecc479b081edfda483e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultHeroData: {fileID: 11400000, guid: 7deb32b70133a16408c155c5497ef8b1, type: 2}
+  defaultHeroData: {fileID: 11400000, guid: 96f41092f7d4c434fa04b647d37c1401, type: 2}
   gameStateMachine: {fileID: 955378624}
   autoInitializationList: []
   _trackingCamera: {fileID: 814665132}
@@ -509,9 +509,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.107407406
-    width: 0.26250002
-    height: 0.2625
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1035,6 +1035,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d318da30777887e408749ad8eb7dbd65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1424428715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 518057509991795527, guid: 14cf37b79262b1d4baa0028b0d16b00b, type: 3}
+  m_PrefabInstance: {fileID: 1424428711}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc85363a74499404985f040a5c06196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1711623808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1145,8 @@ MonoBehaviour:
     action: {fileID: 1424428714}
   - actionID: 2
     action: {fileID: 1424428712}
+  - actionID: 3
+    action: {fileID: 1424428715}
 --- !u!1 &1994963217
 GameObject:
   m_ObjectHideFlags: 0

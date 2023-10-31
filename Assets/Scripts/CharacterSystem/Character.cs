@@ -27,6 +27,8 @@ namespace DreamLU
     {
         [SerializeField] private SpriteRenderer wpSprite;
         [SerializeField] private Transform weaponShootPosition;
+        [SerializeField] private Transform weaponShootSecondPosition;
+        [SerializeField] private SpriteRenderer wpSecondSprite;
 
         private ICharacterActor _characterActor;
 
@@ -35,8 +37,11 @@ namespace DreamLU
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
 
         private WeaponData _weaponData;
+        private bool useSkillDoubleGun;
 
         public WeaponData WeaponData => _weaponData;
+
+        public bool UseSkillDoubleGun => useSkillDoubleGun;
 
         private void Awake()
         {
@@ -159,11 +164,29 @@ namespace DreamLU
 
             wpSprite.sprite = weaponData.weaponSprite;
             weaponShootPosition.localPosition = weaponData.weaponShootPosition;
+            weaponShootSecondPosition.localPosition = weaponData.weaponShootPosition;
+        }
+
+        public void SetupSecondWeapon()
+        {
+            useSkillDoubleGun = true;
+            wpSecondSprite.sprite = _weaponData.weaponSprite;
+        }
+
+        public void ShutDownSkillDoubleGun()
+        {
+            useSkillDoubleGun = false;
+            wpSecondSprite.sprite = null;
         }
 
         public Vector3 GetWeaponShootPosition()
         {
             return weaponShootPosition.position;
+        }
+
+        public Vector3 GetWeaponSecondShootPosition()
+        {
+            return weaponShootSecondPosition.position;
         }
 
         public void SetStatsAniamtion(StatsAniamtion stats)
