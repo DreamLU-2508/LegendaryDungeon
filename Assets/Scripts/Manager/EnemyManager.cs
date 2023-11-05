@@ -26,6 +26,7 @@ namespace DreamLU
         private Room _currentRoom;
 
         public event System.Action<int> OnKillEnemy;
+        public event System.Action<Room> OnClear;
 
         private IGameStateProvider _gameStateProvider;
 
@@ -127,8 +128,10 @@ namespace DreamLU
             spawnPositionArray = null;
             spawnTime = 0;
             timeCount = 0;
-            
-            if(enemies.Count > 0)
+            _currentRoom.InstancedRoom.IsClearEnemy = true;
+            OnClear?.Invoke(_currentRoom);
+
+            if (enemies.Count > 0)
             {
                 foreach(Enemy enemy in enemies)
                 {

@@ -11,5 +11,7 @@ namespace DreamLU
         public Room CurrentRoom { get; }
 
         public event System.Action<int> OnKillEnemy;
+
+        public event System.Action<Room> OnClear;
     }
 }

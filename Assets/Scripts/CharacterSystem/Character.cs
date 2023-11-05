@@ -33,7 +33,7 @@ namespace DreamLU
         private ICharacterActor _characterActor;
 
         private Animator animator;
-        private Rigidbody2D rigidbody2D;
+        //private Rigidbody2D rigidbody2D;
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
 
         private WeaponData _weaponData;
@@ -46,7 +46,7 @@ namespace DreamLU
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            //rigidbody2D = GetComponent<Rigidbody2D>();
             _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
         }
 
@@ -85,7 +85,7 @@ namespace DreamLU
                 animator.SetBool(Settings.isIdle, true);
                 statsAniamtion = StatsAniamtion.Idle;
             }
-            rigidbody2D.velocity = Vector3.zero;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
 
         public void SetMovement(Vector2 moveDir)
@@ -100,7 +100,7 @@ namespace DreamLU
                 statsAniamtion = StatsAniamtion.Move;
             }
 
-            rigidbody2D.velocity = moveDir * Settings.baseMoveSpeed;
+            GetComponent<Rigidbody2D>().velocity = moveDir * Settings.baseMoveSpeed;
         }
 
         public void SetDash(Direction Dir)

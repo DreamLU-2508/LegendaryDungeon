@@ -30,24 +30,22 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: DoorCollider
+    path: Door
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 6235154995679643765, guid: 94ceb7f4942570649bd0a897ef2a4ed9,
-        type: 3}
+      value: {fileID: 7053689574826554501, guid: 8bf4537c840876747a02facf5781dfb0, type: 3}
     attribute: m_Sprite
-    path: DoorCollider
+    path: 
     classID: 212
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: 7053689574826554501, guid: 8bf4537c840876747a02facf5781dfb0,
-        type: 3}
+      value: {fileID: 6235154995679643765, guid: 94ceb7f4942570649bd0a897ef2a4ed9, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Door
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 1
@@ -58,13 +56,6 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 592208984
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    - serializedVersion: 2
       path: 0
       attribute: 0
       script: {fileID: 0}
@@ -72,15 +63,22 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     - serializedVersion: 2
-      path: 592208984
+      path: 718797587
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 718797587
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     pptrCurveMapping:
-    - {fileID: 6235154995679643765, guid: 94ceb7f4942570649bd0a897ef2a4ed9, type: 3}
     - {fileID: 7053689574826554501, guid: 8bf4537c840876747a02facf5781dfb0, type: 3}
+    - {fileID: 6235154995679643765, guid: 94ceb7f4942570649bd0a897ef2a4ed9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -118,7 +116,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: DoorCollider
+    path: Door
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -137,7 +135,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: DoorCollider
+    path: Door
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -156,7 +154,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: DoorCollider
+    path: Door
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

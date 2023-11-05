@@ -21,5 +21,12 @@ namespace DreamLU
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
+
+        public static bool IsCorridor(RoomType roomType)
+        {
+            if (roomType == RoomType.Corridor || roomType == RoomType.CorridorEW || roomType == RoomType.CorridorNS) return true;
+
+            return false;
+        }
     }
 }

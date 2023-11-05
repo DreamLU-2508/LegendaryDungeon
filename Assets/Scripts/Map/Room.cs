@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -18,9 +19,11 @@ namespace DreamLU
 
         private IEnemySpawnProvider _enemySpawnProvider;
 
-        private System.Action<Room> OnEnterRoom;
+        public System.Action<Room> OnEnterRoom;
+        public System.Action<Room> OnExitRoom;
 
         public InstancedRoom InstancedRoom => _room;
+        [ShowInInspector, ReadOnly] public bool isClear => _room.IsClearEnemy;
         public Grid Grid => grid;
 
         private void Awake()
@@ -39,6 +42,7 @@ namespace DreamLU
         {
             PopulateTilemapMemberVariables(gameObject);
             BlockOffUnusedDoorWays();
+            AddDoors();
         }
 
         private void BlockOffUnusedDoorWays()
@@ -197,11 +201,12 @@ namespace DreamLU
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            var character = collision.GetComponent<Character>();
-            if (character != null && _room.IsPreviouslyVisited)
-            {
-                _room.IsPreviouslyVisited = false;
-            }
+            //var character = collision.GetComponent<Character>();
+            //if (character != null && _room.IsPreviouslyVisited)
+            //{
+            //    _room.IsPreviouslyVisited = false;
+            //}
+            OnExitRoom?.Invoke(this);
         }
 
         private void OnKillEnemyInRoom(int count)
@@ -215,6 +220,41 @@ namespace DreamLU
                 if(_room.EnemyAmount <= 0)
                 {
                     _room.IsClearEnemy = true;
+                }
+            }
+        }
+
+        private void AddDoors()
+        {
+            if (HelperUtilities.IsCorridor(_room.RoomType)) return;
+
+            foreach(var door in _room.Doors)
+            {
+                if(door.doorPrefab != null && door.isConnected)
+                {
+                    float tileDistance = 1;
+
+                    GameObject doorGameObject = Instantiate(door.doorPrefab, gameObject.transform);
+
+                    if(door.orientation == DoorOrientation.Up)
+                    {
+                        doorGameObject.transform.localPosition = new Vector3(door.position.x +tileDistance / 2f, door.position.y + tileDistance, 0);
+                    }
+                    else if (door.orientation == DoorOrientation.Down)
+                    {
+                        doorGameObject.transform.localPosition = new Vector3(door.position.x + tileDistance / 2f, door.position.y, 0);
+                    }
+                    else if (door.orientation == DoorOrientation.Right)
+                    {
+                        doorGameObject.transform.localPosition = new Vector3(door.position.x + tileDistance, door.position.y + tileDistance*1.25f, 0);
+                    }
+                    else if (door.orientation == DoorOrientation.Left)
+                    {
+                        doorGameObject.transform.localPosition = new Vector3(door.position.x, door.position.y + tileDistance * 1.25f, 0);
+                    }
+
+                    Door scriptDoor = doorGameObject.GetComponent<Door>();
+                    scriptDoor.Setup(this);
                 }
             }
         }

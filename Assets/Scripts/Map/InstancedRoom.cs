@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace DreamLU
@@ -118,6 +117,11 @@ namespace DreamLU
             else
             {
                 this.parentRoomID = roomNode.parentRoomNodeIDList[0];
+            }
+
+            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom)
+            {
+                this.isClearEnemy = true;
             }
         }
     }
