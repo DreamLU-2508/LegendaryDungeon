@@ -21,7 +21,7 @@ MonoBehaviour:
   doorwayList:
   - position: {x: 22, y: 31}
     orientation: 1
-    doorPrefab: {fileID: 0}
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
     doorwayStartCopy:
       position: {x: 19, y: 31}
       width: 5
@@ -30,7 +30,7 @@ MonoBehaviour:
     isUnavailable: 0
   - position: {x: 22, y: 6}
     orientation: 2
-    doorPrefab: {fileID: 0}
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
     doorwayStartCopy:
       position: {x: 17, y: 9}
       width: 9
@@ -39,7 +39,7 @@ MonoBehaviour:
     isUnavailable: 0
   - position: {x: 37, y: 15}
     orientation: 4
-    doorPrefab: {fileID: 0}
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
     doorwayStartCopy:
       position: {x: 34, y: 21}
       width: 4
@@ -48,7 +48,7 @@ MonoBehaviour:
     isUnavailable: 0
   - position: {x: 7, y: 15}
     orientation: 3
-    doorPrefab: {fileID: 0}
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
     doorwayStartCopy:
       position: {x: 7, y: 21}
       width: 4
@@ -60,3 +60,4 @@ MonoBehaviour:
   - {x: 27, y: 22}
   - {x: 14, y: 12}
   - {x: 32, y: 13}
+  enemyAmount: 0
