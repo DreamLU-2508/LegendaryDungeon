@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 namespace DreamLU
@@ -14,7 +15,7 @@ namespace DreamLU
         public CharacterAction action;
     }
 
-    public class CharacterManager : MonoBehaviour, ICharacterActor
+    public class CharacterManager : MonoBehaviour, ICharacterActor, IWeaponProvider
     {
         [SerializeField][TableList] private List<CharacterActionDefinition> characterActions;
 
@@ -25,6 +26,15 @@ namespace DreamLU
         private bool _isActionLocked = false;
         private bool _characterInitialized = false;
         private CharacterSkill _characterSkill;
+        private int health;
+        private int mana;
+        private int maxMana;
+        private int maxHealth;
+        private CharacterData characterData;
+        private Character _character;
+        private float _heroInvulnerableTimer = 0;
+        private bool _isHeroDead;
+        private CharacterStat _characterStat;
 
         public Transform CharacterTransform => characterTransform;
 
@@ -42,6 +52,11 @@ namespace DreamLU
             set => _isMovementLocked = value;
         }
 
+        [ShowInInspector, ReadOnly]
+        public int Health => health;
+        [ShowInInspector, ReadOnly]
+        public int MaxHealth => maxHealth;
+
         private void Awake()
         {
             gameManager = FindObjectOfType<LDGameManager>();
@@ -52,6 +67,13 @@ namespace DreamLU
         private void Update()
         {
             if (!_characterInitialized) { return; }
+
+            if (_isHeroDead) {
+                Destroy(_character.gameObject);
+                Time.timeScale = 0;
+                _characterInitialized = false;
+                return;
+            }
 
             if (LDGameManager.Instance.CurrentMasterGameState == StateID.None) return;
 
@@ -66,10 +88,11 @@ namespace DreamLU
                 {
                     ActivateAction(_characterSkill.ultimateSkill);
                 }
-                //if (_heroInvulnerableTimer > 0)
-                //{
-                //    _heroInvulnerableTimer -= Time.deltaTime;
-                //}
+
+                if (_heroInvulnerableTimer > 0)
+                {
+                    _heroInvulnerableTimer -= Time.deltaTime;
+                }
             }
         }
 
@@ -78,6 +101,18 @@ namespace DreamLU
             characterTransform = gameManager.HeroTransform;
 
             SetupActions();
+
+            characterData = gameManager.CharacterData;
+            _characterStat = characterData.characterStat.Clone();
+
+            this.health = _characterStat.maxHealth;
+            this.maxHealth = _characterStat.maxHealth;
+            this.mana = _characterStat.maxMana;
+            this.maxMana = _characterStat.maxMana;
+            _character = characterTransform.GetComponent<Character>();
+            _heroInvulnerableTimer = 0;
+            _isHeroDead = false;
+
             _characterInitialized = true;
         }
 
@@ -106,6 +141,30 @@ namespace DreamLU
                 }
             }
         }
+
+        public void AddDamage(int damage)
+        {
+            if (_heroInvulnerableTimer > 0) return;
+
+            
+            this.health -= damage;
+            if(this.health < 0)
+            {
+                this.health = 0;
+                _isHeroDead = true;
+            }
+
+            _heroInvulnerableTimer = 0.3f;
+        }
+
+        #region Weapon
+
+        public int GetWeaponDamage(WeaponData weaponData)
+        {
+            return weaponData.damage;
+        }
+
+        #endregion
     }
 
 }

@@ -14,12 +14,14 @@ namespace DreamLU
 
         public Sprite weaponSprite;
 
-        public bool isInfiniteAmmo = false;
-
         // Thời gian delay bắn của vũ khí
         public float weaponPrechargeTime = 0f;
 
         [Header("Ammo Prefab")]
         public AmmoData ammoData;
+
+        public int damage;
+        public float cooldown;
+        public int timeReload;
     }
 }

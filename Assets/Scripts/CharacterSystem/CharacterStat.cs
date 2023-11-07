@@ -10,5 +10,10 @@ namespace DreamLU
         public int maxHealth;
         public int maxMana;
         public int shield;
+
+        public CharacterStat Clone()
+        {
+            return (CharacterStat)this.MemberwiseClone();
+        }
     }
 }

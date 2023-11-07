@@ -32,6 +32,7 @@ namespace DreamLU
         private Character _character;
         private Transform targetTransform;
         private CharacterSkill _characterSkill;
+        private CharacterData characterData;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         public Transform HeroTransform => targetTransform;
@@ -49,6 +50,10 @@ namespace DreamLU
         }
 
         public CharacterSkill CharacterSkill => _characterSkill;
+
+        public WeaponData WeaponData => _character.WeaponData;
+
+        public CharacterData CharacterData => characterData;
 
         // event
         public event System.Action OnInitializeCharacter;
@@ -123,6 +128,7 @@ namespace DreamLU
         void InitializeCharacter()
         {
             CharacterData selectedCharacter = defaultHeroData;
+            characterData = selectedCharacter;
             AssetReference reference = selectedCharacter.characterPrefab;
             var handle = reference.InstantiateAsync();
             handle.WaitForCompletion();

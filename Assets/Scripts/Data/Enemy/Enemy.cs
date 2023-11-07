@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using VContainer;
 
 namespace DreamLU
 {
@@ -22,6 +23,10 @@ namespace DreamLU
         private bool isDie = true;
         private bool canFire = false;
 
+        private IWeaponProvider weaponProvider;
+        private IHeroPositionProvider heroPositionProvider;
+        private ICharacterActor characterActor;
+
         public EnemeyData Data => _enemeyData;
         public bool CanFire
         {
@@ -36,7 +41,9 @@ namespace DreamLU
         {
             animator = GetComponent<Animator>();
             isDie = false;
-            health = 10;
+            weaponProvider = CoreLifetimeScope.SharedContainer.Resolve<IWeaponProvider>();
+            heroPositionProvider = CoreLifetimeScope.SharedContainer.Resolve<IHeroPositionProvider>();
+            characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
         }
 
         void Start()
@@ -49,6 +56,7 @@ namespace DreamLU
         {
             _enemeyData = enemyData;
             isDie = false;
+            health = _enemeyData.enemyMaxHeath;
         }
 
         public void SetIdle()
@@ -134,11 +142,33 @@ namespace DreamLU
             var ammo = collision.GetComponent<Ammo>();
             if (ammo != null)
             {
-                health -= 2;
-                if(health <= 0)
+                int damage = weaponProvider.GetWeaponDamage(heroPositionProvider.WeaponData);
+
+                if(damage > 0)
                 {
-                    ShutDown();
+                    health -= damage;
+                    if (health <= 0)
+                    {
+                        ShutDown();
+                    }
                 }
+            }
+
+            //var character = collision.GetComponent<Character>();
+            //if (character != null)
+            //{
+            //    int damage = _enemeyData.collisionDamage;
+            //    characterActor.AddDamage(damage);
+            //}
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            var character = collision.GetComponent<Character>();
+            if (character != null)
+            {
+                int damage = _enemeyData.collisionDamage;
+                characterActor.AddDamage(damage);
             }
         }
     }
