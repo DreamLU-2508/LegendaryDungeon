@@ -11,8 +11,13 @@ namespace DreamLU
         public string enemyName;
         public GameObject prefab;
 
+        public int enemyMaxHeath;
         public float enemySpeed;
-        public AmmoData ammoData;
+        public bool isBoss;
+        public bool isElite;
+
+        public WeaponID weaponID;
+        public int collisionDamage;
     }
 
 }

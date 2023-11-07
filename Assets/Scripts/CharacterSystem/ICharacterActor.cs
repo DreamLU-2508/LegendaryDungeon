@@ -9,5 +9,7 @@ namespace DreamLU
         public Animator CharacterAnimator { get; }
 
         public bool IsMovementLocked { get; set; }
+
+        public void AddDamage(int damage);
     }
 }
