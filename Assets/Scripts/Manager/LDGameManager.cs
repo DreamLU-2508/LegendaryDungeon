@@ -1,4 +1,5 @@
 using Cinemachine;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -36,18 +37,23 @@ namespace DreamLU
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         public Transform HeroTransform => targetTransform;
+
+        [ShowInInspector, ReadOnly]
         public StateID CurrentMasterGameState 
         {
             get
             {
                 if(gameStateMachine != null)
                 {
+                    //Debug.LogError(gameStateMachine.CurrentState);
                     return gameStateMachine.CurrentState;
                 }
 
                 return StateID.None;
             }
         }
+
+        public GameStateMachine stateMachine { get { return gameStateMachine; } }
 
         public CharacterSkill CharacterSkill => _characterSkill;
 
@@ -92,7 +98,7 @@ namespace DreamLU
                 {
                     // If PlayTarget is Demo, init character
                     gameStateMachine.ChangeState(StateID.Normal);
-                    InitializeCharacter();
+                    InitializeCharacter(defaultHeroData);
                 }
             }
         }
@@ -116,7 +122,7 @@ namespace DreamLU
                         }
                         else
                         {
-                            InitializeCharacter();
+                            InitializeCharacter(defaultHeroData);
                         }
                         _enemyManager.OnStopSpawnEnemy();
                     }
@@ -125,9 +131,9 @@ namespace DreamLU
             }
         }
 
-        void InitializeCharacter()
+        private void InitializeCharacter(CharacterData character)
         {
-            CharacterData selectedCharacter = defaultHeroData;
+            CharacterData selectedCharacter = character;
             characterData = selectedCharacter;
             AssetReference reference = selectedCharacter.characterPrefab;
             var handle = reference.InstantiateAsync();
@@ -144,7 +150,7 @@ namespace DreamLU
             SetVirtualCameraDamping(1, 1, 1);
 
             // init wepon
-            if(_weaponDataManifest.TryGetWeapon(defaultHeroData.weaponID, out var wpData))
+            if(_weaponDataManifest.TryGetWeapon(character.weaponID, out var wpData))
             {
                 _character.SetWeapon(wpData);
             }
@@ -196,6 +202,15 @@ namespace DreamLU
             }
 
             return _character.transform.position;
+        }
+
+        public void HandleConfirmedSelectCharacter(CharacterData characterData)
+        {
+            if (_dungeonBuilder.GenerateDungeon())
+            {
+                gameStateMachine.ChangeState(StateID.Normal);
+                InitializeCharacter(characterData);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using DreamLU.UI;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -21,11 +22,13 @@ namespace DreamLU
             LDGameManager gameManager = FindObjectOfType<LDGameManager>();
             DungeonBuilder dungeonBuilder = FindObjectOfType<DungeonBuilder>();
             EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
+            UIMain uiMain = FindObjectOfType<UIMain>();
 
             builder.RegisterInstance(characterManager).AsImplementedInterfaces();
             builder.RegisterInstance(gameManager).AsImplementedInterfaces();
             builder.RegisterInstance(dungeonBuilder).AsImplementedInterfaces();
             builder.RegisterInstance(enemyManager).AsImplementedInterfaces();
+            builder.RegisterInstance(uiMain).AsImplementedInterfaces();
         }
     }
 

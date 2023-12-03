@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cc369f59713df4ca176da300cdcdfe, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  target: 1
+  target: 0
   fireRateCoolDown: 0.2
   distanceFollowCharacter: 10
   maxSpawnEnemyInRoom: 3
