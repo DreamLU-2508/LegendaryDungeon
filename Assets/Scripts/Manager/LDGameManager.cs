@@ -24,6 +24,8 @@ namespace DreamLU
         [SerializeField] private Camera _camera;
         [SerializeField] private DungeonBuilder _dungeonBuilder;
         [SerializeField] private EnemyManager _enemyManager;
+        [SerializeField] private LevelsDataManifest _levelsDataManifest;
+        [SerializeField] private LevelManager levelManager;
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
@@ -61,6 +63,8 @@ namespace DreamLU
 
         public CharacterData CharacterData => characterData;
 
+        public LevelsDataManifest LevelsDataManifest => _levelsDataManifest;
+
         // event
         public event System.Action OnInitializeCharacter;
 
@@ -92,15 +96,15 @@ namespace DreamLU
 
         void Start()
         {
-            if (_gameConfig.target == PlayTarget.Demo)
-            {
-                if (_dungeonBuilder.GenerateDungeon())
-                {
-                    // If PlayTarget is Demo, init character
-                    gameStateMachine.ChangeState(StateID.Normal);
-                    InitializeCharacter(defaultHeroData);
-                }
-            }
+            //if (_gameConfig.target == PlayTarget.Demo)
+            //{
+            //    if (_dungeonBuilder.GenerateDungeon())
+            //    {
+            //        // If PlayTarget is Demo, init character
+            //        gameStateMachine.ChangeState(StateID.Normal);
+            //        InitializeCharacter(defaultHeroData);
+            //    }
+            //}
         }
 
         // Update is called once per frame
@@ -109,26 +113,38 @@ namespace DreamLU
             //CharacterUtilities.GetMouseWorldPosition(_camera);
             if (_gameConfig.target == PlayTarget.Demo)
             {
-                if (Input.GetKeyDown(KeyCode.G) && Input.GetKey(KeyCode.LeftControl))
-                {
-                    if (_dungeonBuilder.GenerateDungeon())
-                    {
-                        // If PlayTarget is Demo, init character
-                        gameStateMachine.ChangeState(StateID.Normal);
-                        if (_character != null)
-                        {
-                            _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
-                            SetCameraFollow(targetTransform, 1);
-                        }
-                        else
-                        {
-                            InitializeCharacter(defaultHeroData);
-                        }
-                        _enemyManager.OnStopSpawnEnemy();
-                    }
-                }
+                //if (Input.GetKeyDown(KeyCode.G) && Input.GetKey(KeyCode.LeftControl))
+                //{
+                //    if (_dungeonBuilder.GenerateDungeon())
+                //    {
+                //        // If PlayTarget is Demo, init character
+                //        gameStateMachine.ChangeState(StateID.Normal);
+                //        if (_character != null)
+                //        {
+                //            _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
+                //            SetCameraFollow(targetTransform, 1);
+                //        }
+                //        else
+                //        {
+                //            InitializeCharacter(defaultHeroData);
+                //        }
+                //        _enemyManager.OnStopSpawnEnemy();
+                //    }
+                //}
                     
             }
+            else
+            {
+                if (_gameConfig.enableCheat)
+                {
+                    if (Input.GetKeyDown(KeyCode.V))
+                    {
+                        ProceedToEndLevel();
+                    }
+                }
+            }
+
+            
         }
 
         private void InitializeCharacter(CharacterData character)
@@ -204,13 +220,28 @@ namespace DreamLU
             return _character.transform.position;
         }
 
-        public void HandleConfirmedSelectCharacter(CharacterData characterData)
+        public void StartRun(CharacterData characterData)
         {
-            if (_dungeonBuilder.GenerateDungeon())
+            gameStateMachine.ChangeState(StateID.Normal);
+            InitializeCharacter(characterData);
+            levelManager.LoadLevel(1);
+        }
+
+        public void ProceedToEndLevel()
+        {
+            int nextLevel = levelManager.CurrentLevel + 1;
+
+            gameStateMachine.ChangeState(StateID.StageVictory, () =>
             {
-                gameStateMachine.ChangeState(StateID.Normal);
-                InitializeCharacter(characterData);
-            }
+                _dungeonBuilder.ClearDungeon();
+            });
+
+            // test
+            gameStateMachine.ChangeState(StateID.Normal, () =>
+            {
+                levelManager.LoadLevel(nextLevel);
+                targetTransform.position = _dungeonBuilder.GetPositionRoomEntrance();
+            });
         }
     }
 }

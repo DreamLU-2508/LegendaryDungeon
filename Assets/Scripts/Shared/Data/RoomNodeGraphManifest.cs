@@ -7,7 +7,9 @@ namespace DreamLU
     [CreateAssetMenu(menuName = "Database/Map/RoomNodeGraphManifest")]
     public class RoomNodeGraphManifest : ScriptableObject
     {
-        public List<RoomNodeGraph> list;
+        public List<RoomNodeGraph> listRoomNormal;
+
+        public List<RoomNodeGraph> listRoomBoss;
     }
 
 }

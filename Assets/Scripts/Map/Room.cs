@@ -16,6 +16,8 @@ namespace DreamLU
         private Tilemap frontTilemap;
         private Tilemap collisionTilemap;
         private Tilemap minimapTilemap;
+        private GameObject _vfxTelepos;
+        private bool isCreateTelepos;
 
         private IEnemySpawnProvider _enemySpawnProvider;
 
@@ -23,7 +25,7 @@ namespace DreamLU
         public System.Action<Room> OnExitRoom;
 
         public InstancedRoom InstancedRoom => _room;
-        [ShowInInspector, ReadOnly] public bool isClear => _room.IsClearEnemy;
+        [ShowInInspector, ReadOnly] public bool IsClear => _room.IsClearEnemy;
         public Grid Grid => grid;
 
         private void Awake()
@@ -33,9 +35,11 @@ namespace DreamLU
             _enemySpawnProvider.OnKillEnemy += OnKillEnemyInRoom;
         }
 
-        public void SetData(InstancedRoom room)
+        public void SetData(InstancedRoom room, GameObject vfxTelepos)
         {
             _room = room;
+            _vfxTelepos = vfxTelepos;
+            isCreateTelepos = false;
         }
 
         public void Initialise(GameObject gameObject)
@@ -265,5 +269,18 @@ namespace DreamLU
             _enemySpawnProvider.OnKillEnemy -= OnKillEnemyInRoom;
         }
 
+        private void Update()
+        {
+            if (isCreateTelepos) return;
+
+            if (_room.IsHasTele && IsClear)
+            {
+                var port = Instantiate(_vfxTelepos, this.transform);
+                var pos = grid.CellToWorld(new Vector3Int(_room.PositionTele.x, _room.PositionTele.y, 0));
+                port.transform.position = pos;
+
+                isCreateTelepos = true;
+            }
+        }
     }
 }

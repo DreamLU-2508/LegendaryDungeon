@@ -19,7 +19,9 @@ namespace DreamLU
         ChessRoom,
         UpgradeRoom,
         ExchangeRoom,
-        SpecialExchangeRoom
+        SpecialExchangeRoom,
+
+        EndRoom = 999
     }
 
     [System.Serializable]

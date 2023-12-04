@@ -24,6 +24,8 @@ namespace DreamLU
         private bool isPreviouslyVisited = false;
         private RoomData roomData;
         private int enemyAmount;
+        private bool isHasTelepos;
+        private Vector2Int positionTelepos;
 
         [ShowInInspector]
         public string ID => roomNodeID;
@@ -92,6 +94,8 @@ namespace DreamLU
             set { enemyAmount = value; }
         }
         public Vector2Int[] SpawnPositionArray => spawnPositionArray;
+        public bool IsHasTele => isHasTelepos;
+        public Vector2Int PositionTele => positionTelepos;
 
         public InstancedRoom(RoomData roomData, RoomNode roomNode)
         {
@@ -119,9 +123,15 @@ namespace DreamLU
                 this.parentRoomID = roomNode.parentRoomNodeIDList[0];
             }
 
-            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom)
+            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom || this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom)
             {
                 this.isClearEnemy = true;
+            }
+            
+            if(this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom)
+            {
+                this.isHasTelepos = true;
+                this.positionTelepos = roomData.positionTele;
             }
         }
     }

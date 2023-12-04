@@ -7,5 +7,7 @@ namespace DreamLU
     public interface IGameStateProvider
     {
         public GameConfig GameConfig { get; }
+
+        public void ProceedToEndLevel();
     }
 }

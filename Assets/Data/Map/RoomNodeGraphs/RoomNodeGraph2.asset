@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4628757755896709747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69aef70beea43d45a1e8c8d7f141d17, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: ccd64d1a-0512-412b-b613-c9d44d85e371
+  parentRoomNodeIDList:
+  - 0201223e-4b26-47da-ad79-5f49c997c345
+  childRoomNodeIDList: []
+  roomNodeGraph: {fileID: 11400000}
+  roomNodeType:
+    disPlayInRoomNodeGraph: 1
+    type: 999
+    RoomName: End Room
+  roomNodeTypeList: {fileID: 11400000, guid: b78979e1f33dab146a4aec6ea3edeb1f, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 1075.0007
+    y: 326.50003
+    width: 160
+    height: 75
+  isLeftClickDragging: 0
+  isSelected: 0
 --- !u!114 &-4365977715269543329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +145,9 @@ MonoBehaviour:
   - {fileID: -3582763366210043536}
   - {fileID: 2524198950318385941}
   - {fileID: 7665319700730464249}
-  - {fileID: 6972412969187846788}
   - {fileID: 6972326296141800075}
   - {fileID: 5319202176763282582}
+  - {fileID: -4628757755896709747}
   roomNodeStartDrawLine: {fileID: 0}
   positionEndLine: {x: 0, y: 0}
 --- !u!114 &614267611643547674
@@ -305,36 +335,6 @@ MonoBehaviour:
     height: 75
   isLeftClickDragging: 0
   isSelected: 0
---- !u!114 &6972412969187846788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e69aef70beea43d45a1e8c8d7f141d17, type: 3}
-  m_Name: RoomNode
-  m_EditorClassIdentifier: 
-  id: 40127ef4-ac0b-40fb-8c1b-9397ebe3568d
-  parentRoomNodeIDList:
-  - 0201223e-4b26-47da-ad79-5f49c997c345
-  childRoomNodeIDList: []
-  roomNodeGraph: {fileID: 11400000}
-  roomNodeType:
-    disPlayInRoomNodeGraph: 1
-    type: 4
-    RoomName: Boss Room
-  roomNodeTypeList: {fileID: 11400000, guid: b78979e1f33dab146a4aec6ea3edeb1f, type: 2}
-  rect:
-    serializedVersion: 2
-    x: 1065.9005
-    y: 303.2
-    width: 160
-    height: 75
-  isLeftClickDragging: 0
-  isSelected: 0
 --- !u!114 &7665319700730464249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   parentRoomNodeIDList:
   - 66fb0880-c456-4215-a865-3d889cfef8c8
   childRoomNodeIDList:
-  - 40127ef4-ac0b-40fb-8c1b-9397ebe3568d
+  - ccd64d1a-0512-412b-b613-c9d44d85e371
   roomNodeGraph: {fileID: 11400000}
   roomNodeType:
     disPlayInRoomNodeGraph: 1

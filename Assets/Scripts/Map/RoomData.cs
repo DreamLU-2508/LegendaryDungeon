@@ -36,6 +36,10 @@ namespace DreamLU
             return this.doorwayList.Select(item => item.Clone()).ToList();
         }
 
+
+        [ShowIf("@this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom")]
+        public Vector2Int positionTele;
+
         #region Validation
 
 #if UNITY_EDITOR
