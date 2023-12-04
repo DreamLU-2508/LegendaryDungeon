@@ -57,3 +57,4 @@ MonoBehaviour:
     isUnavailable: 0
   spawnPositionArray: []
   enemyAmount: 0
+  positionTele: {x: 5, y: 27}

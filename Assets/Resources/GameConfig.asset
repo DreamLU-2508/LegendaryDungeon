@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   target: 0
+  enableCheat: 1
   fireRateCoolDown: 0.2
   distanceFollowCharacter: 10
   maxSpawnEnemyInRoom: 3

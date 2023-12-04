@@ -23,12 +23,14 @@ namespace DreamLU
             DungeonBuilder dungeonBuilder = FindObjectOfType<DungeonBuilder>();
             EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
             UIMain uiMain = FindObjectOfType<UIMain>();
+            LevelManager levelManager = FindObjectOfType<LevelManager>();
 
             builder.RegisterInstance(characterManager).AsImplementedInterfaces();
             builder.RegisterInstance(gameManager).AsImplementedInterfaces();
             builder.RegisterInstance(dungeonBuilder).AsImplementedInterfaces();
             builder.RegisterInstance(enemyManager).AsImplementedInterfaces();
             builder.RegisterInstance(uiMain).AsImplementedInterfaces();
+            builder.RegisterInstance(levelManager).AsImplementedInterfaces();
         }
     }
 

@@ -347,6 +347,8 @@ MonoBehaviour:
   _camera: {fileID: 519420031}
   _dungeonBuilder: {fileID: 1711623810}
   _enemyManager: {fileID: 856838920}
+  _levelsDataManifest: {fileID: 11400000, guid: faf8b1ba7940cab4bbfdf004c6e0cddc, type: 2}
+  levelManager: {fileID: 1960230597}
   _gameConfig: {fileID: 11400000, guid: 599419ad193059d42b6e2967a23dc4b6, type: 2}
   _weaponDataManifest: {fileID: 11400000, guid: d2faabbdd05baed4ebc7b95a56420cd7, type: 2}
 --- !u!224 &442576817 stripped
@@ -1456,6 +1458,7 @@ MonoBehaviour:
   roomNodeTypeList: {fileID: 11400000, guid: b78979e1f33dab146a4aec6ea3edeb1f, type: 2}
   roomNodeGraphManifest: {fileID: 11400000, guid: 4e7daa01b41080b45b68162a731dcfd1, type: 2}
   container: {fileID: 1994963218}
+  vfxTelepos: {fileID: 1887960397579140591, guid: f7af724ab4c84e247a7d2f7abfe7d905, type: 3}
   roomDatas: []
 --- !u!1 &1725658536
 GameObject:
@@ -1562,6 +1565,50 @@ MonoBehaviour:
     action: {fileID: 1424428712}
   - actionID: 3
     action: {fileID: 1424428715}
+--- !u!1 &1960230595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960230596}
+  - component: {fileID: 1960230597}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1960230596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960230595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960230597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960230595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090b109f0343ea04895786c6d3ed21bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1994963217
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dd6dbc641326842bf542f428d7f5f8, type: 3}
   m_Name: RoomNodeGraphManifest
   m_EditorClassIdentifier: 
-  list:
-  - {fileID: 11400000, guid: c3f7138699ab9e34a8441dcd25026b62, type: 2}
+  listRoomNormal:
   - {fileID: 11400000, guid: 62a29dde931137548a0be590fed4159f, type: 2}
   - {fileID: 11400000, guid: e82e81db5c579ee469be6dc61e414b4b, type: 2}
+  listRoomBoss:
+  - {fileID: 11400000, guid: c3f7138699ab9e34a8441dcd25026b62, type: 2}

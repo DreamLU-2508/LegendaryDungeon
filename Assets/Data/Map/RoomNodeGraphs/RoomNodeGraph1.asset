@@ -92,6 +92,36 @@ MonoBehaviour:
     height: 75
   isLeftClickDragging: 0
   isSelected: 0
+--- !u!114 &-2899718546593625131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69aef70beea43d45a1e8c8d7f141d17, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 0ab360bf-d31e-4895-aeea-1771c9df16d4
+  parentRoomNodeIDList:
+  - 26e49920-f7f9-4068-bf78-fee567dc5815
+  childRoomNodeIDList: []
+  roomNodeGraph: {fileID: 11400000}
+  roomNodeType:
+    disPlayInRoomNodeGraph: 1
+    type: 999
+    RoomName: End Room
+  roomNodeTypeList: {fileID: 11400000, guid: b78979e1f33dab146a4aec6ea3edeb1f, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 575.9
+    y: 580.5999
+    width: 160
+    height: 75
+  isLeftClickDragging: 0
+  isSelected: 0
 --- !u!114 &-2330813191090072119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +271,7 @@ MonoBehaviour:
   - {fileID: 4255528545426769594}
   - {fileID: 3562238874867360201}
   - {fileID: -3414627966491075719}
+  - {fileID: -2899718546593625131}
   roomNodeStartDrawLine: {fileID: 0}
   positionEndLine: {x: 0, y: 0}
 --- !u!114 &3562238874867360201
@@ -289,7 +320,8 @@ MonoBehaviour:
   id: 26e49920-f7f9-4068-bf78-fee567dc5815
   parentRoomNodeIDList:
   - a64c1582-dacd-4580-a720-180a09d53695
-  childRoomNodeIDList: []
+  childRoomNodeIDList:
+  - 0ab360bf-d31e-4895-aeea-1771c9df16d4
   roomNodeGraph: {fileID: 11400000}
   roomNodeType:
     disPlayInRoomNodeGraph: 1

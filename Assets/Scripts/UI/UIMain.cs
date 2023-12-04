@@ -37,7 +37,7 @@ namespace DreamLU.UI
 
         public void SelectCharacter(CharacterData characterData)
         {
-            _gameManager.HandleConfirmedSelectCharacter(characterData);
+            _gameManager.StartRun(characterData);
         }
     }
 

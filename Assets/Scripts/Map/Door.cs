@@ -46,7 +46,7 @@ namespace DreamLU
 
         private void OpenDoor()
         {
-            if (_room.isClear || (!_room.isClear && !_room.InstancedRoom.IsPreviouslyVisited))
+            if (_room.IsClear || (!_room.IsClear && !_room.InstancedRoom.IsPreviouslyVisited))
             {
                 isOpened = true;
                 animator.SetBool("open", true);
@@ -59,7 +59,7 @@ namespace DreamLU
         {
             if (room != _room) return;
 
-            if(isOpened && !_room.isClear)
+            if(isOpened && !_room.IsClear)
             {
                 animator.SetBool("open", false);
                 collider2D.enabled = true;
@@ -71,7 +71,7 @@ namespace DreamLU
         {
             if (room != _room) return;
 
-            if (_room.isClear && isPreviouslyOpened)
+            if (_room.IsClear && isPreviouslyOpened)
             {
                 isOpened = true;
                 animator.SetBool("open", true);

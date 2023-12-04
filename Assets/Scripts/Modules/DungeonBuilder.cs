@@ -1,18 +1,20 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
 namespace DreamLU
 {
-    public class DungeonBuilder: MonoBehaviour
+    public class DungeonBuilder: MonoBehaviour, IDungeonBuilder
     {
         private Dictionary<string, InstancedRoom> dungeonBuilderRoomDictionary = new Dictionary<string, InstancedRoom>();
         [SerializeField] private RoomManifest roomTemplateList;
         [SerializeField] private RoomNodeListType roomNodeTypeList;
         [SerializeField] private RoomNodeGraphManifest roomNodeGraphManifest;
         [SerializeField] private Transform container;
+        [SerializeField] private GameObject vfxTelepos;
 
 
         private bool dungeonBuildSuccessful;
@@ -20,6 +22,7 @@ namespace DreamLU
         public List<RoomDataType> roomDatas = new List<RoomDataType>();
         private int maxBuild = 10000;
         private int countBuild;
+        private List<Room> rooms = new List<Room>();
         [ShowInInspector]
         public int CountBuild => countBuild;
 
@@ -32,15 +35,25 @@ namespace DreamLU
         }
 
         [Button]
-        public bool GenerateDungeon()
+        public bool GenerateDungeon(LevelData levelData)
         {
+            rooms.Clear();
             dungeonBuildSuccessful = false;
             int count = 0;
             while (!dungeonBuildSuccessful && count < maxBuild)
             {
                 countBuild = count;
                 count++;
-                RoomNodeGraph nodeGraph = roomNodeGraphManifest.list[Random.Range(0, roomNodeGraphManifest.list.Count)];
+                RoomNodeGraph nodeGraph = null;
+                if (levelData.isLevelBoss)
+                {
+                    nodeGraph = roomNodeGraphManifest.listRoomBoss[Random.Range(0, roomNodeGraphManifest.listRoomNormal.Count)];
+                }
+                else
+                {
+                    nodeGraph = roomNodeGraphManifest.listRoomNormal[Random.Range(0, roomNodeGraphManifest.listRoomNormal.Count)];
+                }
+                
                 if (nodeGraph != null)
                 {
                     ClearDungeon();
@@ -403,13 +416,14 @@ namespace DreamLU
                 Room room = roomGameobject.GetComponent<Room>();
                 if(room != null)
                 {
-                    room.SetData(instancedRoom);
+                    room.SetData(instancedRoom, vfxTelepos);
                     room.Initialise(roomGameobject);
+                    rooms.Add(room);
                 }
             }
         }
 
-        private void ClearDungeon()
+        public void ClearDungeon()
         {
             for (int i = container.childCount - 1; i >= 0; i--)
             {
@@ -421,13 +435,14 @@ namespace DreamLU
 
         public Vector3 GetPositionRoomEntrance()
         {
-            if(dungeonBuilderRoomDictionary.Count > 0 && dungeonBuildSuccessful)
+            if(rooms.Count > 0 && dungeonBuildSuccessful)
             {
-                foreach(var room  in dungeonBuilderRoomDictionary)
+                foreach(var room  in rooms)
                 {
-                    if(room.Value.RoomType == RoomType.Entrance)
+                    if(room.InstancedRoom.RoomType == RoomType.Entrance)
                     {
-                        return new Vector3((room.Value.LowerBounds.x + room.Value.UpperBounds.x) / 2, (room.Value.LowerBounds.y + room.Value.UpperBounds.y) / 2, 0);
+                        Vector3Int vector3Int = new Vector3Int((room.InstancedRoom.LowerBounds.x + room.InstancedRoom.UpperBounds.x) / 2, (room.InstancedRoom.LowerBounds.y + room.InstancedRoom.UpperBounds.y) / 2, 0);
+                        return room.Grid.CellToWorld(vector3Int);
                     }
                 }
             }
