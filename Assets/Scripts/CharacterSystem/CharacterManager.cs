@@ -53,9 +53,35 @@ namespace DreamLU
         }
 
         [ShowInInspector, ReadOnly]
-        public int Health => health;
+        public int Health
+        {
+            get { return health; }
+            set 
+            { 
+                health = value;
+                OnUpdateHealth?.Invoke();
+            }
+        } 
         [ShowInInspector, ReadOnly]
         public int MaxHealth => maxHealth;
+
+        [ShowInInspector, ReadOnly]
+        public int Mana
+        {
+            get { return mana; }
+            set
+            {
+                mana = value;
+                OnUpdateMana?.Invoke();
+            }
+        }
+        [ShowInInspector, ReadOnly]
+        public int MaxMana => maxMana;
+
+        // Action
+        public event System.Action OnInitCharacter;
+        public event System.Action OnUpdateHealth;
+        public event System.Action OnUpdateMana;
 
         private void Awake()
         {
@@ -93,6 +119,12 @@ namespace DreamLU
                 {
                     _heroInvulnerableTimer -= Time.deltaTime;
                 }
+
+                // cheat
+                if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift))
+                {
+                    AddDamage(1);
+                }
             }
         }
 
@@ -114,6 +146,8 @@ namespace DreamLU
             _isHeroDead = false;
 
             _characterInitialized = true;
+
+            OnInitCharacter?.Invoke();
         }
 
         void SetupActions()
@@ -145,10 +179,11 @@ namespace DreamLU
         public void AddDamage(int damage)
         {
             if (_heroInvulnerableTimer > 0) return;
-
             
             this.health -= damage;
-            if(this.health < 0)
+            OnUpdateHealth?.Invoke();
+
+            if(this.health <= 0)
             {
                 this.health = 0;
                 _isHeroDead = true;
