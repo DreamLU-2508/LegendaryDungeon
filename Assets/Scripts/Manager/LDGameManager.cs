@@ -223,8 +223,8 @@ namespace DreamLU
         public void StartRun(CharacterData characterData)
         {
             gameStateMachine.ChangeState(StateID.Normal);
-            InitializeCharacter(characterData);
             levelManager.LoadLevel(1);
+            InitializeCharacter(characterData);
         }
 
         public void ProceedToEndLevel()
