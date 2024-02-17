@@ -56,7 +56,7 @@ namespace DreamLU
         {
             _enemeyData = enemyData;
             isDie = false;
-            health = _enemeyData.enemyMaxHeath;
+            health = _enemeyData.stat.maxHealth;
         }
 
         public void SetIdle()
@@ -167,7 +167,7 @@ namespace DreamLU
             var character = collision.GetComponent<Character>();
             if (character != null)
             {
-                int damage = _enemeyData.collisionDamage;
+                int damage = _enemeyData.stat.collisionDamage;
                 characterActor.AddDamage(damage);
             }
         }

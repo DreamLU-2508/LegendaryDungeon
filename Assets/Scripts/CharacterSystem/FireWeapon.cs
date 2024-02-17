@@ -36,15 +36,23 @@ namespace DreamLU
 
                 float ammoSpeed = Random.Range(ammoData.minMaxSpeed.x, ammoData.minMaxSpeed.y);
 
-                IAmmo ammo = (IAmmo)PoolManager.Instance.ReuseComponent(ammoPrefab, character.GetWeaponShootPosition(), Quaternion.identity);
-                ammo.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+                var ammoGO = PoolManager.GetPool(ammoPrefab).RetrieveObject(character.GetWeaponShootPosition(), Quaternion.identity, PoolManager.Instance.CurrentTransform);
+                var ammo = ammoGO.GetComponent<Ammo>();
+                if (ammo != null)
+                {
+                    ammo.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+                }
 
                 if (character.UseSkillDoubleGun)
                 {
                     StartCoroutine(WaitShot(() =>
                     {
-                        IAmmo ammo2 = (IAmmo)PoolManager.Instance.ReuseComponent(ammoPrefab, character.GetWeaponSecondShootPosition(), Quaternion.identity);
-                        ammo2.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+                        var ammoGO2 = PoolManager.GetPool(ammoPrefab).RetrieveObject(character.GetWeaponSecondShootPosition(), Quaternion.identity, PoolManager.Instance.CurrentTransform);
+                        var ammo2 = ammoGO2.GetComponent<Ammo>();
+                        if (ammo2 != null)
+                        {
+                            ammo2.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
+                        }
                     }));
                 }
 

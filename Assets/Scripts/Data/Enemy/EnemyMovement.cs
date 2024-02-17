@@ -33,7 +33,7 @@ namespace DreamLU
 
             if(!isFollowCharacter) isFollowCharacter = true;
             enemy.CanFire = true;
-            this.transform.position = Vector3.MoveTowards(this.transform.position, _positionProvider.GetTargetPosition(), enemy.Data.enemySpeed * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, _positionProvider.GetTargetPosition(), enemy.Data.stat.moveSpeed * Time.deltaTime);
             enemy.SetAnimationMovement(this.transform.position, _positionProvider.GetTargetPosition());
         }
 

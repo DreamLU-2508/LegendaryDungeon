@@ -24,6 +24,7 @@ namespace DreamLU
             EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
             UIMain uiMain = FindObjectOfType<UIMain>();
             LevelManager levelManager = FindObjectOfType<LevelManager>();
+            CastingManager castingManager = FindObjectOfType<CastingManager>();
 
             builder.RegisterInstance(characterManager).AsImplementedInterfaces();
             builder.RegisterInstance(gameManager).AsImplementedInterfaces();
@@ -31,6 +32,7 @@ namespace DreamLU
             builder.RegisterInstance(enemyManager).AsImplementedInterfaces();
             builder.RegisterInstance(uiMain).AsImplementedInterfaces();
             builder.RegisterInstance(levelManager).AsImplementedInterfaces();
+            builder.RegisterInstance(castingManager).AsImplementedInterfaces();
         }
     }
 
