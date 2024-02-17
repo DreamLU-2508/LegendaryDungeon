@@ -6,6 +6,9 @@ namespace DreamLU
 {
     public class CastingManager : MonoBehaviour, ICastingProvider
     {
-        
+        public void CastingDamage(CastingType source, CastingType recipient)
+        {
+            
+        }
     }
 }

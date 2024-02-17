@@ -41,7 +41,7 @@ namespace DreamLU
 
         protected virtual void DisableAmmo()
         {
-            this.gameObject.SetActive(false);
+            PoolManager.Release(this.gameObject);
         }
 
         public virtual void OnCreateAmmo(AmmoData data, float aimAngle, float weaponAimAngle, Vector3 weaponAimDir, bool overrideAmmoMovement = false)

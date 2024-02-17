@@ -15,5 +15,11 @@ MonoBehaviour:
   enemeyID: 2
   enemyName: Hedusa
   prefab: {fileID: 5147560052670122829, guid: 5581ab3c56e84f54db41b7f594c56eb1, type: 3}
-  enemySpeed: 3
-  ammoData: {fileID: 11400000, guid: cde61d7e3321ea64d8c2ed1f132b4924, type: 2}
+  weaponID: 0
+  stat:
+    maxHealth: 10
+    damageBase: 3
+    moveSpeed: 3
+    collisionDamage: 2
+    isBoss: 0
+    isElite: 0

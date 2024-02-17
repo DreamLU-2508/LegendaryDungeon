@@ -4,6 +4,19 @@ using UnityEngine;
 
 namespace DreamLU
 {
+    [System.Serializable]
+    public class EnemyStat
+    {
+        public int maxHealth;
+        public int damageBase;
+        public float moveSpeed;
+        
+        public int collisionDamage;
+        
+        public bool isBoss;
+        public bool isElite;
+    }
+    
     [CreateAssetMenu(fileName = "Enemey_", menuName = "Database/Enemy/Enemy Data")]
     public class EnemeyData : ScriptableObject
     {
@@ -11,13 +24,9 @@ namespace DreamLU
         public string enemyName;
         public GameObject prefab;
 
-        public int enemyMaxHeath;
-        public float enemySpeed;
-        public bool isBoss;
-        public bool isElite;
-
         public WeaponID weaponID;
-        public int collisionDamage;
+        
+        public EnemyStat stat;
     }
 
 }

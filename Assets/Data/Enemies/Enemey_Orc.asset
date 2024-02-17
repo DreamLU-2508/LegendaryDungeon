@@ -15,5 +15,11 @@ MonoBehaviour:
   enemeyID: 1
   enemyName: Orc
   prefab: {fileID: 6950451559058744187, guid: 4b4038c5690a48c449b56cf2f70ffa6c, type: 3}
-  enemySpeed: 2
-  ammoData: {fileID: 0}
+  weaponID: 0
+  stat:
+    maxHealth: 10
+    damageBase: 3
+    moveSpeed: 3
+    collisionDamage: 2
+    isBoss: 0
+    isElite: 0

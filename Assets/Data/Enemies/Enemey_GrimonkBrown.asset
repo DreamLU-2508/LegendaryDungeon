@@ -15,4 +15,11 @@ MonoBehaviour:
   enemeyID: 1
   enemyName: Grimonk Brown
   prefab: {fileID: 1663180384312432028, guid: 7aa32e1e602ef5e4b8420a61696ff0ca, type: 3}
-  enemySpeed: 2
+  weaponID: 0
+  stat:
+    maxHealth: 10
+    damageBase: 3
+    moveSpeed: 3
+    collisionDamage: 2
+    isBoss: 0
+    isElite: 0
