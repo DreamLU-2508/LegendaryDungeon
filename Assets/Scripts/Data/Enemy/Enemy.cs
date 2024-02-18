@@ -132,9 +132,8 @@ namespace DreamLU
 
         public void ShutDown()
         {
-            this.gameObject.SetActive(false);
             isDie = true;
-            Destroy(this.gameObject);
+            PoolManager.Release(this.gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -143,7 +142,7 @@ namespace DreamLU
             if (ammo != null)
             {
                 int damage = weaponProvider.GetWeaponDamage(heroPositionProvider.WeaponData);
-
+                Debug.LogError(damage);
                 if(damage > 0)
                 {
                     health -= damage;
@@ -154,12 +153,12 @@ namespace DreamLU
                 }
             }
 
-            //var character = collision.GetComponent<Character>();
-            //if (character != null)
-            //{
-            //    int damage = _enemeyData.collisionDamage;
-            //    characterActor.AddDamage(damage);
-            //}
+            var character = collision.GetComponent<Character>();
+            if (character != null)
+            {
+                int damage = _enemeyData.stat.collisionDamage;
+                characterActor.AddDamage(damage);
+            }
         }
 
         private void OnTriggerStay2D(Collider2D collision)

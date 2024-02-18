@@ -15,6 +15,8 @@ namespace DreamLU
         [SerializeField, ShowIf("isDemo")] private Vector2 minMaxX;
         [SerializeField, ShowIf("isDemo")] private Vector2 minMaxY;
 
+        [Header("Pool")] [SerializeField] private string nameParentPool;
+
         [ShowInInspector, ReadOnly]
         List<Enemy> enemies = new List<Enemy>();
 
@@ -24,6 +26,7 @@ namespace DreamLU
         private float timeCount  = 0;
         private float spawnTime = 0;
         private Room _currentRoom;
+        private Transform parentTransform;
 
         public event System.Action<int> OnKillEnemy;
         public event System.Action<Room> OnClear;
@@ -42,6 +45,7 @@ namespace DreamLU
         private void Awake()
         {
             _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
+            PoolManager.RegisterParent(nameParentPool, out parentTransform);
         }
 
         private void Start()
@@ -56,29 +60,43 @@ namespace DreamLU
 
             if (!isSpawnEnemy) return;
 
-            if (isDemo)
+            // if (isDemo)
+            // {
+            //     if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.LeftControl))
+            //     {
+            //         if(spawnPositionArray != null && spawnPositionArray.Length > 0)
+            //         {
+            //             SpawnEnemy();
+            //         }
+            //     }
+            //
+            //     if (enemies.Count > 0)
+            //     {
+            //         int count = 0;
+            //         foreach (Enemy enemy in enemies)
+            //         {
+            //             if (enemy == null)
+            //             {
+            //                 count += 1;
+            //             }
+            //         }
+            //         OnKillEnemy?.Invoke(count);
+            //         enemies.RemoveAll(x => x == null);
+            //     }
+            // }
+            
+            if (enemies.Count > 0)
             {
-                if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.LeftControl))
+                int count = 0;
+                foreach (Enemy enemy in enemies)
                 {
-                    if(spawnPositionArray != null && spawnPositionArray.Length > 0)
+                    if (enemy.IsDie)
                     {
-                        SpawnEnemy();
+                        count += 1;
                     }
                 }
-
-                if (enemies.Count > 0)
-                {
-                    int count = 0;
-                    foreach (Enemy enemy in enemies)
-                    {
-                        if (enemy == null)
-                        {
-                            count += 1;
-                        }
-                    }
-                    OnKillEnemy?.Invoke(count);
-                    enemies.RemoveAll(x => x == null);
-                }
+                OnKillEnemy?.Invoke(count);
+                enemies.RemoveAll(x => x.IsDie);
             }
 
             if(enemyAmount > 0 && timeCount >= spawnTime && enemies.Count < _gameStateProvider.GameConfig.maxSpawnEnemyInRoom)
@@ -114,9 +132,9 @@ namespace DreamLU
 
             Vector3Int cellPosition = (Vector3Int)spawnPositionArray[Random.Range(0, spawnPositionArray.Length)];
             int id = Random.Range(0, manifest.list.Count);
-            GameObject newObj = Instantiate(manifest.list[id].prefab);
+            
+            GameObject newObj = PoolManager.GetPool(manifest.list[id].prefab, parentTransform).RetrieveObject(_currentRoom.Grid.CellToWorld(cellPosition), Quaternion.identity, parentTransform);
             Enemy enemy = newObj.GetComponent<Enemy>();
-            enemy.transform.position = _currentRoom.Grid.CellToWorld(cellPosition);
             enemy.EnemySetup(manifest.list[id]);
             enemies.Add(enemy);
         }
@@ -137,7 +155,7 @@ namespace DreamLU
                 {
                     if(enemy != null)
                     {
-                        Destroy(enemy.gameObject);
+                        PoolManager.Release(enemy.gameObject);
                     }
                 }
                 enemies.Clear();
