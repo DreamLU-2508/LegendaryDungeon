@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -88,8 +87,8 @@ namespace DreamLU
             }                        
         }
         
-        public QuickPool CreatePool(GameObject prefab, int preloadCount, int capacity) {
-            QuickPool pool = new QuickPool(prefab, currentTransform, preloadCount, capacity);
+        public QuickPool CreatePool(GameObject prefab, Transform parentTransform, int preloadCount, int capacity) {
+            QuickPool pool = new QuickPool(prefab, parentTransform, preloadCount, capacity);
             pools.Add(pool.ID, pool);
             return pool;
         }
@@ -104,7 +103,7 @@ namespace DreamLU
             return Instance.namedPools.ContainsKey(name) ? Instance.namedPools[name] : null;
         }
         
-        public static QuickPool GetPool(GameObject prefab)
+        public static QuickPool GetPool(GameObject prefab, Transform parentTransform = null)
         {
             int poolID = prefab.GetInstanceID();
             if (Instance.pools.ContainsKey(poolID))
@@ -113,7 +112,7 @@ namespace DreamLU
             }
             else
             {
-                return Instance.CreatePool(prefab,0,0);
+                return Instance.CreatePool(prefab, parentTransform == null ? Instance.CurrentTransform : parentTransform,0,0);
             }
         }
         
@@ -121,6 +120,37 @@ namespace DreamLU
         {
             var comp = pooledObject.GetComponent<PoolInstanceID>();
             GetPool(comp.poolID).ReleaseObject(pooledObject);
+        }
+
+        public static void RegisterParent(string nameParent, out Transform transformParent)
+        {
+            transformParent = null;
+
+            var gameObject = new GameObject(nameParent);
+            gameObject.transform.SetParent(Instance.currentTransform);
+            transformParent = gameObject.transform;
+        }
+
+        [Button]
+        public void TestRegisterParent(string name, bool isDestroy)
+        {
+            if (isDestroy)
+            {
+                var gO = GameObject.Find(name);
+                if (gO != null)
+                {
+                    Destroy(gO);
+                    Debug.LogError("Destroy");
+                }
+                else
+                {
+                    Debug.LogError("Not Found");
+                }
+            }
+            else
+            {
+                RegisterParent(name, out var transformParent);
+            }
         }
     }
 }
