@@ -13,7 +13,10 @@ namespace DreamLU
 
         [Header("Boss setup")]
         public bool isLevelBoss;
-        [ShowIf("isLevelBoss")] public int bossDamageBonus;
-        [ShowIf("isLevelBoss")] public int bossHPBonus;
+        [ShowIf("isLevelBoss")] public float bossDamageBonus;
+        [ShowIf("isLevelBoss")] public float bossHPBonus;
+
+        [Header("Enemy Config")] 
+        public List<EnemeyData> enemeyDatas;
     }
 }

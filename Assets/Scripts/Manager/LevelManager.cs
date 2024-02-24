@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -55,8 +56,14 @@ namespace DreamLU
         private void LoadMap()
         {
             LevelData level = CurrentLevelData;
+            Debug.LogError(level.name);
 
             _dungeonBuilder.GenerateDungeon(level);
+        }
+
+        private void Update()
+        {
+            
         }
     }
 }
