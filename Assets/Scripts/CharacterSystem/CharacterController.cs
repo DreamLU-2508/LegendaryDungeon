@@ -14,16 +14,20 @@ namespace DreamLU
         private Character character;
         private Camera _camera;
         private FireWeapon fireWeapon;
+        private IPauseGame _pauseGame;
 
         private void Awake()
         {
             character = GetComponent<Character>();
             _camera = Camera.main;
             fireWeapon = GetComponent<FireWeapon>();
+            _pauseGame = CoreLifetimeScope.SharedContainer.Resolve<IPauseGame>();
         }
 
         private void Update()
         {
+            if(_pauseGame.IsPausedGame) return;
+            
             HandleMovement();
 
             HandleAim(weaponShootPosition);
