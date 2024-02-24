@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -15,7 +16,7 @@ namespace DreamLU
     }
 
     [DefaultExecutionOrder(-101)]
-    public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider
+    public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider, IPauseGame 
     {
         [SerializeField] private CharacterData defaultHeroData;
         [SerializeField] private GameStateMachine gameStateMachine;
@@ -118,6 +119,18 @@ namespace DreamLU
                 if (Input.GetKeyDown(KeyCode.V))
                 {
                     ProceedToEndLevel();
+                }
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (gameStateMachine.IsState(StateID.Normal))
+                {
+                    gameStateMachine.ChangeState(StateID.Pause, () => { PauseGame(); });
+                }
+                else if (gameStateMachine.IsState(StateID.Pause))
+                {
+                    UnpauseGame();
                 }
             }
         }
@@ -228,6 +241,11 @@ namespace DreamLU
 
         public void GotoMainMenu()
         {
+            if (isPaused)
+            {
+                UnpauseGame();
+            }
+            
             _dungeonBuilder.ClearDungeon();
             PoolManager.Instance.DestroyAllPools();
             if (_character != null)
@@ -245,5 +263,32 @@ namespace DreamLU
 
             gameStateMachine.ChangeState(StateID.GameStart);
         }
+
+        #region Pause
+
+        private bool isPaused = false;
+        public bool IsPausedGame => isPaused;
+        
+        public event Action OnPauseGame;
+        public event Action OnUnpauseGame;
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+            OnPauseGame?.Invoke();
+        }
+
+        public void UnpauseGame()
+        {
+            gameStateMachine.ChangeState(StateID.Normal, () =>
+            {
+                isPaused = false;
+                Time.timeScale = 1;
+                OnUnpauseGame?.Invoke();
+            });
+        }
+
+        #endregion
     }
 }
