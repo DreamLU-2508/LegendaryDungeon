@@ -38,6 +38,7 @@ namespace DreamLU
         private CharacterData characterData;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
+        [ShowInInspector, ReadOnly]
         public Transform HeroTransform => targetTransform;
 
         [ShowInInspector, ReadOnly]
@@ -110,41 +111,15 @@ namespace DreamLU
         // Update is called once per frame
         void Update()
         {
-            //CharacterUtilities.GetMouseWorldPosition(_camera);
-            if (_gameConfig.target == PlayTarget.Demo)
+            // Debug.LogError(CurrentMasterGameState);
+            
+            if (_gameConfig.enableCheat)
             {
-                //if (Input.GetKeyDown(KeyCode.G) && Input.GetKey(KeyCode.LeftControl))
-                //{
-                //    if (_dungeonBuilder.GenerateDungeon())
-                //    {
-                //        // If PlayTarget is Demo, init character
-                //        gameStateMachine.ChangeState(StateID.Normal);
-                //        if (_character != null)
-                //        {
-                //            _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
-                //            SetCameraFollow(targetTransform, 1);
-                //        }
-                //        else
-                //        {
-                //            InitializeCharacter(defaultHeroData);
-                //        }
-                //        _enemyManager.OnStopSpawnEnemy();
-                //    }
-                //}
-                    
-            }
-            else
-            {
-                if (_gameConfig.enableCheat)
+                if (Input.GetKeyDown(KeyCode.V))
                 {
-                    if (Input.GetKeyDown(KeyCode.V))
-                    {
-                        ProceedToEndLevel();
-                    }
+                    ProceedToEndLevel();
                 }
             }
-
-            
         }
 
         private void InitializeCharacter(CharacterData character)
@@ -231,25 +206,44 @@ namespace DreamLU
         {
             int nextLevel = levelManager.CurrentLevel + 1;
 
-            gameStateMachine.ChangeState(StateID.StageVictory, () =>
-            {
-                _dungeonBuilder.ClearDungeon();
-            });
-
             // test
             if (nextLevel > _gameConfig.maxLevel)
             {
-                // End Game
-                Debug.LogError("End Game");
+                gameStateMachine.ChangeState(StateID.StageVictory);
             }
             else
             {
+                gameStateMachine.ChangeState(StateID.Victory, () =>
+                {
+                    _dungeonBuilder.ClearDungeon();
+                });
+                
                 gameStateMachine.ChangeState(StateID.Normal, () =>
                 {
                     levelManager.LoadLevel(nextLevel);
                     targetTransform.position = _dungeonBuilder.GetPositionRoomEntrance();
                 });
             }
+        }
+
+        public void GotoMainMenu()
+        {
+            _dungeonBuilder.ClearDungeon();
+            PoolManager.Instance.DestroyAllPools();
+            if (_character != null)
+            {
+                Destroy(_character.gameObject);
+                _character = null;
+            }
+            
+            // int Skill
+            _characterSkill = new CharacterSkill()
+            {
+                defaultSkill = CharacterActionID.None,
+                ultimateSkill = CharacterActionID.None
+            };
+
+            gameStateMachine.ChangeState(StateID.GameStart);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace DreamLU
         public GameConfig GameConfig { get; }
 
         public void ProceedToEndLevel();
+
+        public void GotoMainMenu();
     }
 }

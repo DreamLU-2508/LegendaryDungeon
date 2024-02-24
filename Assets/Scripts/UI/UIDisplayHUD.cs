@@ -23,12 +23,15 @@ namespace DreamLU
 
         private CharacterManager characterManager;
         private LDGameManager gameManager;
+        private GameStateMachine _gameStateMachine;
 
         private void Awake()
         {
             characterManager = FindObjectOfType<CharacterManager>();
             gameManager = FindObjectOfType<LDGameManager>();
+            _gameStateMachine = GameStateMachine.Instance;
 
+            _gameStateMachine.onStateEnter += OnStateEnter;
             characterManager.OnInitCharacter += Setup;
             characterManager.OnUpdateHealth += () =>
             {
@@ -47,8 +50,6 @@ namespace DreamLU
 
         private void Setup()
         {
-            this.gameObject.SetActive(true);
-
             SetUIProgressBar(barHealth, 1);
             SetUIProgressBar(manaHealth, 1);
 
@@ -67,6 +68,18 @@ namespace DreamLU
         private void SetText(TextMeshProUGUI textMeshPro, int max, int current)
         {
             textMeshPro.text = $"{current}/{max}";
+        }
+
+        public void OnStateEnter(StateID stateID)
+        {
+            if (stateID == StateID.Normal || stateID == StateID.StageVictory || stateID == StateID.Victory)
+            {
+                this.gameObject.SetActive(true);
+            }
+            else
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }

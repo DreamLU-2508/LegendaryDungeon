@@ -56,8 +56,6 @@ namespace DreamLU
         private void LoadMap()
         {
             LevelData level = CurrentLevelData;
-            Debug.LogError(level.name);
-
             _dungeonBuilder.GenerateDungeon(level);
         }
 
