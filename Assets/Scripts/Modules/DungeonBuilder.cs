@@ -47,7 +47,7 @@ namespace DreamLU
                 RoomNodeGraph nodeGraph = null;
                 if (levelData.isLevelBoss)
                 {
-                    nodeGraph = roomNodeGraphManifest.listRoomBoss[Random.Range(0, roomNodeGraphManifest.listRoomNormal.Count)];
+                    nodeGraph = roomNodeGraphManifest.listRoomBoss[Random.Range(0, roomNodeGraphManifest.listRoomBoss.Count)];
                 }
                 else
                 {

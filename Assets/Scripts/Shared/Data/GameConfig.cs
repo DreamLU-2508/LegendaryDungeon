@@ -18,5 +18,7 @@ namespace DreamLU
         public float distanceFollowCharacter = 10f;
         public float maxSpawnEnemyInRoom = 10;
 
+        [Header("Level Config")] 
+        public int maxLevel;
     }
 }

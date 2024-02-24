@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62a29dde931137548a0be590fed4159f, type: 2}
   - {fileID: 11400000, guid: e82e81db5c579ee469be6dc61e414b4b, type: 2}
   listRoomBoss:
-  - {fileID: 11400000, guid: c3f7138699ab9e34a8441dcd25026b62, type: 2}
+  - {fileID: 11400000, guid: ee3daae1ccfbce3498e51b43bbf86eed, type: 2}

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: LV_15_Boss_3
   m_EditorClassIdentifier: 
   level: 15
-  isLevelBoss: 0
-  bossDamageBonus: 0
-  bossHPBonus: 0
+  isLevelBoss: 1
+  bossDamageBonus: 0.3
+  bossHPBonus: 0.3
+  enemeyDatas:
+  - {fileID: 11400000, guid: aa3e6079efb06c442874df8b8f73fd78, type: 2}
+  - {fileID: 11400000, guid: b8c54eeaf0b384a499e6412d6b6d1cf0, type: 2}
+  - {fileID: 11400000, guid: 756d1e4f70ecfad4cbff47c19cf92920, type: 2}

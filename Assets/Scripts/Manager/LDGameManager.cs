@@ -237,11 +237,19 @@ namespace DreamLU
             });
 
             // test
-            gameStateMachine.ChangeState(StateID.Normal, () =>
+            if (nextLevel > _gameConfig.maxLevel)
             {
-                levelManager.LoadLevel(nextLevel);
-                targetTransform.position = _dungeonBuilder.GetPositionRoomEntrance();
-            });
+                // End Game
+                Debug.LogError("End Game");
+            }
+            else
+            {
+                gameStateMachine.ChangeState(StateID.Normal, () =>
+                {
+                    levelManager.LoadLevel(nextLevel);
+                    targetTransform.position = _dungeonBuilder.GetPositionRoomEntrance();
+                });
+            }
         }
     }
 }

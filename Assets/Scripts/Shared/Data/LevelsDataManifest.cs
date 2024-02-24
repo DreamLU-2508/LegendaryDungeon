@@ -8,7 +8,10 @@ namespace DreamLU
     [CreateAssetMenu(menuName = "Database/Level/LevelsDataManifest")]
     public class LevelsDataManifest : ScriptableObject
     {
-       public List<LevelData> levels;
+        public float protoHealthModPerLevel = 0.2f;
+        public float protoDamageModPerLevel = 0.2f;
+        
+        public List<LevelData> levels;
 
         public LevelData GetLevelData(int level)
         {
