@@ -49,6 +49,14 @@ namespace DreamLU
         [Button]
         public void DestroyAllPools()
         {
+            var poolsInstance = this.GetComponentsInChildren<PoolInstanceID>(true);
+            if (poolsInstance != null)
+            {
+                foreach (var poolInstance in poolsInstance)
+                {
+                    Destroy(poolInstance.gameObject);
+                }
+            }
             pools.Clear();
         }
         
