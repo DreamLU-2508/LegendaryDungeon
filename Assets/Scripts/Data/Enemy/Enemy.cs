@@ -22,10 +22,12 @@ namespace DreamLU
         private EnemeyData _enemeyData;
         private bool isDie = true;
         private bool canFire = false;
+        private float moveSpeed;
 
         private IWeaponProvider weaponProvider;
         private IHeroPositionProvider heroPositionProvider;
         private ICharacterActor characterActor;
+        private IEnemyProvider _enemyProvider;
 
         public EnemeyData Data => _enemeyData;
         public bool CanFire
@@ -34,6 +36,8 @@ namespace DreamLU
             set { canFire = value; }
         }
         public bool IsDie => isDie;
+
+        public float MoveSpeed => moveSpeed;
 
         private int health = 10;
 
@@ -44,6 +48,7 @@ namespace DreamLU
             weaponProvider = CoreLifetimeScope.SharedContainer.Resolve<IWeaponProvider>();
             heroPositionProvider = CoreLifetimeScope.SharedContainer.Resolve<IHeroPositionProvider>();
             characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
+            _enemyProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemyProvider>();
         }
 
         void Start()
@@ -57,6 +62,7 @@ namespace DreamLU
             _enemeyData = enemyData;
             isDie = false;
             health = _enemeyData.stat.maxHealth;
+            moveSpeed = _enemyProvider.GetEnemyMoveSpeed(_enemeyData);
         }
 
         public void SetIdle()

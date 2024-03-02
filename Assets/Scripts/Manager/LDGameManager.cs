@@ -3,6 +3,7 @@ using Cinemachine;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using DreamLU.AStar;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -30,6 +31,10 @@ namespace DreamLU
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
+
+        [Header("AStar Test")] 
+        [SerializeField] private bool isTestAStar;
+        [SerializeField] private AStarTest aStarTest;
 
         public static LDGameManager Instance;
 
@@ -264,6 +269,15 @@ namespace DreamLU
             gameStateMachine.ChangeState(StateID.GameStart);
         }
 
+        public void OnEnterRoom(Room roomData)
+        {
+            _enemyManager.OnEnterRoom(roomData);
+            if (isTestAStar)
+            {
+                aStarTest.OnRoomChanged(roomData);
+            }
+        }
+
         #region Pause
 
         private bool isPaused = false;
@@ -290,5 +304,26 @@ namespace DreamLU
         }
 
         #endregion
+        
+        /// <summary>
+        /// Get the mouse world position.
+        /// </summary>
+        public Vector3 GetMouseWorldPosition()
+        {
+            if (_camera == null) _camera = Camera.main;
+
+            Vector3 mouseScreenPosition = Input.mousePosition;
+
+            // Clamp mouse position to screen size
+            mouseScreenPosition.x = Mathf.Clamp(mouseScreenPosition.x, 0f, Screen.width);
+            mouseScreenPosition.y = Mathf.Clamp(mouseScreenPosition.y, 0f, Screen.height);
+
+            Vector3 worldPosition = _camera.ScreenToWorldPoint(mouseScreenPosition);
+
+            worldPosition.z = 0f;
+
+            return worldPosition;
+
+        }
     }
 }

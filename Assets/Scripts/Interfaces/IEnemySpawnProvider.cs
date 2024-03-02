@@ -6,8 +6,6 @@ namespace DreamLU
 {
     public interface IEnemySpawnProvider
     {
-        public void OnEnterRoom(Room roomData);
-
         public Room CurrentRoom { get; }
 
         public event System.Action<int> OnKillEnemy;

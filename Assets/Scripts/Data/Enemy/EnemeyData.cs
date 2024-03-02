@@ -15,6 +15,9 @@ namespace DreamLU
         
         public bool isBoss;
         public bool isElite;
+
+        [Header("Chase Distance")]
+        public float chaseDistance;
     }
     
     [CreateAssetMenu(fileName = "Enemey_", menuName = "Database/Enemy/Enemy Data")]
