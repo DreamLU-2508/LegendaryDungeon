@@ -6,7 +6,7 @@ using VContainer;
 
 namespace DreamLU
 {
-    public class EnemyManager : MonoBehaviour, IEnemySpawnProvider
+    public class EnemyManager : MonoBehaviour, IEnemySpawnProvider, IEnemyProvider
     {
         [SerializeField] private EnemeyDataManifest manifest;
         [SerializeField] private bool isDemo;
@@ -160,6 +160,11 @@ namespace DreamLU
                 }
                 enemies.Clear();
             }
+        }
+
+        public float GetEnemyMoveSpeed(EnemeyData enemeyData)
+        {
+            return enemeyData.stat.moveSpeed; 
         }
     }
 

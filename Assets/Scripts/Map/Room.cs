@@ -18,8 +18,14 @@ namespace DreamLU
         private Tilemap minimapTilemap;
         private GameObject _vfxTelepos;
         private bool isCreateTelepos;
+        
+        [ShowInInspector, ReadOnly]
+        private int[,] aStarMovementPenalty;  // use this 2d array to store movement penalties from the tilemaps to be used in AStar pathfinding
+        [ShowInInspector, ReadOnly]
+        private int[,] aStarItemObstacles; // use to store position of moveable items that are obstacles
 
         private IEnemySpawnProvider _enemySpawnProvider;
+        private IGameStateProvider _gameStateProvider;
 
         public System.Action<Room> OnEnterRoom;
         public System.Action<Room> OnExitRoom;
@@ -28,10 +34,14 @@ namespace DreamLU
         [ShowInInspector, ReadOnly] public bool IsClear => _room.IsClearEnemy;
         public Grid Grid => grid;
 
+        public int[,] AStarMovementPenalty => aStarMovementPenalty;
+        public int[,] AStarItemObstacles => aStarItemObstacles;
+
         private void Awake()
         {
             _enemySpawnProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemySpawnProvider>();
-            OnEnterRoom += _enemySpawnProvider.OnEnterRoom;
+            _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
+            OnEnterRoom += _gameStateProvider.OnEnterRoom;
             _enemySpawnProvider.OnKillEnemy += OnKillEnemyInRoom;
         }
 
@@ -47,6 +57,52 @@ namespace DreamLU
             PopulateTilemapMemberVariables(gameObject);
             BlockOffUnusedDoorWays();
             AddDoors();
+            AddObstaclesAndPreferredPaths();
+            CreateItemObstaclesArray();
+            UpdateMoveableObstacles();
+            
+            if (_room.RoomType == RoomType.Entrance)
+            {
+                OnEnterRoom.Invoke(this);
+            }
+        }
+        
+        /// <summary>
+        /// Update the array of moveable obstacles
+        /// </summary>
+        public void UpdateMoveableObstacles()
+        {
+            InitializeItemObstaclesArray();
+
+            // foreach (MoveItem moveItem in moveableItemsList)
+            // {
+            //     Vector3Int colliderBoundsMin = grid.WorldToCell(moveItem.boxCollider2D.bounds.min);
+            //     Vector3Int colliderBoundsMax = grid.WorldToCell(moveItem.boxCollider2D.bounds.max);
+            //
+            //     // Loop through and add moveable item collider bounds to obstacle array
+            //     for (int i = colliderBoundsMin.x; i <= colliderBoundsMax.x; i++)
+            //     {
+            //         for (int j = colliderBoundsMin.y; j <= colliderBoundsMax.y; j++)
+            //         {
+            //             aStarItemObstacles[i - _room.TemplateLowerBounds.x, j - _room.TemplateLowerBounds.y] = 0;
+            //         }
+            //     }
+            // }
+        }
+        
+        /// <summary>
+        /// Initialize Item Obstacles Array With Default AStar Movement Penalty Values
+        /// </summary>
+        private void InitializeItemObstaclesArray()
+        {
+            for (int x = 0; x < (_room.TemplateUpperBounds.x - _room.TemplateLowerBounds.x + 1); x++)
+            {
+                for (int y = 0; y < (_room.TemplateUpperBounds.y - _room.TemplateLowerBounds.y + 1); y++)
+                {
+                    // Set default movement penalty for grid sqaures
+                    aStarItemObstacles[x, y] = Settings.defaultAStarMovementPenalty;
+                }
+            }
         }
 
         private void BlockOffUnusedDoorWays()
@@ -265,7 +321,7 @@ namespace DreamLU
 
         private void OnDestroy()
         {
-            OnEnterRoom -= _enemySpawnProvider.OnEnterRoom;
+            OnEnterRoom -= _gameStateProvider.OnEnterRoom;
             _enemySpawnProvider.OnKillEnemy -= OnKillEnemyInRoom;
         }
 
@@ -281,6 +337,51 @@ namespace DreamLU
 
                 isCreateTelepos = true;
             }
+        }
+        
+        /// <summary>
+        /// Update obstacles used by AStar pathfinmding.
+        /// </summary>
+        private void AddObstaclesAndPreferredPaths()
+        {
+            // this array will be populated with wall obstacles 
+            aStarMovementPenalty = new int[_room.TemplateUpperBounds.x - _room.TemplateLowerBounds.x + 1, _room.TemplateUpperBounds.y - _room.TemplateLowerBounds.y + 1];
+
+
+            // Loop thorugh all grid squares
+            for (int x = 0; x < (_room.TemplateUpperBounds.x - _room.TemplateLowerBounds.x + 1); x++)
+            {
+                for (int y = 0; y < (_room.TemplateUpperBounds.y - _room.TemplateLowerBounds.y + 1); y++)
+                {
+                    // Set default movement penalty for grid sqaures
+                    aStarMovementPenalty[x, y] = Settings.defaultAStarMovementPenalty;
+
+                    // Add obstacles for collision tiles the enemy can't walk on
+                    TileBase tile = collisionTilemap.GetTile(new Vector3Int(x + _room.TemplateLowerBounds.x, y + _room.TemplateLowerBounds.y, 0));
+
+                    foreach (TileBase collisionTile in GameResources.Instance.enemyUnwalkableCollisionTilesArray)
+                    {
+                        if (tile == collisionTile)
+                        {
+                            aStarMovementPenalty[x, y] = 0;
+                            break;
+                        }
+                    }
+
+                    // Add preferred path for enemies (1 is the preferred path value, default value for
+                    // a grid location is specified in the Settings).
+                    if (tile == GameResources.Instance.preferredEnemyPathTile)
+                    {
+                        aStarMovementPenalty[x, y] = Settings.preferredPathAStarMovementPenalty;
+                    }
+                }
+            }
+        }
+        
+        private void CreateItemObstaclesArray()
+        {
+            // this array will be populated during gameplay with any moveable obstacles
+            aStarItemObstacles = new int[_room.TemplateUpperBounds.x - _room.TemplateLowerBounds.x + 1, _room.TemplateUpperBounds.y - _room.TemplateLowerBounds.y + 1];
         }
     }
 }

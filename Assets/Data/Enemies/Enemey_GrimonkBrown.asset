@@ -23,3 +23,4 @@ MonoBehaviour:
     collisionDamage: 2
     isBoss: 0
     isElite: 0
+    chaseDistance: 50

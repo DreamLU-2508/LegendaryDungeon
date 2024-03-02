@@ -11,5 +11,9 @@ namespace DreamLU
         public void ProceedToEndLevel();
 
         public void GotoMainMenu();
+
+        public void OnEnterRoom(Room roomData);
+
+        public Vector3 GetMouseWorldPosition();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace DreamLU
 {
@@ -22,6 +23,10 @@ namespace DreamLU
 
         [Header("Map")]
         public RoomNodeListType roomNodeListType;
+        
+        [Header("Special Tilemap Tiles")] 
+        public TileBase[] enemyUnwalkableCollisionTilesArray;
+        public TileBase preferredEnemyPathTile;
     }
 
 }
