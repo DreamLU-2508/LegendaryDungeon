@@ -35,6 +35,7 @@ namespace DreamLU
         private float _heroInvulnerableTimer = 0;
         private bool _isHeroDead;
         private CharacterStat _characterStat;
+        private List<CardData> _card = new();
 
         public Transform CharacterTransform => characterTransform;
 
@@ -50,6 +51,12 @@ namespace DreamLU
         {
             get => _isMovementLocked;
             set => _isMovementLocked = value;
+        }
+        
+        public bool IsActionLocked
+        {
+            get => _isActionLocked;
+            set => _isActionLocked = value;
         }
 
         [ShowInInspector, ReadOnly]
@@ -144,7 +151,7 @@ namespace DreamLU
             _character = characterTransform.GetComponent<Character>();
             _heroInvulnerableTimer = 0;
             _isHeroDead = false;
-
+            _card = new List<CardData>();
             _characterInitialized = true;
 
             OnInitCharacter?.Invoke();
@@ -192,6 +199,11 @@ namespace DreamLU
             _heroInvulnerableTimer = 0.3f;
         }
 
+        public void AddCard(CardData cardData)
+        {
+            _card.Add(cardData);
+        }
+
         #region Weapon
 
         public int GetWeaponDamage(WeaponData weaponData)
@@ -200,6 +212,13 @@ namespace DreamLU
         }
 
         #endregion
+
+        public void RebuildStat()
+        {
+            Debug.LogError("Hãy Rebuild lại Stat");
+        }
+        
+        
     }
 
 }

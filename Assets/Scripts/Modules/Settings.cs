@@ -30,4 +30,7 @@ public static class Settings
     public const float enemyPathRebuildCooldown = 2f;
 
     #endregion
+    
+    // Card Settings
+    public const int maxCardSelect = 3;
 }

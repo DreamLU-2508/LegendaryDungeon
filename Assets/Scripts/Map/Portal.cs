@@ -41,7 +41,7 @@ namespace DreamLU
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    _gameStateProvider.ProceedToEndLevel();
+                    _gameStateProvider.ProceedToSelectCard();
                 }
             }
         }

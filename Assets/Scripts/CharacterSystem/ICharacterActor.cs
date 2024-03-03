@@ -11,5 +11,9 @@ namespace DreamLU
         public bool IsMovementLocked { get; set; }
 
         public void AddDamage(int damage);
+
+        public void AddCard(CardData cardData);
+        
+        public bool IsActionLocked { get; set; }
     }
 }

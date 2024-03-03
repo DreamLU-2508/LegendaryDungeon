@@ -28,6 +28,8 @@ namespace DreamLU
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private LevelsDataManifest _levelsDataManifest;
         [SerializeField] private LevelManager levelManager;
+        [SerializeField] private CardManager _cardManager;
+        [SerializeField] private CharacterManager _characterManager;
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
@@ -74,6 +76,8 @@ namespace DreamLU
 
         // event
         public event System.Action OnInitializeCharacter;
+        public event System.Action OnStartGame;
+        public event System.Action OnEndGame;
 
         private void Awake()
         {
@@ -123,7 +127,7 @@ namespace DreamLU
             {
                 if (Input.GetKeyDown(KeyCode.V))
                 {
-                    ProceedToEndLevel();
+                    ProceedToSelectCard();
                 }
             }
             
@@ -215,7 +219,10 @@ namespace DreamLU
 
         public void StartRun(CharacterData characterData)
         {
-            gameStateMachine.ChangeState(StateID.Normal);
+            gameStateMachine.ChangeState(StateID.Normal, () =>
+            {
+                OnStartGame?.Invoke();
+            });
             levelManager.LoadLevel(1);
             InitializeCharacter(characterData);
         }
@@ -227,7 +234,10 @@ namespace DreamLU
             // test
             if (nextLevel > _gameConfig.maxLevel)
             {
-                gameStateMachine.ChangeState(StateID.StageVictory);
+                gameStateMachine.ChangeState(StateID.StageVictory, () =>
+                {
+                    OnEndGame?.Invoke();
+                });
             }
             else
             {
@@ -239,6 +249,7 @@ namespace DreamLU
                 gameStateMachine.ChangeState(StateID.Normal, () =>
                 {
                     levelManager.LoadLevel(nextLevel);
+                    _characterManager.RebuildStat();
                     targetTransform.position = _dungeonBuilder.GetPositionRoomEntrance();
                 });
             }
@@ -323,7 +334,33 @@ namespace DreamLU
             worldPosition.z = 0f;
 
             return worldPosition;
+        }
 
+        public void ProceedToSelectCard()
+        {
+            int nextLevel = levelManager.CurrentLevel + 1;
+
+            // test
+            if (nextLevel > _gameConfig.maxLevel)
+            {
+                gameStateMachine.ChangeState(StateID.StageVictory, () =>
+                {
+                    OnEndGame?.Invoke();
+                });
+            }
+            else
+            {
+                if (!_cardManager.CanSelectCard)
+                {
+                    ProceedToEndLevel();
+                    return;
+                }
+                
+                gameStateMachine.ChangeState(StateID.SelectCard, () =>
+                {
+                    _dungeonBuilder.ClearDungeon();
+                });
+            }
         }
     }
 }
