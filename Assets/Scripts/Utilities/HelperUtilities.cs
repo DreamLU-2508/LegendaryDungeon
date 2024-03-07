@@ -28,5 +28,20 @@ namespace DreamLU
 
             return false;
         }
+        
+        public static void ClearChildren(Transform tr, bool immediately)
+        {
+            for (int i = tr.childCount - 1; i >= 0; i--)
+            {
+                if (immediately)
+                {
+                    UnityEngine.Object.DestroyImmediate(tr.GetChild(i).gameObject);                
+                }
+                else
+                {
+                    UnityEngine.Object.Destroy(tr.GetChild(i).gameObject);
+                }
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace DreamLU
         private Camera _camera;
         private FireWeapon fireWeapon;
         private IPauseGame _pauseGame;
+        private ICharacterActor _characterActor;
 
         private void Awake()
         {
@@ -22,11 +23,14 @@ namespace DreamLU
             _camera = Camera.main;
             fireWeapon = GetComponent<FireWeapon>();
             _pauseGame = CoreLifetimeScope.SharedContainer.Resolve<IPauseGame>();
+            _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
         }
 
         private void Update()
         {
             if(_pauseGame.IsPausedGame) return;
+            
+            if(_characterActor.IsActionLocked || _characterActor.IsMovementLocked) return;
             
             HandleMovement();
 

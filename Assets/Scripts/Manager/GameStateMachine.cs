@@ -15,6 +15,7 @@ namespace DreamLU
         GameOver,
         Victory, // end dungeon
         StageVictory, // end game
+        SelectCard,
     }
 
     public class WaitingState

@@ -24,6 +24,8 @@ namespace DreamLU
         [Header("Skill")]
         public CharacterActionID defaultAction;
         public CharacterActionID ultimateAction;
+
+        [Header("Card Slot")] public int cardSlot = 3;
     }
 
 }
