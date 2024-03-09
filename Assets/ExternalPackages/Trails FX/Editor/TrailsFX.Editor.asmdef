@@ -1,0 +1,18 @@
+{
+    "name": "TrailsFX.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a04e79529a4e61d42a070398e9618522"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
