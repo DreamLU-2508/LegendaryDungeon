@@ -1,8 +1,10 @@
 namespace DreamLU
 {
-    public enum WeaponID
+    public enum ItemID
     {
         None,
+        
+        // Weapon
         Pistol1
     }
 }

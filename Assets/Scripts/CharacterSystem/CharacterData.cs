@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace DreamLU
 {
@@ -18,8 +19,8 @@ namespace DreamLU
         public Sprite handSprite;
         public AssetReference characterPrefab;
 
-        [Header("Starting Weapon")]
-        public WeaponID weaponID;
+        [FormerlySerializedAs("weaponID")] [Header("Starting Weapon")]
+        public ItemID itemID;
 
         [Header("Skill")]
         public CharacterActionID defaultAction;

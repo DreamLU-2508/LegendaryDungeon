@@ -9,12 +9,12 @@ namespace DreamLU
     {
         public List<WeaponData> weapons;
 
-        public bool TryGetWeapon(WeaponID weaponID, out WeaponData weapon)
+        public bool TryGetWeapon(ItemID itemID, out WeaponData weapon)
         {
             weapon = null;
             if (weapons != null)
             {
-                weapon = weapons.Find(x => x.weaponID == weaponID);
+                weapon = weapons.Find(x => x.itemID == itemID);
                 if(weapon != null)
                 {
                     return true;

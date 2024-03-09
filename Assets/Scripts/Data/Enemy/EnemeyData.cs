@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DreamLU
 {
@@ -27,7 +28,7 @@ namespace DreamLU
         public string enemyName;
         public GameObject prefab;
 
-        public WeaponID weaponID;
+        [FormerlySerializedAs("weaponID")] public ItemID itemID;
         
         public EnemyStat stat;
     }

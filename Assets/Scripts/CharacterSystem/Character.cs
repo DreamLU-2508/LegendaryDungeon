@@ -162,7 +162,7 @@ namespace DreamLU
         {
             this._weaponData = weaponData;
 
-            wpSprite.sprite = weaponData.weaponSprite;
+            wpSprite.sprite = weaponData.itemSprite;
             weaponShootPosition.localPosition = weaponData.weaponShootPosition;
             weaponShootSecondPosition.localPosition = weaponData.weaponShootPosition;
         }
@@ -170,7 +170,7 @@ namespace DreamLU
         public void SetupSecondWeapon()
         {
             useSkillDoubleGun = true;
-            wpSecondSprite.sprite = _weaponData.weaponSprite;
+            wpSecondSprite.sprite = _weaponData.itemSprite;
         }
 
         public void ShutDownSkillDoubleGun()

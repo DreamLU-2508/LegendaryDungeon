@@ -163,7 +163,7 @@ namespace DreamLU
             SetVirtualCameraDamping(1, 1, 1);
 
             // init wepon
-            if(_weaponDataManifest.TryGetWeapon(character.weaponID, out var wpData))
+            if(_weaponDataManifest.TryGetWeapon(character.itemID, out var wpData))
             {
                 _character.SetWeapon(wpData);
             }
