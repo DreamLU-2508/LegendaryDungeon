@@ -38,6 +38,7 @@ namespace DreamLU
         public void Hide()
         {
             this.gameObject.SetActive(false);
+            ResetPosition();
         }
 
         public void ResetPosition()
@@ -49,6 +50,9 @@ namespace DreamLU
                     slot.RestPostion();
                 }
             }
+
+            currentIndex = 0;
+            nameChar.text = list[currentIndex].CharacterData.characterName;
         }
 
         public void Next()
