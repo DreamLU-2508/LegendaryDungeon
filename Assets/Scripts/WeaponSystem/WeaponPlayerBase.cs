@@ -67,7 +67,7 @@ namespace DreamLU
         {
             _isInAction = true;
             // _statProvider.ItemActionBegin(_instancedItem);
-            _attackState = AttackState.Anticipate;
+            _attackState = AttackState.Attack;
             OnBeginAction?.Invoke();
         }
         
@@ -80,6 +80,7 @@ namespace DreamLU
         protected virtual void EndAction()
         {
             _isInAction = false;
+            _attackState = AttackState.Finish;
             OnEndAction?.Invoke();
         }
 
@@ -169,8 +170,8 @@ namespace DreamLU
         /// </summary>
         public virtual void Shutdown()
         {
-            this.gameObject.SetActive(false);
             _isShutdown = true;
+            EndAction();
         }
         
         public virtual void DestroySelf()
@@ -178,7 +179,7 @@ namespace DreamLU
             Destroy(this.gameObject);
         }
         
-        public virtual void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon)
+        public virtual void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon, Vector3 mousePos)
         {
         }
     }

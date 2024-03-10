@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4424f683a25874fb80f61f5c1ba659, type: 3}
+  m_Name: WP_Laser1
+  m_EditorClassIdentifier: 
+  itemID: 100
+  itemName: Laser Small
+  itemSprite: {fileID: -9020406824871800643, guid: 2262f408278271248889a3ea3c7e75bf, type: 3}
+  price: 0
+  tier: 0
+  weaponShootPosition: {x: 0.47, y: 0.1, z: 0}
+  weaponPrechargeTime: 0
+  ammoData: {fileID: 11400000, guid: ea9b5a797b5c0a849b9f345ffa1b2d3b, type: 2}
+  damage: 0
+  cooldown: 0
+  timeReload: 0
+  _weaponPlayerBasePrefab: {fileID: 743831342225749148, guid: 7bf3971427619a144a47f4ca42c92f60, type: 3}

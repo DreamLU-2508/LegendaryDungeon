@@ -14,6 +14,7 @@ namespace DreamLU
         private IGameStateProvider _gameStateProvider;
         private IEnemyProvider _enemyProvider;
         private IEnemySpawnProvider _enemySpawnProvider;
+        private ICharacterActor _characterActor;
         
         private Vector3 playerPosition;
         private bool chasePlayer;
@@ -29,6 +30,7 @@ namespace DreamLU
             _positionProvider = CoreLifetimeScope.SharedContainer.Resolve<IHeroPositionProvider>();
             _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
             _enemySpawnProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemySpawnProvider>();
+            _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             
             playerPosition = _positionProvider.GetTargetPosition();
@@ -36,7 +38,7 @@ namespace DreamLU
 
         private void Update()
         {
-            if (enemy.IsDie) return;
+            if (enemy.IsDie || _characterActor.IsHeroDead) return;
 
             MoveEnemy();
         }

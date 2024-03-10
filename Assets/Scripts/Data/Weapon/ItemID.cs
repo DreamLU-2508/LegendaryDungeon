@@ -5,6 +5,8 @@ namespace DreamLU
         None,
         
         // Weapon
-        Pistol1
+        Pistol1,
+        
+        Laser1 = 100,
     }
 }

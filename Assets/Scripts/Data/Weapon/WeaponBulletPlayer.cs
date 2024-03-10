@@ -6,7 +6,7 @@ namespace DreamLU
 {
     public class WeaponBulletPlayer : WeaponPlayerBase
     {
-        public override void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon)
+        public override void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon, Vector3 mousePos)
         {
             if(_weaponData == null) return;
 
