@@ -163,7 +163,7 @@ namespace DreamLU
             SetVirtualCameraDamping(1, 1, 1);
 
             // init wepon
-            if(_weaponDataManifest.TryGetWeapon(character.weaponID, out var wpData))
+            if(_weaponDataManifest.TryGetWeapon(character.itemID, out var wpData))
             {
                 _character.SetWeapon(wpData);
             }
@@ -215,6 +215,26 @@ namespace DreamLU
             }
 
             return _character.transform.position;
+        }
+
+        public Vector3 GetWeaponShootPosition()
+        {
+            if (_character == null)
+            {
+                return Vector3.zero;
+            }
+
+            return _character.GetWeaponShootPosition();
+        }
+
+        public Vector3 GetWeaponSecondShootPosition()
+        {
+            if (_character == null)
+            {
+                return Vector3.zero;
+            }
+
+            return _character.GetWeaponSecondShootPosition();
         }
 
         public void StartRun(CharacterData characterData)

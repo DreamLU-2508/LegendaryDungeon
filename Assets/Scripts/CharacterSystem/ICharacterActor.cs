@@ -4,6 +4,8 @@ namespace DreamLU
 {
     public interface ICharacterActor
     {
+        public bool IsHeroDead { get; set; }
+
         public Transform CharacterTransform { get; }
 
         public Animator CharacterAnimator { get; }
@@ -15,5 +17,7 @@ namespace DreamLU
         public void AddCard(CardData cardData);
         
         public bool IsActionLocked { get; set; }
+
+        public bool UseSkillDoubleGun { get; }
     }
 }

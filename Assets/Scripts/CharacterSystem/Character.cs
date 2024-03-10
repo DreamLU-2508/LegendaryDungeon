@@ -37,6 +37,7 @@ namespace DreamLU
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
 
         private WeaponData _weaponData;
+        private InstancedItem _instancedItem;
         private bool useSkillDoubleGun;
 
         public WeaponData WeaponData => _weaponData;
@@ -158,25 +159,62 @@ namespace DreamLU
             }
         }
 
+        private WeaponPlayerBase _player1 = null;
+        private WeaponPlayerBase _player2 = null;
         public void SetWeapon(WeaponData weaponData)
         {
             this._weaponData = weaponData;
+            _instancedItem = new InstancedItem(weaponData, weaponData.tier);
 
-            wpSprite.sprite = weaponData.weaponSprite;
+            wpSprite.sprite = weaponData.itemSprite;
             weaponShootPosition.localPosition = weaponData.weaponShootPosition;
             weaponShootSecondPosition.localPosition = weaponData.weaponShootPosition;
+
+            if (_player1 != null)
+            {
+                DestroyImmediate(_player1.gameObject);
+            }
+
+            _player1 = Instantiate(weaponData._weaponPlayerBasePrefab, weaponShootPosition);
+            _player1.SetData(_instancedItem);
+        }
+
+        public void ActiveWeaponPlayer(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector)
+        {
+            if (_player1 != null)
+            {
+                _player1.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, false);
+            }
+            
+            if (_player2 != null)
+            {
+                _player2.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, true);
+            }
         }
 
         public void SetupSecondWeapon()
         {
             useSkillDoubleGun = true;
-            wpSecondSprite.sprite = _weaponData.weaponSprite;
+            wpSecondSprite.sprite = _weaponData.itemSprite;
+            
+            if (_player2 != null)
+            {
+                DestroyImmediate(_player2.gameObject);
+            }
+
+            _player2 = Instantiate(_weaponData._weaponPlayerBasePrefab, weaponShootSecondPosition);
+            _player2.SetData(_instancedItem);
         }
 
         public void ShutDownSkillDoubleGun()
         {
             useSkillDoubleGun = false;
             wpSecondSprite.sprite = null;
+            
+            if (_player2 != null)
+            {
+                DestroyImmediate(_player2.gameObject);
+            }
         }
 
         public Vector3 GetWeaponShootPosition()

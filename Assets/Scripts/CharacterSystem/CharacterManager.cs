@@ -36,6 +36,12 @@ namespace DreamLU
         private bool _isHeroDead;
         private CharacterStat _characterStat;
         private List<CardData> _card = new();
+        
+        public bool IsHeroDead
+        {
+            get => _isHeroDead;
+            set => _isHeroDead = value;
+        }
 
         public Transform CharacterTransform => characterTransform;
 
@@ -57,6 +63,16 @@ namespace DreamLU
         {
             get => _isActionLocked;
             set => _isActionLocked = value;
+        }
+
+        public bool UseSkillDoubleGun
+        {
+            get
+            {
+                if (_character == null) return false;
+
+                return _character.UseSkillDoubleGun;
+            }
         }
 
         [ShowInInspector, ReadOnly]
@@ -209,6 +225,11 @@ namespace DreamLU
         public int GetWeaponDamage(WeaponData weaponData)
         {
             return weaponData.damage;
+        }
+
+        public float GetWeaponAttackSpeed(WeaponData weaponData, InstancedItem instancedItem)
+        {
+            return weaponData.cooldown;
         }
 
         #endregion

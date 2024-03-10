@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4424f683a25874fb80f61f5c1ba659, type: 3}
   m_Name: WP_Pistol1
   m_EditorClassIdentifier: 
-  weaponID: 1
-  weaponName: Pistol
+  itemID: 1
+  itemName: Pistol
+  itemSprite: {fileID: 21300000, guid: abbe40c4d6a803f42a7c4f53404a484d, type: 3}
   weaponShootPosition: {x: 1.115, y: 0.277, z: 0}
-  weaponSprite: {fileID: 21300000, guid: abbe40c4d6a803f42a7c4f53404a484d, type: 3}
   weaponPrechargeTime: 0
   ammoData: {fileID: 11400000, guid: dd4d26a399f53074d8abe1851c2e8600, type: 2}
   damage: 4
