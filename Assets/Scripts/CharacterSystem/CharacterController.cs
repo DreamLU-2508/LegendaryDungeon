@@ -79,14 +79,19 @@ namespace DreamLU
                 aimController.Aim2(playerAimDir, weaponAngle);
             }
 
-            ShootWeapon(weaponDirection, weaponAngle, playerAngle, playerAimDir);
+            ShootWeapon(weaponDirection, weaponAngle, playerAngle, playerAimDir, mouseWorldPos);
         }
 
-        private void ShootWeapon(Vector3 weaponDirection, float weaponAngle, float playerAngle, AimDirection playerAimDir)
+        private void ShootWeapon(Vector3 weaponDirection, float weaponAngle, float playerAngle, AimDirection playerAimDir, Vector3 mousePos)
         {
             if (Input.GetMouseButton(0))
             {
-                character.ActiveWeaponPlayer(playerAngle, weaponAngle, weaponDirection);
+                character.ActiveWeaponPlayer(playerAngle, weaponAngle, weaponDirection, mousePos);
+            }
+            
+            if (Input.GetMouseButtonUp(0))
+            {
+                character.ShutdownWeaponPlayer();
             }
         }
     }

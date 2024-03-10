@@ -179,18 +179,32 @@ namespace DreamLU
             _player1.SetData(_instancedItem);
         }
 
-        public void ActiveWeaponPlayer(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector)
+        public void ActiveWeaponPlayer(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, Vector3 mousePos)
         {
             if (_player1 != null)
             {
-                _player1.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, false);
+                _player1.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, false, mousePos);
             }
             
             if (_player2 != null)
             {
-                _player2.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, true);
+                _player2.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, true,mousePos);
             }
         }
+        
+        public void ShutdownWeaponPlayer()
+        {
+            if (_player1 != null)
+            {
+                _player1.Shutdown();
+            }
+            
+            if (_player2 != null)
+            {
+                _player2.Shutdown();
+            }
+        }
+        
 
         public void SetupSecondWeapon()
         {

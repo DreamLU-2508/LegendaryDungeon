@@ -26,6 +26,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  weaponID: 1
+  itemID: 100
   defaultAction: 1
   ultimateAction: 4
+  cardSlot: 3
