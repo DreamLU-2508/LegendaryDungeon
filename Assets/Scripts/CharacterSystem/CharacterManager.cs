@@ -119,8 +119,8 @@ namespace DreamLU
 
             if (_isHeroDead) {
                 Destroy(_character.gameObject);
-                Time.timeScale = 0;
                 _characterInitialized = false;
+                GameStateMachine.Instance.ChangeState(StateID.GameOver);
                 return;
             }
 
@@ -169,7 +169,9 @@ namespace DreamLU
             _isHeroDead = false;
             _card = new List<CardData>();
             _characterInitialized = true;
-
+            _isActionLocked = false;
+            _isMovementLocked = false;
+            // Time.timeScale = 1;
             OnInitCharacter?.Invoke();
         }
 
