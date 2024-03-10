@@ -217,6 +217,26 @@ namespace DreamLU
             return _character.transform.position;
         }
 
+        public Vector3 GetWeaponShootPosition()
+        {
+            if (_character == null)
+            {
+                return Vector3.zero;
+            }
+
+            return _character.GetWeaponShootPosition();
+        }
+
+        public Vector3 GetWeaponSecondShootPosition()
+        {
+            if (_character == null)
+            {
+                return Vector3.zero;
+            }
+
+            return _character.GetWeaponSecondShootPosition();
+        }
+
         public void StartRun(CharacterData characterData)
         {
             gameStateMachine.ChangeState(StateID.Normal, () =>

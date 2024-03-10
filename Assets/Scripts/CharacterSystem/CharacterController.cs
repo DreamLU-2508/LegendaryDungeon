@@ -13,7 +13,6 @@ namespace DreamLU
 
         private Character character;
         private Camera _camera;
-        private FireWeapon fireWeapon;
         private IPauseGame _pauseGame;
         private ICharacterActor _characterActor;
 
@@ -21,7 +20,6 @@ namespace DreamLU
         {
             character = GetComponent<Character>();
             _camera = Camera.main;
-            fireWeapon = GetComponent<FireWeapon>();
             _pauseGame = CoreLifetimeScope.SharedContainer.Resolve<IPauseGame>();
             _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
         }
@@ -88,7 +86,7 @@ namespace DreamLU
         {
             if (Input.GetMouseButton(0))
             {
-                fireWeapon.OnFire(playerAngle, weaponAngle, weaponDirection);
+                character.ActiveWeaponPlayer(playerAngle, weaponAngle, weaponDirection);
             }
         }
     }

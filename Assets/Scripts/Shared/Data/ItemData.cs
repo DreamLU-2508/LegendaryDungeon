@@ -10,5 +10,6 @@ namespace DreamLU
         public string itemName;
         public Sprite itemSprite;
         public int price;
+        public ItemRarity tier;
     }
 }

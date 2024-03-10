@@ -19,5 +19,8 @@ namespace DreamLU
         public int damage;
         public float cooldown;
         public int timeReload;
+
+        [Header("Weapon Player")] 
+        public WeaponPlayerBase _weaponPlayerBasePrefab;
     }
 }

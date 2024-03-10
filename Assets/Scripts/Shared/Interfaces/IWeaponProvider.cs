@@ -7,6 +7,8 @@ namespace DreamLU
     public interface IWeaponProvider
     {
         public int GetWeaponDamage(WeaponData weaponData);
+        
+        public float GetWeaponAttackSpeed(WeaponData weaponData, InstancedItem instancedItem);
     }
 
 }

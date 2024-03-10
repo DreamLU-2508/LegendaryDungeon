@@ -10,5 +10,8 @@ namespace DreamLU
         public WeaponData WeaponData { get; }
 
         public Vector3 GetTargetPosition();
+
+        public Vector3 GetWeaponShootPosition();
+        public Vector3 GetWeaponSecondShootPosition();
     }
 }
