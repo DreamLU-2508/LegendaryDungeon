@@ -19,5 +19,7 @@ namespace DreamLU
         public bool IsActionLocked { get; set; }
 
         public bool UseSkillDoubleGun { get; }
+
+        public void MinusMana(int manaConsumed, out bool isSuccess);
     }
 }

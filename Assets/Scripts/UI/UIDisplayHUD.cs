@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace DreamLU
@@ -10,10 +11,12 @@ namespace DreamLU
     public class UIDisplayHUD : MonoBehaviour
     {
         [SerializeField] private UIProgressBar barHealth;
-        [SerializeField] private UIProgressBar manaHealth;
+        [SerializeField] private UIProgressBar barShield;
+        [SerializeField] private UIProgressBar barMana;
 
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI textHealth;
+        [SerializeField] private TextMeshProUGUI textShield;
         [SerializeField] private TextMeshProUGUI textMana;
         [SerializeField] private TextMeshProUGUI nameCharacter;
 
@@ -39,10 +42,16 @@ namespace DreamLU
                 SetText(textHealth, characterManager.MaxHealth, characterManager.Health);
             };
 
+            characterManager.OnUpdateShield += () =>
+            {
+                SetUIProgressBar(barShield, (float)characterManager.Shield / (float)characterManager.MaxShield);
+                SetText(textShield, characterManager.MaxShield, characterManager.Shield);
+            };
+            
             characterManager.OnUpdateMana += () =>
             {
-                SetUIProgressBar(barHealth, (float)characterManager.Mana / (float)characterManager.MaxMana);
-                SetText(textHealth, characterManager.MaxMana, characterManager.Mana);
+                SetUIProgressBar(barMana, (float)characterManager.Mana / (float)characterManager.MaxMana);
+                SetText(textMana, characterManager.MaxMana, characterManager.Mana);
             };
 
             this.gameObject.SetActive(false);
@@ -51,10 +60,10 @@ namespace DreamLU
         private void Setup()
         {
             SetUIProgressBar(barHealth, 1);
-            SetUIProgressBar(manaHealth, 1);
+            SetUIProgressBar(barShield, 1);
 
             SetText(textHealth, characterManager.MaxHealth, characterManager.Health);
-            SetText(textMana, characterManager.MaxMana, characterManager.Mana);
+            SetText(textShield, characterManager.MaxHealth, characterManager.Shield);
 
             nameCharacter.text = gameManager.CharacterData.characterName;
             icon.sprite = gameManager.CharacterData.icon;

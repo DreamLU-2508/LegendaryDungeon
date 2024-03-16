@@ -22,4 +22,5 @@ MonoBehaviour:
   rotationSpeed: 1
   minMaxSpread: {x: 1, y: 1}
   minMaxSpawnAmount: {x: 0, y: 0}
+  manaConsumed: 1
   prefab: {fileID: 2496300576252047035, guid: d2f8ac5de29879f4283e4d915a25798f, type: 3}

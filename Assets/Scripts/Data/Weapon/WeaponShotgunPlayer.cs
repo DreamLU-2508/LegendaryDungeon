@@ -17,6 +17,9 @@ namespace DreamLU
             AmmoData ammoData = _weaponData.ammoData;
             if (ammoData != null && _isReady)
             {
+                _characterActor.MinusMana(ammoData.manaConsumed,out bool isSuccess);
+                if(!isSuccess) return;
+                
                 StartCooldown();
                 for (int i = 0; i < shots; i++)
                 {
@@ -51,5 +54,8 @@ namespace DreamLU
                 ammo.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
             }
         }
+        
+        
+        
     }
 }

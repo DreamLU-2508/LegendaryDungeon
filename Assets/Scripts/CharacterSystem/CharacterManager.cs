@@ -28,8 +28,10 @@ namespace DreamLU
         private CharacterSkill _characterSkill;
         private int health;
         private int mana;
+        private int shield;
         private int maxMana;
         private int maxHealth;
+        private int maxShield;
         private CharacterData characterData;
         private Character _character;
         private float _heroInvulnerableTimer = 0;
@@ -85,8 +87,22 @@ namespace DreamLU
                 OnUpdateHealth?.Invoke();
             }
         } 
+        
+        [ShowInInspector, ReadOnly]
+        public int Shield
+        {
+            get { return shield; }
+            set 
+            { 
+                shield = value;
+                OnUpdateShield?.Invoke();
+            }
+        } 
         [ShowInInspector, ReadOnly]
         public int MaxHealth => maxHealth;
+        
+        [ShowInInspector, ReadOnly]
+        public int MaxShield => maxShield;
 
         [ShowInInspector, ReadOnly]
         public int Mana
@@ -104,6 +120,7 @@ namespace DreamLU
         // Action
         public event System.Action OnInitCharacter;
         public event System.Action OnUpdateHealth;
+        public event System.Action OnUpdateShield;
         public event System.Action OnUpdateMana;
 
         private void Awake()
@@ -143,11 +160,27 @@ namespace DreamLU
                     _heroInvulnerableTimer -= Time.deltaTime;
                 }
 
+                ShieldRecovery();
+
                 // cheat
                 if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift))
                 {
                     AddDamage(1);
                 }
+            }
+        }
+
+        private float timeShieldRecovery = 0;
+        private void ShieldRecovery()
+        {
+            if(this.shield >= maxShield) return;
+            
+            timeShieldRecovery -= Time.deltaTime;
+
+            if (timeShieldRecovery <= 0)
+            {
+                Shield = this.shield + 1;
+                timeShieldRecovery = gameManager.GameConfig.timeShieldRecovery;
             }
         }
 
@@ -164,6 +197,8 @@ namespace DreamLU
             this.maxHealth = _characterStat.maxHealth;
             this.mana = _characterStat.maxMana;
             this.maxMana = _characterStat.maxMana;
+            this.shield = _characterStat.maxShield;
+            this.maxShield = _characterStat.maxShield;
             _character = characterTransform.GetComponent<Character>();
             _heroInvulnerableTimer = 0;
             _isHeroDead = false;
@@ -204,9 +239,21 @@ namespace DreamLU
         public void AddDamage(int damage)
         {
             if (_heroInvulnerableTimer > 0) return;
-            
-            this.health -= damage;
-            OnUpdateHealth?.Invoke();
+
+            if (shield > 0)
+            {
+                this.shield -= damage;
+                if (timeShieldRecovery <= 0)
+                {
+                    timeShieldRecovery = gameManager.GameConfig.timeShieldRecovery;
+                }
+                OnUpdateShield?.Invoke(); 
+            }
+            else
+            {
+                this.health -= damage;
+                OnUpdateHealth?.Invoke();   
+            }
 
             if(this.health <= 0)
             {
@@ -240,8 +287,20 @@ namespace DreamLU
         {
             Debug.LogError("Hãy Rebuild lại Stat");
         }
-        
-        
+
+        public void MinusMana(int manaConsumed, out bool isSuccess)
+        {
+            var newMana = this.mana - manaConsumed;
+            if (newMana >= 0)
+            {
+                isSuccess = true;
+                Mana = newMana;
+            }
+            else
+            {
+                isSuccess = false;
+            }
+        }
     }
 
 }

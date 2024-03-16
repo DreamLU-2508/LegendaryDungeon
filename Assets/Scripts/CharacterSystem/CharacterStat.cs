@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DreamLU
 {
@@ -9,7 +10,7 @@ namespace DreamLU
     {
         public int maxHealth;
         public int maxMana;
-        public int shield;
+        public int maxShield;
 
         public CharacterStat Clone()
         {

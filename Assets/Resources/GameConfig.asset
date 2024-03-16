@@ -17,4 +17,5 @@ MonoBehaviour:
   fireRateCoolDown: 0.2
   distanceFollowCharacter: 10
   maxSpawnEnemyInRoom: 3
+  timeShieldRecovery: 1
   maxLevel: 15
