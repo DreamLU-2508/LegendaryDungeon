@@ -17,6 +17,9 @@ namespace DreamLU
             AmmoData ammoData = _weaponData.ammoData;
             if (ammoData != null && _isReady)
             {
+                _characterActor.MinusMana(ammoData.manaConsumed,out bool isSuccess);
+                if(!isSuccess) return;
+                
                 int count = numberColt;
                 StartCooldown();
                 GameObject ammoPrefab = ammoData.prefab;

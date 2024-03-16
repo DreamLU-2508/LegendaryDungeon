@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7558483934599620794}
   - component: {fileID: 7558483934599620799}
   m_Layer: 5
-  m_Name: Bar (Mana)
+  m_Name: Bar (Shield)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,9 +586,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barHealth: {fileID: 7558483935789356233}
-  manaHealth: {fileID: 7558483934599620799}
+  barShield: {fileID: 7558483934599620799}
+  barMana: {fileID: 0}
   textHealth: {fileID: 6340276525055922198}
-  textMana: {fileID: 6570969841484031405}
+  textShield: {fileID: 6570969841484031405}
+  textMana: {fileID: 0}
   nameCharacter: {fileID: 6889796876336276233}
   icon: {fileID: 7558483935326466426}
 --- !u!1 &7558483935326466424

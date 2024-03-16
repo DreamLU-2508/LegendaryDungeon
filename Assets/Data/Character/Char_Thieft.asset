@@ -18,7 +18,7 @@ MonoBehaviour:
   characterStat:
     maxHealth: 7
     maxMana: 300
-    shield: 8
+    maxShield: 0
   icon: {fileID: 21300000, guid: ece52399eae095b47a36a71981d158eb, type: 3}
   handSprite: {fileID: 21300000, guid: 41f4979c188d1574b8228d2a096904bd, type: 3}
   characterPrefab:
@@ -26,6 +26,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  weaponID: 1
+  itemID: 1
   defaultAction: 2
   ultimateAction: 5
+  cardSlot: 3
