@@ -43,5 +43,21 @@ namespace DreamLU
                 }
             }
         }
+        
+        public static Vector3 SpreadedDirectionInArc(Vector3 mainDir, float arc, int dirIndex, int dirAmount)
+        {
+            if (dirAmount <= 1)
+            {
+                return mainDir;
+            }
+
+            var startDir = Quaternion.Euler(0, 0, -arc / 2f) * mainDir;            
+        
+            float angleStep = arc / ((float)dirAmount - 1f);
+        
+            //Debug.Log($"ShootDir for idx {dirAmount} step {angleStep} {angleStep * dirIndex}");
+
+            return Quaternion.Euler(0,0, angleStep * dirIndex) * startDir;
+        }
     }
 }
