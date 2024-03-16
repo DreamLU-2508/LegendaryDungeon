@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a4424f683a25874fb80f61f5c1ba659, type: 3}
-  m_Name: WP_QBZ95SMG
+  m_Name: WP_Shotgun1
   m_EditorClassIdentifier: 
-  itemID: 200
-  itemName: QBZ95SMG
-  itemSprite: {fileID: 21300000, guid: dff74299f2cf7674eb05930ed6b07f8e, type: 3}
+  itemID: 300
+  itemName: Small Shotgun
+  itemSprite: {fileID: 21300000, guid: 957e7c5a4532c7b4fa28cd31bf5aee5d, type: 3}
   price: 0
   tier: 0
-  weaponShootPosition: {x: 1.13, y: 0.38, z: 0}
+  weaponShootPosition: {x: 1.36, y: 0.22, z: 0}
   weaponPrechargeTime: 0
   ammoData: {fileID: 11400000, guid: 2d8793caa7fdae245be2f8c770876624, type: 2}
-  damage: 2
+  damage: 1
   cooldown: 1.1
   timeReload: 0
-  _weaponPlayerBasePrefab: {fileID: 1537131022703236176, guid: dd0cc350710c3fe4e96837edb7e74747, type: 3}
+  _weaponPlayerBasePrefab: {fileID: 4821376976104626800, guid: 2615442ba39a13f4181fc88c40477e63, type: 3}

@@ -12,5 +12,9 @@ namespace DreamLU
         
         // sung truong
         QBZ95SMG = 200,
+        
+        
+        // Shotgun
+        Shotgun1 = 300,
     }
 }
