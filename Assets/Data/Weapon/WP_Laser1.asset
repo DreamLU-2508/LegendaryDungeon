@@ -17,6 +17,7 @@ MonoBehaviour:
   itemSprite: {fileID: -9020406824871800643, guid: 2262f408278271248889a3ea3c7e75bf, type: 3}
   price: 0
   tier: 0
+  itemDropPrefab: {fileID: 1853344346824876916, guid: 3141b5cb4e703ad4f8dec07c7b325848, type: 3}
   weaponShootPosition: {x: 0.47, y: 0.1, z: 0}
   weaponPrechargeTime: 0
   ammoData: {fileID: 11400000, guid: ea9b5a797b5c0a849b9f345ffa1b2d3b, type: 2}

@@ -61,3 +61,5 @@ MonoBehaviour:
   - {x: 4, y: 5}
   - {x: 16, y: 5}
   enemyAmount: 0
+  positionChest: {x: 10, y: 10}
+  positionTele: {x: 0, y: 0}

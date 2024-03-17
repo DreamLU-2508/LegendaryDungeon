@@ -1933,6 +1933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927676986}
   - component: {fileID: 1927676987}
+  - component: {fileID: 1927676988}
   m_Layer: 0
   m_Name: CharacterManager
   m_TagString: Untagged
@@ -1975,6 +1976,26 @@ MonoBehaviour:
     action: {fileID: 1424428712}
   - actionID: 3
     action: {fileID: 1424428715}
+  _dropItemHandle: {fileID: 1927676988}
+--- !u!114 &1927676988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927676985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468bed0a1d8034440a6a9e831cfcecd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRadius: 2
+  maxRadius: 5
+  _bezier: {fileID: 11400000, guid: 80796055dbd5bba40ab061a515d24b15, type: 2}
+  type: 0
+  prefab: {fileID: 1853344346824876916, guid: 3141b5cb4e703ad4f8dec07c7b325848, type: 3}
+  _dropDataManifest: {fileID: 11400000, guid: fd72a8c61a32043498aac80465df3b23, type: 2}
+  chestPrefab: {fileID: 3301437875186420878, guid: 5a34c84244fec7445bcabaceadb02403, type: 3}
 --- !u!1 &1936359732
 GameObject:
   m_ObjectHideFlags: 0
