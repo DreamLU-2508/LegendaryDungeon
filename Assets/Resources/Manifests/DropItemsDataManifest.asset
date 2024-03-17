@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116985aff1e1c044886ada9e0b599d62, type: 3}
+  m_Name: DropItemsDataManifest
+  m_EditorClassIdentifier: 
+  chestItemsDroppable:
+  - {fileID: 11400000, guid: dce6a017acf7f3a4f94e51a931ae6d00, type: 2}
+  - {fileID: 11400000, guid: 981a955ae3a1bc34d80f75fda3f30da8, type: 2}
+  - {fileID: 11400000, guid: 061fbc85140f07140bf63cd34799b85e, type: 2}

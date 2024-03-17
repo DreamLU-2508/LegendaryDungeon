@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0811bc5d31513428a7e1738ae8c1b4, type: 3}
+  m_Name: BezierCurveDataManifest
+  m_EditorClassIdentifier: 
+  _bezierCurveDatas:
+  - curveType: 0
+    angleAxisMinMax:
+    - {x: -90, y: 90}
+    distanceP2MinMax: {x: 0.5, y: 2}
+    isP2Back: 0
+    angleBackMinMax: {x: 0, y: 0}

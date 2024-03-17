@@ -18,6 +18,7 @@ namespace DreamLU
     public class CharacterManager : MonoBehaviour, ICharacterActor, IWeaponProvider
     {
         [SerializeField][TableList] private List<CharacterActionDefinition> characterActions;
+        [SerializeField] private DropItemHandle _dropItemHandle;
 
         private LDGameManager gameManager;
 
@@ -45,6 +46,8 @@ namespace DreamLU
             set => _isHeroDead = value;
         }
 
+        public Character Character => _character;
+        
         public Transform CharacterTransform => characterTransform;
 
         public Animator CharacterAnimator
@@ -211,6 +214,17 @@ namespace DreamLU
                 {
                     AddDamage(1);
                 }
+
+                if (dropItem != null)
+                {
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        if (dropItem.ItemData is WeaponData weaponData && HandleChangeWeapon(weaponData))
+                        {
+                            PoolManager.Release(dropItem.gameObject);
+                        }
+                    }
+                }
             }
         }
 
@@ -360,6 +374,31 @@ namespace DreamLU
             {
                 isSuccess = false;
             }
+        }
+
+        [ShowInInspector, ReadOnly]
+        private DropItem dropItem = null;
+        public DropItem DropItem
+        {
+            set
+            {
+                dropItem = value;
+            }
+        }
+        
+        bool HandleChangeWeapon(WeaponData weaponData)
+        {
+            if(_character == null) return false;
+
+            var oldWeapon = _character.WeaponData; 
+            _character.SetWeapon(weaponData);
+
+            if (oldWeapon != null)
+            {
+                _dropItemHandle.DropItem(oldWeapon, _character.transform.position);
+            }
+
+            return true;
         }
     }
 

@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using VContainer;
 
@@ -19,19 +18,20 @@ namespace DreamLU
         private GameObject _vfxTelepos;
         private bool isCreateTelepos;
         
-        [ShowInInspector, ReadOnly]
-        private int[,] aStarMovementPenalty;  // use this 2d array to store movement penalties from the tilemaps to be used in AStar pathfinding
-        [ShowInInspector, ReadOnly]
-        private int[,] aStarItemObstacles; // use to store position of moveable items that are obstacles
+        // [ShowInInspector, ReadOnly]
+        private int[,] aStarMovementPenalty = new int[0,0];  // use this 2d array to store movement penalties from the tilemaps to be used in AStar pathfinding
+        // [ShowInInspector, ReadOnly]
+        private int[,] aStarItemObstacles = new int[0,0]; // use to store position of moveable items that are obstacles
 
         private IEnemySpawnProvider _enemySpawnProvider;
         private IGameStateProvider _gameStateProvider;
+        private IDropItemHandle _dropItemHandle;
 
         public System.Action<Room> OnEnterRoom;
         public System.Action<Room> OnExitRoom;
 
         public InstancedRoom InstancedRoom => _room;
-        [ShowInInspector, ReadOnly] public bool IsClear => _room.IsClearEnemy;
+        public bool IsClear => _room.IsClearEnemy;
         public Grid Grid => grid;
 
         public int[,] AStarMovementPenalty => aStarMovementPenalty;
@@ -41,6 +41,8 @@ namespace DreamLU
         {
             _enemySpawnProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemySpawnProvider>();
             _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
+            _dropItemHandle = CoreLifetimeScope.SharedContainer.Resolve<IDropItemHandle>();
+            
             OnEnterRoom += _gameStateProvider.OnEnterRoom;
             _enemySpawnProvider.OnKillEnemy += OnKillEnemyInRoom;
         }
@@ -64,6 +66,16 @@ namespace DreamLU
             if (_room.RoomType == RoomType.Entrance)
             {
                 OnEnterRoom.Invoke(this);
+            }
+
+            if (_room.RoomType == RoomType.ChessRoom)
+            {
+                var chestPrefab = _dropItemHandle.ChestPrefab;
+                if (chestPrefab != null)
+                {
+                    var chest = Instantiate(chestPrefab, this.transform);
+                    chest.transform.position = grid.CellToWorld((Vector3Int)_room.RoomData.positionChest);
+                }
             }
         }
         

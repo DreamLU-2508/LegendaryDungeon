@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DreamLU
@@ -58,6 +59,22 @@ namespace DreamLU
             //Debug.Log($"ShootDir for idx {dirAmount} step {angleStep} {angleStep * dirIndex}");
 
             return Quaternion.Euler(0,0, angleStep * dirIndex) * startDir;
+        }
+        
+        public static float3 CalculateCubicBezierPoint(float t, float3 p0, float3 p1, float3 p2, float3 p3)
+        {
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+            float uuu = uu * u;
+            float ttt = tt * t;
+
+            float3 p = uuu * p0;
+            p += 3 * uu * t * p1;
+            p += 3 * u * tt * p2;
+            p += ttt * p3;
+
+            return p;
         }
     }
 }

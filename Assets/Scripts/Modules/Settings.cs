@@ -17,6 +17,8 @@ public static class Settings
     public static int rollLeft = Animator.StringToHash("rollLeft");
     public static int rollDown = Animator.StringToHash("rollDown");
 
+    public static int useChest = Animator.StringToHash("use");
+
     // Move speed
     public static int baseMoveSpeed = 10;
 

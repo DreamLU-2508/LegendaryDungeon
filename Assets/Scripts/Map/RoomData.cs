@@ -31,6 +31,8 @@ namespace DreamLU
 
         public int enemyAmount = 0;
 
+        [Header("Chest")] public Vector2Int positionChest;
+
         public List<Doorway> CloneDoorwayList()
         {
             return this.doorwayList.Select(item => item.Clone()).ToList();
