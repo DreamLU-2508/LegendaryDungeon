@@ -10,6 +10,8 @@ namespace DreamLU
 {
     public class UIDisplayHUD : MonoBehaviour
     {
+        [SerializeField] private Transform root;
+        
         [SerializeField] private UIProgressBar barHealth;
         [SerializeField] private UIProgressBar barShield;
         [SerializeField] private UIProgressBar barMana;
@@ -54,7 +56,7 @@ namespace DreamLU
                 SetText(textMana, characterManager.MaxMana, characterManager.Mana);
             };
 
-            this.gameObject.SetActive(false);
+            root.gameObject.SetActive(false);
         }
 
         private void Setup()
@@ -83,11 +85,11 @@ namespace DreamLU
         {
             if (stateID == StateID.Normal || stateID == StateID.StageVictory || stateID == StateID.Victory)
             {
-                this.gameObject.SetActive(true);
+                root.gameObject.SetActive(true);
             }
             else
             {
-                this.gameObject.SetActive(false);
+                root.gameObject.SetActive(false);
             }
         }
     }

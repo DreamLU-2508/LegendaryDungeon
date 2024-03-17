@@ -15,9 +15,9 @@ namespace DreamLU
     {
         None = 0,
         // Stat Powerup 
-        MaxHealth,
-        MaxMana,
-        MaxShield,
+        vitality,
+        manaBonus,
+        shieldBonus,
         // Amount,
         // Recovery,
         // Armor,
@@ -26,7 +26,7 @@ namespace DreamLU
         // AreaMod,
         // SpeedMod,
         // DurationMod,        
-        CooldownSkillMod,
+        cooldownSkillMod,
         // Luck,
         // ExperienceGainMod,
         // GoldGainMod,
@@ -40,11 +40,12 @@ namespace DreamLU
         // SkipCount,
         // BanishCount,
         // PickupDropChanceMod,
+        AttackSpeed,
         //
         // // Weapon Powup Up
         // WeaponAmount = 100,
         // WeaponDamage,
-        WeaponSpeed,
+        // WeaponSpeed,
         // WeaponDuration,
         // WeaponArea,
         // WeaponCooldown,
@@ -65,7 +66,7 @@ namespace DreamLU
     [System.Serializable]
     public class  PowerUp
     {
-        public PowerUpType powerUpType;
+        // public PowerUpType powerUpType;
         public PowerUpStatID powerUpStatID;
         public float value;
         public string description;

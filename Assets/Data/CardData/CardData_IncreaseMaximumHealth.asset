@@ -16,7 +16,8 @@ MonoBehaviour:
   nameCard: Increase Maximum Health
   descriptionCard: Increase Maximum Health
   powerUp:
-    powerUpType: 1
     powerUpStatID: 1
     value: 2
     description: Increase Maximum Health
+  icon: {fileID: 21300000, guid: 4a525619465b0ee4e8f08b15286d6f87, type: 3}
+  iconPosition: {x: 0, y: 0}

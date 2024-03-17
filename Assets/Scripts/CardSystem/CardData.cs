@@ -14,6 +14,7 @@ namespace DreamLU
 
         [Header("Icon")] 
         public Sprite icon;
+        public Vector2 iconPosition;
 
         public virtual float Resolve()
         {
