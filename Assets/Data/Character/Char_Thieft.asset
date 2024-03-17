@@ -18,7 +18,12 @@ MonoBehaviour:
   characterStat:
     maxHealth: 7
     maxMana: 300
-    maxShield: 0
+    maxShield: 9
+    vitality: 0
+    attackSpeed: 0
+    manaBonus: 0
+    shieldBonus: 0
+    cooldownSkillMod: 0
   icon: {fileID: 21300000, guid: ece52399eae095b47a36a71981d158eb, type: 3}
   handSprite: {fileID: 21300000, guid: 41f4979c188d1574b8228d2a096904bd, type: 3}
   characterPrefab:

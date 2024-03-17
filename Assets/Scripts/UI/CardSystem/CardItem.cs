@@ -15,6 +15,7 @@ namespace DreamLU.UI
         [SerializeField] private TextMeshProUGUI textName;
         [SerializeField] private TextMeshProUGUI textDes;
         [SerializeField] private Sprite defaultIcon;
+        [SerializeField] private RectTransform rectIcon;
 
         private CardData _cardData;
 
@@ -37,6 +38,7 @@ namespace DreamLU.UI
 
                 Sprite sprite = cardData.icon == null ? defaultIcon : cardData.icon;
                 icon.sprite = sprite;
+                rectIcon.anchoredPosition = cardData.iconPosition;
 
                 textName.text = cardData.nameCard;
                 textDes.text = cardData.descriptionCard;

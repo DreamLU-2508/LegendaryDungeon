@@ -32,13 +32,13 @@ namespace DreamLU
         private int maxMana;
         private int maxHealth;
         private int maxShield;
-        private CharacterData characterData;
+        private CharacterData _characterData;
         private Character _character;
         private float _heroInvulnerableTimer = 0;
         private bool _isHeroDead;
         private CharacterStat _characterStat;
-        private List<CardData> _card = new();
-        
+        private List<CardData> _cards = new();
+
         public bool IsHeroDead
         {
             get => _isHeroDead;
@@ -97,12 +97,41 @@ namespace DreamLU
                 shield = value;
                 OnUpdateShield?.Invoke();
             }
-        } 
+        }
+
         [ShowInInspector, ReadOnly]
-        public int MaxHealth => maxHealth;
-        
+        public int MaxHealth
+        {
+            get
+            {
+                // Max Health Never fall below zero
+                if (_characterStat != null)
+                {
+                    return Mathf.Max(_characterStat.maxHealth + (int)_characterStat.GetStatBaseByID(PowerUpStatID.vitality), 1);
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
         [ShowInInspector, ReadOnly]
-        public int MaxShield => maxShield;
+        public int MaxShield
+        {
+            get
+            {
+                // Max Health Never fall below zero
+                if (_characterStat != null)
+                {
+                    return Mathf.Max(_characterStat.maxShield + (int)_characterStat.GetStatBaseByID(PowerUpStatID.shieldBonus), 1);
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
 
         [ShowInInspector, ReadOnly]
         public int Mana
@@ -114,8 +143,23 @@ namespace DreamLU
                 OnUpdateMana?.Invoke();
             }
         }
+
         [ShowInInspector, ReadOnly]
-        public int MaxMana => maxMana;
+        public int MaxMana
+        {
+            get
+            {
+                if (_characterStat != null)
+                {
+                    return Mathf.Max(
+                        _characterStat.maxMana + (int)_characterStat.GetStatBaseByID(PowerUpStatID.manaBonus), 1);
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
 
         // Action
         public event System.Action OnInitCharacter;
@@ -173,7 +217,7 @@ namespace DreamLU
         private float timeShieldRecovery = 0;
         private void ShieldRecovery()
         {
-            if(this.shield >= maxShield) return;
+            if(this.shield >= MaxShield) return;
             
             timeShieldRecovery -= Time.deltaTime;
 
@@ -187,11 +231,11 @@ namespace DreamLU
         private void OnInitializeCharacter()
         {
             characterTransform = gameManager.HeroTransform;
-
+        
             SetupActions();
 
-            characterData = gameManager.CharacterData;
-            _characterStat = characterData.characterStat.Clone();
+            _characterData = gameManager.CharacterData;
+            _characterStat = _characterData.characterStat.Clone();
 
             this.health = _characterStat.maxHealth;
             this.maxHealth = _characterStat.maxHealth;
@@ -202,7 +246,7 @@ namespace DreamLU
             _character = characterTransform.GetComponent<Character>();
             _heroInvulnerableTimer = 0;
             _isHeroDead = false;
-            _card = new List<CardData>();
+            _cards = new List<CardData>();
             _characterInitialized = true;
             _isActionLocked = false;
             _isMovementLocked = false;
@@ -266,7 +310,7 @@ namespace DreamLU
 
         public void AddCard(CardData cardData)
         {
-            _card.Add(cardData);
+            _cards.Add(cardData);
         }
 
         #region Weapon
@@ -285,7 +329,23 @@ namespace DreamLU
 
         public void RebuildStat()
         {
-            Debug.LogError("Hãy Rebuild lại Stat");
+            _characterStat.CopyStats(_characterData.characterStat);
+
+            if (_cards.Count > 0)
+            {
+                foreach (var cardData in _cards)
+                {
+                    _characterStat.AddPowerup(new PowerUp()
+                    {
+                        powerUpStatID = cardData.powerUp.powerUpStatID,
+                        value = cardData.powerUp.value,
+                    });
+                }
+            }
+
+            OnUpdateHealth?.Invoke();
+            OnUpdateMana?.Invoke();
+            OnUpdateShield?.Invoke();
         }
 
         public void MinusMana(int manaConsumed, out bool isSuccess)
