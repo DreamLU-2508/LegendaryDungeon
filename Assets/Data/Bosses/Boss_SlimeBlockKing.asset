@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyID: 5000
   stat:
-    maxHealth: 0
+    maxHealth: 50
     damageBase: 0
-    moveSpeed: 2
-    collisionDamage: 0
+    moveSpeed: 4
+    collisionDamage: 2
     isBoss: 1
     isElite: 0
     chaseDistance: 50
