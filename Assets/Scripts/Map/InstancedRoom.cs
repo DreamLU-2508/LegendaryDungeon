@@ -123,7 +123,7 @@ namespace DreamLU
                 this.parentRoomID = roomNode.parentRoomNodeIDList[0];
             }
 
-            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom || this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom)
+            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom || this.roomType == RoomType.EndRoom)
             {
                 this.isClearEnemy = true;
             }

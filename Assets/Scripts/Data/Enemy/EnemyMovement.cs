@@ -157,7 +157,7 @@ namespace DreamLU
             Vector3Int playerCellPosition = currentRoom.Grid.WorldToCell(playerPosition);
 
             Vector2Int adjustedPlayerCellPositon = new Vector2Int(playerCellPosition.x - currentRoom.InstancedRoom.TemplateLowerBounds.x, playerCellPosition.y - currentRoom.InstancedRoom.TemplateLowerBounds.y);
-
+            
             int obstacle = Mathf.Min(currentRoom.AStarMovementPenalty[adjustedPlayerCellPositon.x, adjustedPlayerCellPositon.y], currentRoom.AStarItemObstacles[adjustedPlayerCellPositon.x, adjustedPlayerCellPositon.y]);
 
             // if the player isn't on a cell square marked as an obstacle then return that position

@@ -257,6 +257,7 @@ namespace DreamLU
                 gameStateMachine.ChangeState(StateID.StageVictory, () =>
                 {
                     OnEndGame?.Invoke();
+                    _enemyManager.ClearBoss();
                 });
             }
             else
@@ -264,6 +265,7 @@ namespace DreamLU
                 gameStateMachine.ChangeState(StateID.Victory, () =>
                 {
                     _dungeonBuilder.ClearDungeon();
+                    _enemyManager.ClearBoss();
                 });
                 
                 gameStateMachine.ChangeState(StateID.Normal, () =>

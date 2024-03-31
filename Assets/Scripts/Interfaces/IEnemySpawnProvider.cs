@@ -11,5 +11,7 @@ namespace DreamLU
         public event System.Action<int> OnKillEnemy;
 
         public event System.Action<Room> OnClear;
+
+        public void SpawnBoss(Vector3 position);
     }
 }

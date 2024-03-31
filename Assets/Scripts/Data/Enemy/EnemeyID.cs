@@ -5,7 +5,10 @@ namespace DreamLU
        None,
        GrimonkBrown,
        Hedusa,
-       Orc
+       Orc,
+       
+       // Boss
+       Boss_SlimeBlockKing = 5000,
     }
 
 }

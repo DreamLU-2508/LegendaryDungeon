@@ -76,5 +76,32 @@ namespace DreamLU
 
             return p;
         }
+        
+        public static Vector3 RandomPositionNearby(Vector3 pos, float radius)
+        {
+            pos.x += UnityEngine.Random.Range(1.0f, radius) * (HelperUtilities.Chance(50) ? 1.0f : -1f);
+            pos.z += UnityEngine.Random.Range(1.0f, radius) * (HelperUtilities.Chance(50) ? 1.0f : -1f);
+            return pos;
+        }
+        
+        public static Vector3 RandomPositionNearby(Vector3 pos, float radius, float minDist)
+        {
+            // pos.x += UnityEngine.Random.Range(minDist, radius) * (RGUtility.Chance(50) ? 1.0f : -1f);
+            // pos.z += UnityEngine.Random.Range(minDist, radius) * (RGUtility.Chance(50) ? 1.0f : -1f);
+            // return pos;
+        
+            var dir = Quaternion.Euler(0,  UnityEngine.Random.Range(0, 360), 0) * (new Vector3(0,0,1));
+            return pos + dir * UnityEngine.Random.Range(minDist, radius);
+        }
+        
+        public static bool Chance(float chancePer100)
+        {
+            return UnityEngine.Random.Range(0, 100) < chancePer100;
+        }
+        
+        public static Vector3 ToPinnedZ(this Vector3 v)
+        {
+            return new Vector3(v.x, v.y, 0);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace DreamLU.AStar
 
             AStarNode startNode = gridNodes.GetGridNode(new Vector2Int(startGridPosition.x, startGridPosition.y));
             AStarNode targetNode = gridNodes.GetGridNode(new Vector2Int(endGridPosition.x, endGridPosition.y));
-
+            
             AStarNode endPathNode = FindShortestPath(startNode, targetNode, gridNodes, openNodeList, closeNodeList,
                 room);
             
@@ -51,7 +51,7 @@ namespace DreamLU.AStar
                 }
 
                 closeNodeList.Add(currentNode);
-
+                
                 EvaluateCurrentNodeNeighbours(currentNode, targetNode, gridNodes, openNodeList, closeNodeList,
                     room);
             }

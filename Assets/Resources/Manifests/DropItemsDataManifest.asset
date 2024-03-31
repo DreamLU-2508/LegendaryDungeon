@@ -15,4 +15,4 @@ MonoBehaviour:
   chestItemsDroppable:
   - {fileID: 11400000, guid: dce6a017acf7f3a4f94e51a931ae6d00, type: 2}
   - {fileID: 11400000, guid: 981a955ae3a1bc34d80f75fda3f30da8, type: 2}
-  - {fileID: 11400000, guid: 061fbc85140f07140bf63cd34799b85e, type: 2}
+  - {fileID: 11400000, guid: 9061d47ed65641946b9bee9740acf01a, type: 2}
