@@ -19,6 +19,8 @@ namespace DreamLU
 
         [ShowInInspector, ReadOnly]
         List<Enemy> enemies = new List<Enemy>();
+        private List<BossData> bossDatasExclude = new List<BossData>();
+        private GameObject _bossGameObject;
 
         private int enemyAmount = 0;
         private bool isSpawnEnemy = false;
@@ -60,31 +62,6 @@ namespace DreamLU
 
             if (!isSpawnEnemy) return;
 
-            // if (isDemo)
-            // {
-            //     if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.LeftControl))
-            //     {
-            //         if(spawnPositionArray != null && spawnPositionArray.Length > 0)
-            //         {
-            //             SpawnEnemy();
-            //         }
-            //     }
-            //
-            //     if (enemies.Count > 0)
-            //     {
-            //         int count = 0;
-            //         foreach (Enemy enemy in enemies)
-            //         {
-            //             if (enemy == null)
-            //             {
-            //                 count += 1;
-            //             }
-            //         }
-            //         OnKillEnemy?.Invoke(count);
-            //         enemies.RemoveAll(x => x == null);
-            //     }
-            // }
-            
             if (enemies.Count > 0)
             {
                 int count = 0;
@@ -165,6 +142,35 @@ namespace DreamLU
         public float GetEnemyMoveSpeed(EnemeyData enemeyData)
         {
             return enemeyData.stat.moveSpeed; 
+        }
+        
+        public float GetEnemyMoveSpeed(BossData bossData)
+        {
+            return bossData.stat.moveSpeed; 
+        }
+
+        public void SpawnBoss(Vector3 position)
+        {
+            if (_bossGameObject)
+            {
+                PoolManager.Release(_bossGameObject);
+            }
+            
+            BossData bossData = manifest.GetBossData(bossDatasExclude);
+            if(bossData == null) return;
+            // bossDatasExclude.Add(bossData);
+            
+            _bossGameObject = PoolManager.GetPool(bossData.bossPrefab).RetrieveObject(position, Quaternion.identity, parentTransform);
+            Boss boss = _bossGameObject.GetComponent<Boss>();
+            boss.BossSetup(bossData);
+        }
+
+        public void ClearBoss()
+        {
+            if (_bossGameObject)
+            {
+                PoolManager.Release(_bossGameObject);
+            }
         }
     }
 
