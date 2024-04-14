@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708e4084c4a1534ba646096300f778c, type: 3}
+  m_Name: Room_LargeRoom_CatacombsV3_1
+  m_EditorClassIdentifier: 
+  guid: b47ebccfcb2faff4a871bddee72131de
+  prefab: {fileID: 4327421925113694216, guid: 0488db36fc825ed42bb76d1593b9421e, type: 3}
+  previousPrefab: {fileID: 4327421925113694216, guid: 0488db36fc825ed42bb76d1593b9421e, type: 3}
+  roomType: 3
+  lowerBounds: {x: -20, y: -11}
+  upperBounds: {x: 34, y: 40}
+  doorwayList:
+  - position: {x: 16, y: 40}
+    orientation: 1
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 13, y: 40}
+      width: 5
+      height: 9
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 15, y: -11}
+    orientation: 2
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 12, y: -7}
+      width: 5
+      height: 5
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 34, y: 12}
+    orientation: 4
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: 31, y: 18}
+      width: 4
+      height: 8
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: -20, y: 0}
+    orientation: 3
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: -20, y: 6}
+      width: 4
+      height: 9
+    isConnected: 0
+    isUnavailable: 0
+  spawnPositionArray:
+  - {x: -12, y: 29}
+  - {x: 2, y: 29}
+  - {x: 27, y: 29}
+  - {x: -11, y: 19}
+  - {x: 22, y: 16}
+  - {x: -12, y: 0}
+  - {x: 6, y: -3}
+  - {x: 19, y: -4}
+  enemyAmount: 10
+  positionChest: {x: 0, y: 0}
+  positionTele: {x: 0, y: 0}

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708e4084c4a1534ba646096300f778c, type: 3}
+  m_Name: Room_Entrance_CatacombsV3_3
+  m_EditorClassIdentifier: 
+  guid: b3adc718f3fcc1848bae583cc054ab45
+  prefab: {fileID: 7224931148630070477, guid: dfb331e642baac64792ce23bdc4aa31f, type: 3}
+  previousPrefab: {fileID: 7224931148630070477, guid: dfb331e642baac64792ce23bdc4aa31f, type: 3}
+  roomType: 5
+  lowerBounds: {x: -2, y: -7}
+  upperBounds: {x: 23, y: 19}
+  doorwayList:
+  - position: {x: 11, y: 19}
+    orientation: 1
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 8, y: 19}
+      width: 5
+      height: 6
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 11, y: -7}
+    orientation: 2
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 8, y: -5}
+      width: 5
+      height: 3
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 23, y: 4}
+    orientation: 4
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: 20, y: 10}
+      width: 4
+      height: 8
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: -2, y: 4}
+    orientation: 3
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: -2, y: 10}
+      width: 4
+      height: 8
+    isConnected: 0
+    isUnavailable: 0
+  spawnPositionArray:
+  - {x: 2, y: 13}
+  - {x: 19, y: 13}
+  - {x: 2, y: -3}
+  - {x: 19, y: -3}
+  - {x: 10, y: 2}
+  enemyAmount: 0
+  positionChest: {x: 0, y: 0}
+  positionTele: {x: 0, y: 0}

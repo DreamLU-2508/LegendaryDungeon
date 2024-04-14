@@ -10,6 +10,7 @@ namespace DreamLU
     {
         [Header("Map setup")]
         public int level;
+        public bool isChangeTheme;
 
         [Header("Boss setup")]
         public bool isLevelBoss;

@@ -180,7 +180,6 @@ namespace DreamLU
             if (ammo != null)
             {
                 int damage = weaponProvider.GetWeaponDamage(heroPositionProvider.WeaponData);
-                Debug.LogError(damage);
                 if(damage > 0)
                 {
                     health -= damage;

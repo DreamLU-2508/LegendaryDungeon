@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ namespace DreamLU
     public enum ThemeMapType
     {
         None,
-        Default
+        Default,
+        Map1,
+        Map2,
     }
 
     [System.Serializable]
@@ -29,6 +32,32 @@ namespace DreamLU
     public class RoomManifest : ScriptableObject
     {
         public List<ThemeMap> roomDataTypes;
+
+        public ThemeMapType GetRandomThemeMapType(List<ThemeMapType> themeMapTypes)
+        {
+            if (roomDataTypes.Count > 0)
+            {
+                ChancefTable<ThemeMapType> chancefTable = new ChancefTable<ThemeMapType>();
+                URandom random = URandom.CreateSeeded();
+
+                foreach (var themeMap in roomDataTypes)
+                {
+                    if (themeMapTypes.Contains(themeMap.type))
+                    {
+                        continue;
+                    }
+
+                    chancefTable.AddRange(1, themeMap.type);
+                }
+
+                if (chancefTable.CanRoll)
+                {
+                    return chancefTable.RollWithinMaxRange(random);
+                }
+            }
+
+            return ThemeMapType.None;
+        }
 
         public List<RoomDataType> GetThemeMapByType(ThemeMapType type)
         {

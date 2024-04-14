@@ -68,3 +68,99 @@ MonoBehaviour:
     - roomType: 999
       roomDatas:
       - {fileID: 11400000, guid: ab3662bd7ddf5f142b5ac663a7a33c88, type: 2}
+  - type: 2
+    roomDataTypes:
+    - roomType: 1
+      roomDatas:
+      - {fileID: 11400000, guid: ca7ae17e8fe9b6d489afc5c07008f6bf, type: 2}
+      - {fileID: 11400000, guid: 4dfe2e3577c852744b52128dda226cce, type: 2}
+      - {fileID: 11400000, guid: 9c74c8ec5734799458ca54a342386f24, type: 2}
+      - {fileID: 11400000, guid: 5271cbf4b1a7eb54b8b7092b0e74f1a6, type: 2}
+      - {fileID: 11400000, guid: c00a5d2af2c86a543bc6a89f91b3e147, type: 2}
+    - roomType: 2
+      roomDatas:
+      - {fileID: 11400000, guid: 35574f9303cf7964ead71202e1d63418, type: 2}
+      - {fileID: 11400000, guid: 7c68a047662bf2348b9d71906af5d1a3, type: 2}
+      - {fileID: 11400000, guid: 659e489da43fb1c4eb3680cc6e740bae, type: 2}
+      - {fileID: 11400000, guid: e33a6a9721e2fa04db4ae3b10332e30e, type: 2}
+      - {fileID: 11400000, guid: e2eb3a400d9372f469e3a109de136c32, type: 2}
+    - roomType: 3
+      roomDatas:
+      - {fileID: 11400000, guid: 470d1f8477c6dfa41abb12f7a4e1b27c, type: 2}
+      - {fileID: 11400000, guid: cca9c8d2d7adadb4d909693efb993e93, type: 2}
+      - {fileID: 11400000, guid: 1be7c03f85bff894e8d830277d5907af, type: 2}
+      - {fileID: 11400000, guid: 571036909b6072b43b8521769da1917e, type: 2}
+      - {fileID: 11400000, guid: 33347da2c88a72f41a30c596bf1c8239, type: 2}
+    - roomType: 4
+      roomDatas:
+      - {fileID: 11400000, guid: dce200ad512787c4f95b296dde1cf956, type: 2}
+      - {fileID: 11400000, guid: c6cedc182f2227943ba4a3b50c2500a5, type: 2}
+    - roomType: 9
+      roomDatas:
+      - {fileID: 11400000, guid: 339df5920d136284693eec5f39331e20, type: 2}
+      - {fileID: 11400000, guid: 13c59f95ef7c3ef499b0d34f4fd8ea16, type: 2}
+      - {fileID: 11400000, guid: 04d9b9d6a3fd6554e8639112e187cb19, type: 2}
+      - {fileID: 11400000, guid: 7b69c0836bdcd5c40bb983d8d1183131, type: 2}
+    - roomType: 5
+      roomDatas:
+      - {fileID: 11400000, guid: 0f29ae2f6e511a147af043260a1f3a9d, type: 2}
+      - {fileID: 11400000, guid: a63b3ff8182e754498237e1ee21afba8, type: 2}
+      - {fileID: 11400000, guid: 06f4b2c71aa200145906ae08a1cab134, type: 2}
+    - roomType: 7
+      roomDatas:
+      - {fileID: 11400000, guid: 45b6be6205aec9042b44c1c4934b965c, type: 2}
+      - {fileID: 11400000, guid: 788634f2d8041944080091bc409d7e8b, type: 2}
+      - {fileID: 11400000, guid: d14aaea31c6e89a4c88f2e729462bfe5, type: 2}
+      - {fileID: 11400000, guid: d5f449d8994a4254ab455b22f06c1e01, type: 2}
+      - {fileID: 11400000, guid: b84e9d01f1b1c024995cad4816dc0781, type: 2}
+    - roomType: 8
+      roomDatas:
+      - {fileID: 11400000, guid: 2341090579a16c042a679675d5a88148, type: 2}
+      - {fileID: 11400000, guid: 6f3b9ba4c0141904d88d35068c103ff9, type: 2}
+      - {fileID: 11400000, guid: d7e9c1d8dcc82244db75dcd1dc1a9e31, type: 2}
+      - {fileID: 11400000, guid: bf8cb35bb1318b947aeeca83e2b0e8f8, type: 2}
+      - {fileID: 11400000, guid: a24ce61ae62acc74fae79b14ca291fe5, type: 2}
+    - roomType: 999
+      roomDatas:
+      - {fileID: 11400000, guid: 76ba5a1b17d0fe74ca4e815bd6caecd8, type: 2}
+  - type: 3
+    roomDataTypes:
+    - roomType: 1
+      roomDatas:
+      - {fileID: 11400000, guid: 0a349387f8cd76d4b9eab952b1535298, type: 2}
+    - roomType: 2
+      roomDatas:
+      - {fileID: 11400000, guid: 0039e53f3157ba946a8badffbfd9a886, type: 2}
+    - roomType: 3
+      roomDatas:
+      - {fileID: 11400000, guid: bc1f4bd5c91a4ab4c8dc4a61a6ca899d, type: 2}
+    - roomType: 5
+      roomDatas:
+      - {fileID: 11400000, guid: a14f0481a8ab1cf48a98f88b23eb5682, type: 2}
+    - roomType: 999
+      roomDatas:
+      - {fileID: 11400000, guid: e0c6561162d54064c9a25bcf13f11815, type: 2}
+    - roomType: 8
+      roomDatas:
+      - {fileID: 11400000, guid: db322f51c10d51c46a29ede22031ef4e, type: 2}
+      - {fileID: 11400000, guid: d35806ac9667a714b88a5843dc78b14b, type: 2}
+      - {fileID: 11400000, guid: 9c80ca9f8c405624d9932369aa1c2a82, type: 2}
+      - {fileID: 11400000, guid: 4686731135a04e8428d712dfdbf2e687, type: 2}
+      - {fileID: 11400000, guid: 1a61570f1e922e44388ead654c8fae56, type: 2}
+    - roomType: 7
+      roomDatas:
+      - {fileID: 11400000, guid: 7de92ba4aa871b947ba6913af9743e68, type: 2}
+      - {fileID: 11400000, guid: 20d479eae03348b4b867ce869e068c8a, type: 2}
+      - {fileID: 11400000, guid: a94456cf787e6e94e949836c24ca71a0, type: 2}
+      - {fileID: 11400000, guid: b1e4d8d1744488542834fcf2d0574316, type: 2}
+      - {fileID: 11400000, guid: 1c8530c8d49e4fb48afe7457598d332f, type: 2}
+    - roomType: 9
+      roomDatas:
+      - {fileID: 11400000, guid: 6740b7f933f2028418aa4d8f05ff6fc4, type: 2}
+      - {fileID: 11400000, guid: 058aa572d70e06d499178748c05d0ec2, type: 2}
+      - {fileID: 11400000, guid: 3325e44a18d68ee479edcbd1b2eae5d4, type: 2}
+      - {fileID: 11400000, guid: 8f280cee722be48419635f794f945da6, type: 2}
+    - roomType: 4
+      roomDatas:
+      - {fileID: 11400000, guid: 6af84be448182fe4da2c58d0cf6d287e, type: 2}
+      - {fileID: 11400000, guid: 318ad1f45a3d85340bcf473a31eca815, type: 2}
