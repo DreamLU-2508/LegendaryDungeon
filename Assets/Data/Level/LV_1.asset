@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LV_1
   m_EditorClassIdentifier: 
   level: 1
+  isChangeTheme: 1
   isLevelBoss: 0
   bossDamageBonus: 0
   bossHPBonus: 0

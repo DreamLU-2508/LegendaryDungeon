@@ -1,8 +1,11 @@
+using System;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VContainer;
+using Random = UnityEngine.Random;
 
 
 namespace DreamLU
@@ -17,8 +20,10 @@ namespace DreamLU
         [SerializeField] private GameObject vfxTelepos;
 
         private bool dungeonBuildSuccessful;
-        private ThemeMapType theme = ThemeMapType.Default;
+        // private ThemeMapType theme = ThemeMapType.Default;
+        [ShowInInspector]
         public List<RoomDataType> roomDatas = new List<RoomDataType>();
+        public List<ThemeMapType> themeExcludes = new List<ThemeMapType>();
         private int maxBuild = 10000;
         private int countBuild;
         private List<Room> rooms = new List<Room>();
@@ -27,15 +32,34 @@ namespace DreamLU
 
         [ShowInInspector]
         public Dictionary<string, InstancedRoom> DungeonBuilderRoomDictionary => dungeonBuilderRoomDictionary;
+        
+        private IGameStateProvider _gameStateProvider;
 
         private void Awake()
         {
-            roomDatas = roomTemplateList.GetThemeMapByType(theme);
+            // roomDatas = roomTemplateList.GetThemeMapByType(ThemeMapType.Default);
+            _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
+            _gameStateProvider.OnEndGame += OnEndGame;
         }
 
         [Button]
         public bool GenerateDungeon(LevelData levelData)
         {
+            if (levelData.isChangeTheme)
+            {
+                var theme = roomTemplateList.GetRandomThemeMapType(themeExcludes);
+                if (theme == ThemeMapType.None)
+                {
+                    roomDatas = roomTemplateList.GetThemeMapByType(ThemeMapType.Default);
+                }
+                else
+                {
+                    themeExcludes.Add(theme);
+                    roomDatas = roomTemplateList.GetThemeMapByType(theme);
+                }
+                Debug.Log(theme);
+            }
+            
             rooms.Clear();
             dungeonBuildSuccessful = false;
             int count = 0;
@@ -446,6 +470,16 @@ namespace DreamLU
             }
 
             return Vector3.zero;
+        }
+
+        private void OnEndGame()
+        {
+            themeExcludes.Clear();
+        }
+
+        private void OnDestroy()
+        {
+            _gameStateProvider.OnEndGame -= OnEndGame;
         }
     }
 }

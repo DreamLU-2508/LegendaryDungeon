@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708e4084c4a1534ba646096300f778c, type: 3}
+  m_Name: Room_ChestRoom_CatacombsV3_2
+  m_EditorClassIdentifier: 
+  guid: 322a50a890f20b846b0da42f1a43f6ee
+  prefab: {fileID: 4327421925113694216, guid: 95e229be1ea1bc2468b8875309a63572, type: 3}
+  previousPrefab: {fileID: 4327421925113694216, guid: 95e229be1ea1bc2468b8875309a63572, type: 3}
+  roomType: 9
+  lowerBounds: {x: 7, y: 6}
+  upperBounds: {x: 37, y: 31}
+  doorwayList:
+  - position: {x: 22, y: 31}
+    orientation: 1
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 19, y: 31}
+      width: 5
+      height: 7
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 22, y: 6}
+    orientation: 2
+    doorPrefab: {fileID: 7412356765237327549, guid: 035905d5d90383c43b056ff921e7d266, type: 3}
+    doorwayStartCopy:
+      position: {x: 17, y: 9}
+      width: 9
+      height: 4
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 37, y: 15}
+    orientation: 4
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: 34, y: 21}
+      width: 4
+      height: 8
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 7, y: 15}
+    orientation: 3
+    doorPrefab: {fileID: 7412356765237327549, guid: dd01e2790f5168b4992367b897fd2c60, type: 3}
+    doorwayStartCopy:
+      position: {x: 7, y: 21}
+      width: 4
+      height: 8
+    isConnected: 0
+    isUnavailable: 0
+  spawnPositionArray:
+  - {x: 18, y: 22}
+  - {x: 27, y: 22}
+  - {x: 14, y: 12}
+  - {x: 32, y: 13}
+  enemyAmount: 0
+  positionChest: {x: 22, y: 16}
+  positionTele: {x: 0, y: 0}
