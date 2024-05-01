@@ -18,8 +18,9 @@ namespace DreamLU
         [ShowInInspector, ReadOnly] public GameObject previousPrefab; // this is used to regenerate the guid if the so is copied and the prefab is changed
 
 
-        [Space(10)]
+        [Space(10)] 
         [Header("ROOM CONFIGURATION")]
+        public bool isRoomEndGame;
         public RoomType roomType;
 
         public Vector2Int lowerBounds;
@@ -41,6 +42,10 @@ namespace DreamLU
 
         [ShowIf("@this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom")]
         public Vector2Int positionTele;
+        
+        [Header("End Game")]
+        [ShowIf("isRoomEndGame")]
+        public Vector2Int positionSpawnEndGame;
 
         #region Validation
 

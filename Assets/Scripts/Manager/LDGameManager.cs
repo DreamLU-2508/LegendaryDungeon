@@ -44,6 +44,7 @@ namespace DreamLU
         private Transform targetTransform;
         private CharacterSkill _characterSkill;
         private CharacterData characterData;
+        private bool isEndGameRoom;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         [ShowInInspector, ReadOnly]
@@ -127,6 +128,12 @@ namespace DreamLU
             {
                 if (Input.GetKeyDown(KeyCode.V))
                 {
+                    ProceedToSelectCard();
+                }
+
+                if (Input.GetKeyDown(KeyCode.B))
+                {
+                    levelManager.CurrentLevel = 999;
                     ProceedToSelectCard();
                 }
             }
@@ -259,7 +266,7 @@ namespace DreamLU
                     OnEndGame?.Invoke();
                     _dungeonBuilder.ClearDungeon();
                     _enemyManager.ClearBoss();
-                });
+                });  
             }
             else
             {
@@ -366,11 +373,32 @@ namespace DreamLU
             // test
             if (nextLevel > _gameConfig.maxLevel)
             {
-                gameStateMachine.ChangeState(StateID.StageVictory, () =>
+                if (isEndGameRoom)
                 {
-                    OnEndGame?.Invoke();
-                    _enemyManager.ClearBoss();
-                });
+                    gameStateMachine.ChangeState(StateID.StageVictory, () =>
+                    {
+                        OnEndGame?.Invoke();
+                        isEndGameRoom = false;
+                        _enemyManager.ClearBoss();
+                    });  
+                }
+                else
+                {
+                    isEndGameRoom = true;
+                    
+                    gameStateMachine.ChangeState(StateID.Victory, () =>
+                    {
+                        _dungeonBuilder.ClearDungeon();
+                        _enemyManager.ClearBoss();
+                    });
+                
+                    gameStateMachine.ChangeState(StateID.Normal, () =>
+                    {
+                        _dungeonBuilder.GenerateEndGameRoom();
+                        _characterManager.RebuildStat();
+                        targetTransform.position = _dungeonBuilder.GetPositionSpawnEndGameRoom();
+                    });
+                }
             }
             else
             {
