@@ -134,5 +134,31 @@ namespace DreamLU
                 this.positionTelepos = roomData.positionTele;
             }
         }
+        
+        public InstancedRoom(RoomData roomData)
+        {
+            this.roomDataID = roomData.guid;
+            this.prefab = roomData.prefab;
+            this.roomType = roomData.roomType;
+            this.lowerBounds = roomData.lowerBounds;
+            this.upperBounds = roomData.upperBounds;
+            this.templateLowerBounds = roomData.lowerBounds;
+            this.templateUpperBounds = roomData.upperBounds;
+            this.spawnPositionArray = roomData.spawnPositionArray;
+            this.doors = roomData.CloneDoorwayList();
+            this.roomData = roomData;
+            this.enemyAmount = roomData.enemyAmount;
+
+            if(this.roomType == RoomType.Entrance || this.roomType == RoomType.ChessRoom || this.roomType == RoomType.EndRoom)
+            {
+                this.isClearEnemy = true;
+            }
+            
+            if(this.roomType == RoomType.BossRoom || this.roomType == RoomType.EndRoom)
+            {
+                this.isHasTelepos = true;
+                this.positionTelepos = roomData.positionTele;
+            }
+        }
     }
 }

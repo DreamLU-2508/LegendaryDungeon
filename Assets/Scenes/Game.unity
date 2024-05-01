@@ -1731,7 +1731,9 @@ MonoBehaviour:
   roomNodeGraphManifest: {fileID: 11400000, guid: 4e7daa01b41080b45b68162a731dcfd1, type: 2}
   container: {fileID: 1994963218}
   vfxTelepos: {fileID: 1887960397579140591, guid: f7af724ab4c84e247a7d2f7abfe7d905, type: 3}
+  endGameMap: {fileID: 11400000, guid: ab6beba26aa662c4cb68ddcdfe055ab7, type: 2}
   roomDatas: []
+  themeExcludes: 
 --- !u!1 &1725658536
 GameObject:
   m_ObjectHideFlags: 0

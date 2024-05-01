@@ -18,6 +18,7 @@ namespace DreamLU
         [SerializeField] private RoomNodeGraphManifest roomNodeGraphManifest;
         [SerializeField] private Transform container;
         [SerializeField] private GameObject vfxTelepos;
+        [SerializeField] private RoomData endGameMap;
 
         private bool dungeonBuildSuccessful;
         // private ThemeMapType theme = ThemeMapType.Default;
@@ -27,6 +28,7 @@ namespace DreamLU
         private int maxBuild = 10000;
         private int countBuild;
         private List<Room> rooms = new List<Room>();
+        private EndGameRoom endGameRoomData;
         [ShowInInspector]
         public int CountBuild => countBuild;
 
@@ -94,6 +96,15 @@ namespace DreamLU
             return dungeonBuildSuccessful;
         }
 
+        public bool GenerateEndGameRoom()
+        {
+            rooms.Clear();
+            dungeonBuildSuccessful = false;
+            InstantiateEndGameRoom();
+
+            return dungeonBuildSuccessful;
+        }
+
         private bool AttemptToBuildRandomDungeon(RoomNodeGraph roomNodeGraph)
         {
             Queue<RoomNode> openRoomNodeQueue = new Queue<RoomNode>();
@@ -102,6 +113,7 @@ namespace DreamLU
             if (entranceNode != null)
             {
                 openRoomNodeQueue.Enqueue(entranceNode);
+                openRoomNodeQueueShow = openRoomNodeQueue;
             }
             else
             {
@@ -123,16 +135,26 @@ namespace DreamLU
 
         }
 
+        [ShowInInspector, ReadOnly] private Queue<RoomNode> openRoomNodeQueueShow;
+        [ShowInInspector, ReadOnly] private List<RoomNode> nodes = new List<RoomNode>();
+        
         private bool ProcessRoomsInOpenRoomNodeQueue(RoomNodeGraph roomNodeGraph, Queue<RoomNode> openRoomNodeQueue, bool noRoomOverlaps)
         {
-
-            while (openRoomNodeQueue.Count > 0 && noRoomOverlaps == true)
+            nodes.Clear();
+            foreach (var roomNode in roomNodeGraph.roomNodes)
+            {
+                nodes.Add(roomNode);
+            }
+            
+            while (openRoomNodeQueue.Count > 0 && noRoomOverlaps == true && nodes.Count > 0)
             {
                 RoomNode roomNode = openRoomNodeQueue.Dequeue();
-
+                // Debug.LogError(roomNode.roomNodeType.type);
                 foreach (RoomNode childRoomNode in roomNode.GetChildRoomNode())
                 {
+                    // Debug.LogError("child -- " + childRoomNode.roomNodeType.RoomName);
                     openRoomNodeQueue.Enqueue(childRoomNode);
+                    openRoomNodeQueueShow = openRoomNodeQueue;
                 }
 
                 if (roomNode.roomNodeType.type == RoomType.Entrance)
@@ -142,6 +164,12 @@ namespace DreamLU
 
                     room.IsPositoned = true;
                     dungeonBuilderRoomDictionary.Add(room.ID, room);
+
+                    var node = nodes.Find(x => x.id == room.ID);
+                    if (node != null)
+                    {
+                        nodes.Remove(node);
+                    }
                 }
                 else
                 {
@@ -158,7 +186,7 @@ namespace DreamLU
         private bool CanPlaceRoomWithNoOverlaps(RoomNode roomNode, InstancedRoom parentRoom)
         {
             bool roomOverlaps = true;
-            while (roomOverlaps)
+            while (roomOverlaps && nodes.Count > 0)
             {
                 List<Doorway> unconnectedAvailableParentDoorways = GetUnconnectedAvailableDoorways(parentRoom.Doors).ToList();
 
@@ -181,7 +209,11 @@ namespace DreamLU
 
                     // Add room to dictionary
                     dungeonBuilderRoomDictionary.Add(room.ID, room);
-
+                    var node = nodes.Find(x => x.id == room.ID);
+                    if (node != null)
+                    {
+                        nodes.Remove(node);
+                    }
                 }
                 else
                 {
@@ -444,9 +476,27 @@ namespace DreamLU
                 }
             }
         }
+        
+        private void InstantiateEndGameRoom()
+        {
+            InstancedRoom instancedRoom = new InstancedRoom(endGameMap);
+
+            Vector3 roomPosition = new Vector3(0, 0, 0);
+
+            GameObject roomGameobject = Instantiate(instancedRoom.Prefab, roomPosition, Quaternion.identity, container);
+            EndGameRoom room = roomGameobject.GetComponent<EndGameRoom>();
+            if(room != null)
+            {
+                room.SetData(instancedRoom);
+                room.Initialise(roomGameobject);
+                endGameRoomData = room;
+            }
+        }
 
         public void ClearDungeon()
         {
+            endGameRoomData = null;
+
             for (int i = container.childCount - 1; i >= 0; i--)
             {
                 UnityEngine.Object.DestroyImmediate(container.GetChild(i).gameObject);
@@ -469,6 +519,16 @@ namespace DreamLU
                 }
             }
 
+            return Vector3.zero;
+        }
+        
+        public Vector3 GetPositionSpawnEndGameRoom()
+        {
+            if (endGameRoomData != null)
+            {
+                Vector3Int vector3Int = new Vector3Int(endGameMap.positionSpawnEndGame.x, endGameMap.positionSpawnEndGame.y, 0);
+                return endGameRoomData.Grid.CellToWorld(vector3Int);
+            }
             return Vector3.zero;
         }
 
