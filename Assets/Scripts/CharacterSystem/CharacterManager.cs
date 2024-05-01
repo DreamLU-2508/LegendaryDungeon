@@ -293,10 +293,23 @@ namespace DreamLU
                 }
             }
         }
+        
+        bool CheckIsInDashAction()
+        {
+            var actionDef = characterActions.Find((x) => x.actionID == CharacterActionID.Dash);
+            if (actionDef != null)
+            {
+                return actionDef.action.IsInAction();
+            }
+
+            return false;
+        }
 
         public void AddDamage(int damage)
         {
             if (_heroInvulnerableTimer > 0) return;
+            
+            if(CheckIsInDashAction()) return;
 
             if (shield > 0)
             {

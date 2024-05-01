@@ -1732,6 +1732,7 @@ MonoBehaviour:
   container: {fileID: 1994963218}
   vfxTelepos: {fileID: 1887960397579140591, guid: f7af724ab4c84e247a7d2f7abfe7d905, type: 3}
   roomDatas: []
+  themeExcludes: 
 --- !u!1 &1725658536
 GameObject:
   m_ObjectHideFlags: 0

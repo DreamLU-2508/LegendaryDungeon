@@ -35,6 +35,11 @@ namespace DreamLU
 
         public abstract bool IsCompleted();
 
+        public virtual bool IsInAction()
+        {
+            return _isInAction;
+        }
+
         public virtual bool IsInCooldown()
         {
             return hasCooldown && Time.time < _cooldownTime;

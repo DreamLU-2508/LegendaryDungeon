@@ -61,6 +61,7 @@ namespace DreamLU
             base.Activate();
 
             DoDash();
+            
         }
 
         private void DoDash()

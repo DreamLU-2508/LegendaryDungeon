@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5081707351729333875}
   - component: {fileID: -4044098824626669747}
   - component: {fileID: 5487952457883997245}
-  - component: {fileID: -8794050100911393223}
+  - component: {fileID: -6340358505569050351}
   m_Layer: 16
   m_Name: AmmoPistol6x6 1
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-8794050100911393223
+--- !u!114 &-6340358505569050351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2496300576252047035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e3b64b40605364f9e01ad7271563e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b2eb341fd6b0ff4f9df573d268dc66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

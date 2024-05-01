@@ -38,9 +38,11 @@ namespace DreamLU
 
         private void Update()
         {
-            if (boss.IsDie || _characterActor.IsHeroDead || !boss.IsMove) return;
-            
-            if(_enemySpawnProvider.CurrentRoom.InstancedRoom.RoomData.roomType != RoomType.BossRoom) return;
+            if (boss.IsDie || _characterActor.IsHeroDead || !boss.IsMove)
+            {
+                ClearCoroutine();
+                return;
+            }
             
             MoveEnemy();
         }
@@ -84,11 +86,21 @@ namespace DreamLU
                         // Trigger idle event
                         boss.SetIdle();
                         StopCoroutine(moveEnemyRoutine);
+                        moveEnemyRoutine = null;
                     }
 
                     // Move enemy along the path using a coroutine
                     moveEnemyRoutine = StartCoroutine(MoveEnemyRoutine(movementSteps));
                 }
+            }
+        }
+
+        private void ClearCoroutine()
+        {
+            if (moveEnemyRoutine != null)
+            {
+                StopCoroutine(moveEnemyRoutine);
+                moveEnemyRoutine = null;
             }
         }
         
@@ -113,7 +125,6 @@ namespace DreamLU
 
             // End of path steps - trigger the enemy idle event
             boss.SetIdle();
-
         }
         
         private void CreatePath()
