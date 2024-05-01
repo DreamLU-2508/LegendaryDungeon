@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RoomNodeGraphManifest
   m_EditorClassIdentifier: 
   listRoomNormal:
-  - {fileID: 11400000, guid: 62a29dde931137548a0be590fed4159f, type: 2}
-  - {fileID: 11400000, guid: e82e81db5c579ee469be6dc61e414b4b, type: 2}
+  - {fileID: 11400000, guid: 82a1588e7a8793d49b1b5e601e9d40b8, type: 2}
+  - {fileID: 11400000, guid: 896c57bdf5e44dc4e8735ba05acffee9, type: 2}
   listRoomBoss:
   - {fileID: 11400000, guid: 381b5e5aec0f9b448a8d8fea2eaf1421, type: 2}
