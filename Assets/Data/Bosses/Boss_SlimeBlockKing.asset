@@ -23,6 +23,8 @@ MonoBehaviour:
     chaseDistance: 50
   bossPrefab: {fileID: 6552421552492014633, guid: 2c524fb458dda9d45bc97de9f8d869e1, type: 3}
   skills:
+  - data: {fileID: 11400000, guid: 8a7bee97500d7c149b8844e2a78b204b, type: 2}
+    chance: 1
   - data: {fileID: 11400000, guid: a8af8484c6b6a8644bad534236012b1d, type: 2}
     chance: 1
   cooldownActiveSkill: 5

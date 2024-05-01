@@ -29,10 +29,14 @@ namespace DreamLU
         private int bodyDamage;
         private bool usingAimTargetPosition;
         private Vector3 aimTargetPosition;
+        private int _colliderLayerMask;
+        
         
         protected override void OnInit()
         {
             // _levelLayoutProvider = CoreLifetimeScope.SharedContainer.Resolve<ILevelLayoutProvider>();
+            var layer = LayerMask.NameToLayer("Wall");
+            _colliderLayerMask = 1 << layer;
         }
         
         protected override void OnExecute()
@@ -81,10 +85,10 @@ namespace DreamLU
         
         protected override void OnUpdate(bool isExecuting)
         {
-            // if (!isExecuting) return;
-            //
-            // if (IsCollide())
-            //     Stop();
+            if (!isExecuting) return;
+            
+            if (IsCollide(_transformProvider.Position))
+                Stop();
         }
         
         protected override void OnStop(bool isInterrupt)
@@ -111,15 +115,26 @@ namespace DreamLU
                 _uRandom.NextFloat(minDashDistance, maxDashDistance);
         }
         
-        private bool IsCollide()
-        {
-            return true;
-        }
-        
         public void AimTarget(Vector3 aimPosition)
         {
             usingAimTargetPosition = true;
             aimTargetPosition = aimPosition;
+        }
+        
+        private bool IsCollide(Vector3 position)
+        {
+            if (Physics2D.Raycast(position, direction, 1, _colliderLayerMask))
+            {
+                return true;
+            }
+
+            //if (Physics.SphereCast(tf.position, 1f, _dashDirection, out var hitInfo2, 1, _colliderLayerMask))
+            //{
+            //    Debug.Log("Hit sphere " + hitInfo.collider);
+            //    return true;
+            //}
+
+            return false;
         }
     }
 

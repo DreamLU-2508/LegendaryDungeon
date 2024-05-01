@@ -33,6 +33,7 @@ namespace DreamLU
         private int collisionDamage = 0;
         private bool isMove;
         private bool _isExecutingSkill = false;
+        private float timeDelaySkill = 0;
 
         public BossData Data => _bossData;
         public bool IsDie => isDie;
@@ -227,6 +228,12 @@ namespace DreamLU
         {
             if(isDie) return;
 
+            // if (timeDelaySkill <= 2f)
+            // {
+            //     timeDelaySkill += Time.deltaTime;
+            //     return;
+            // }
+
             cooldownActiveSkill -= Time.deltaTime;
             
             if (cooldownActiveSkill <= 0 && !_isExecutingSkill)
@@ -257,9 +264,14 @@ namespace DreamLU
             set => collisionDamage = value;
         }
 
-        public void SetCharge(bool stopMove)
+        public void SetCharge(bool stopMove, bool isIdle = false)
         {
             isMove = !stopMove;
+
+            if (isIdle)
+            {
+                SetIdle();
+            }
         }
     }
 

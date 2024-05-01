@@ -77,12 +77,6 @@ namespace DreamLU
                     chest.transform.position = grid.CellToWorld((Vector3Int)_room.RoomData.positionChest);
                 }
             }
-
-            if (_room.RoomType == RoomType.BossRoom)
-            {
-                Vector3 position = grid.CellToWorld((Vector3Int)_room.RoomData.positionTele);
-                _enemySpawnProvider.SpawnBoss(position);
-            }
         }
         
         /// <summary>
@@ -274,6 +268,12 @@ namespace DreamLU
             {
                 _room.IsPreviouslyVisited = true;
                 OnEnterRoom?.Invoke(this);
+                
+                if (this._room.RoomType == RoomType.BossRoom)
+                {
+                    Vector3 position = grid.CellToWorld((Vector3Int)_room.RoomData.positionTele);
+                    _enemySpawnProvider.SpawnBoss(position);
+                }
             }
         }
 
