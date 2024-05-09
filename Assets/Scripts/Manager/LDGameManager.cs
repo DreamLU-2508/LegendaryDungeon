@@ -30,6 +30,7 @@ namespace DreamLU
         [SerializeField] private LevelManager levelManager;
         [SerializeField] private CardManager _cardManager;
         [SerializeField] private CharacterManager _characterManager;
+        [SerializeField] private MiniMap _miniMap;
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
@@ -168,6 +169,7 @@ namespace DreamLU
             _character.transform.position = _dungeonBuilder.GetPositionRoomEntrance();
             SetCameraFollow(targetTransform, 0);
             SetVirtualCameraDamping(1, 1, 1);
+            _miniMap.StartCam(targetTransform, characterData.icon);
 
             // init wepon
             if(_weaponDataManifest.TryGetWeapon(character.itemID, out var wpData))
