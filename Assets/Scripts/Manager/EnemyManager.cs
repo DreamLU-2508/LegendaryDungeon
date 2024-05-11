@@ -10,6 +10,7 @@ namespace DreamLU
     {
         public Dictionary<EnemyID, int> numberEnemies = new Dictionary<EnemyID, int>();
         public float score;
+        public EnemyStatMod StatMod = new EnemyStatMod();
 
         public void AddDic(EnemyID enemyID, int number)
         {
@@ -151,7 +152,7 @@ namespace DreamLU
 
             GameObject newObj = PoolManager.GetPool(enemyData.prefab, parentTransform).RetrieveObject(_currentRoom.Grid.CellToWorld(cellPosition), Quaternion.identity, parentTransform);
             Enemy enemy = newObj.GetComponent<Enemy>();
-            enemy.EnemySetup(enemyData);
+            enemy.EnemySetup(enemyData, _waveEnemy.StatMod);
             countScore += enemyData.CalcScore(new EnemyStatMod());
             _enemies.Add(enemy);
         }
@@ -230,26 +231,6 @@ namespace DreamLU
         public List<EnemyData> testEnemeyDatas;
         private Enemy _enemytest;
 
-        [Button]
-        public void TestSpawn()
-        {
-            if (_currentRoom == null) return;
-
-            Vector3Int cellPosition = (Vector3Int)_currentRoom.InstancedRoom.RoomData.spawnPositionArray[Random.Range(0, _currentRoom.InstancedRoom.RoomData.spawnPositionArray.Length)];
-            int id = Random.Range(0, testEnemeyDatas.Count);
-
-            if (_enemytest != null)
-            {
-                PoolManager.Release(_enemytest.gameObject);
-                _enemytest = null;
-            }
-            
-            GameObject newObj = PoolManager.GetPool(testEnemeyDatas[id].prefab, parentTransform).RetrieveObject(_currentRoom.Grid.CellToWorld(cellPosition), Quaternion.identity, parentTransform);
-            Enemy enemy = newObj.GetComponent<Enemy>();
-            enemy.EnemySetup(testEnemeyDatas[id]);
-            _enemytest = enemy;
-        }
-        
         [Button]
         public WaveEnemy TestGetWave(RoomType roomType)
         {

@@ -47,6 +47,7 @@ namespace DreamLU
         public float MoveSpeed => moveSpeed;
 
         private int health = 10;
+        private EnemyStatMod _enemyStatMod = new EnemyStatMod();
         private static readonly int Disable = Shader.PropertyToID("_Disable");
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
 
@@ -68,12 +69,13 @@ namespace DreamLU
             SetIdle();
         }
 
-        public void EnemySetup(EnemyData enemyData)
+        public void EnemySetup(EnemyData enemyData, EnemyStatMod statMod)
         {
             _enemyData = enemyData;
+            _enemyStatMod = statMod;
             isDie = false;
             isSpawning = true;
-            health = _enemyData.stat.maxHealth;
+            health = _enemyData.stat.maxHealth + (int)(_enemyData.stat.maxHealth *statMod.healthMod);
             moveSpeed = _enemyProvider.GetEnemyMoveSpeed(_enemyData);
             if (_helper != null && _helper.InstancedMaterial != null)
             {
@@ -202,6 +204,8 @@ namespace DreamLU
             if (character != null)
             {
                 int damage = _enemyData.stat.collisionDamage;
+                float mod = _enemyStatMod.damageMod;
+                damage += (int)(mod * damage);
                 characterActor.AddDamage(damage);
             }
         }

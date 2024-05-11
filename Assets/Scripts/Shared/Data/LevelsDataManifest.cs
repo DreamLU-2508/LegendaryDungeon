@@ -80,5 +80,14 @@ namespace DreamLU
                 scores.Add(new Score() {level = idx, score = score});
             }
         }
+        
+        public EnemyStatMod GetStatMod(int level)
+        {
+            return new EnemyStatMod()
+            {
+                healthMod = this.protoHealthModPerLevel * (level - 1),
+                damageMod = this.protoDamageModPerLevel * (level - 1)
+            };
+        }
     }
 }

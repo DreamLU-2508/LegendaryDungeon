@@ -130,6 +130,7 @@ namespace DreamLU
             }
 
             waveEnemy.score = SelectScore(roomType, _currentLevelData);
+            waveEnemy.StatMod = levelsDataManifest.GetStatMod(Mathf.Max(_currentLevelData.level, 0));
             
             return waveEnemy;
 
@@ -151,6 +152,7 @@ namespace DreamLU
                 return 0;
             }
         }
+        
 
         private void Update()
         {
