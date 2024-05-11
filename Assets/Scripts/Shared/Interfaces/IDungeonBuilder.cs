@@ -6,6 +6,6 @@ namespace DreamLU
 {
     public interface IDungeonBuilder
     {
-        public bool GenerateDungeon(LevelData levelData);
+        public bool GenerateDungeon(LevelData levelData, System.Action<int, List<Room>> callback);
     }
 }

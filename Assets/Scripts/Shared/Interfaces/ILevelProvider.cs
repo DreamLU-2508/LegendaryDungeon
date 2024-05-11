@@ -6,6 +6,6 @@ namespace DreamLU
 {
     public interface ILevelProvider
     {
-
+        public WaveEnemy GetWaveEnemy(RoomType roomType);
     }
 }

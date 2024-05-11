@@ -38,7 +38,7 @@ namespace DreamLU
 
         private void Update()
         {
-            if (enemy.IsDie || _characterActor.IsHeroDead) return;
+            if (enemy.IsDie || _characterActor.IsHeroDead || enemy.IsSpawning) return;
 
             MoveEnemy();
         }

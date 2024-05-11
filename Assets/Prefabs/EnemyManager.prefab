@@ -50,3 +50,8 @@ MonoBehaviour:
   minMaxX: {x: -8, y: 6.7}
   minMaxY: {x: 2.31, y: 14}
   nameParentPool: Enemy
+  testEnemeyDatas:
+  - {fileID: 11400000, guid: 9c932f69c91563545af6b7943cf4dcd3, type: 2}
+  - {fileID: 11400000, guid: aa3e6079efb06c442874df8b8f73fd78, type: 2}
+  - {fileID: 11400000, guid: 92a66009b21096f47a24b8793f8165a7, type: 2}
+  - {fileID: 11400000, guid: 5893ed1b4d311954fb1757339ebd6f71, type: 2}

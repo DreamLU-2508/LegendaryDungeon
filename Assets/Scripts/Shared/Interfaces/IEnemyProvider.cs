@@ -6,7 +6,7 @@ namespace DreamLU
 {
     public interface IEnemyProvider
     {
-        public float GetEnemyMoveSpeed(EnemeyData enemeyData);
+        public float GetEnemyMoveSpeed(EnemyData enemyData);
 
         public float GetEnemyMoveSpeed(BossData bossData);
     }

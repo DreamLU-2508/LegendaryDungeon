@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95152e127d258cc489cbdce9a48fefa9, type: 3}
   m_Name: LevelsDataManifest
   m_EditorClassIdentifier: 
+  protoHealthModPerLevel: 0.2
+  protoDamageModPerLevel: 0.2
   levels:
   - {fileID: 11400000, guid: 1dadd67f7ba021f40b14e10e172a9d3e, type: 2}
   - {fileID: 11400000, guid: 94dc136f7ab15b44d8d8d4795a9bddd0, type: 2}
@@ -28,3 +30,83 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 477c3d382ba6b62448a90dcd1f3678aa, type: 2}
   - {fileID: 11400000, guid: 3c5f71a987874d3498a45b92da6933fb, type: 2}
   - {fileID: 11400000, guid: ad5062afb3f0cdd48bc2011ac19e7c2f, type: 2}
+  baseScore: 80
+  increasePerLevel: 0.25
+  factor: 1.05
+  multiplesRoom: 1.5
+  scores:
+  - level: 1
+    score: 104.99999
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 2
+    score: 132.29999
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 3
+    score: 162.06747
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 4
+    score: 194.48097
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 5
+    score: 229.73062
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 6
+    score: 268.01904
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 7
+    score: 309.56198
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 8
+    score: 354.58917
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 9
+    score: 403.34518
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 10
+    score: 456.09027
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 11
+    score: 513.10156
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 12
+    score: 574.6737
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 13
+    score: 641.1203
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 14
+    score: 712.7749
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0
+  - level: 15
+    score: 789.9922
+    speedMod: 0
+    healthMod: 0
+    dropChanceMultiplier: 0

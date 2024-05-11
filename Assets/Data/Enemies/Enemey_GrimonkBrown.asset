@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453947a6ddd974e4a8d1de7de42e9a7f, type: 3}
   m_Name: Enemey_GrimonkBrown
   m_EditorClassIdentifier: 
-  enemeyID: 1
+  enemyID: 1
   enemyName: Grimonk Brown
   prefab: {fileID: 1663180384312432028, guid: 7aa32e1e602ef5e4b8420a61696ff0ca, type: 3}
-  weaponID: 0
+  itemID: 0
   stat:
     maxHealth: 10
     damageBase: 3
@@ -24,3 +24,5 @@ MonoBehaviour:
     isBoss: 0
     isElite: 0
     chaseDistance: 50
+  scoreModifier: 0.75
+  metaTier: 1

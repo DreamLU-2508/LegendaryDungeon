@@ -16,7 +16,7 @@ namespace DreamLU
     [CreateAssetMenu(fileName = "Boss_", menuName = "Database/Enemy/Boss Data")]
     public class BossData : ScriptableObject
     {
-        public EnemeyID enemyID;
+        public EnemyID enemyID;
         public EnemyStat stat;
         public GameObject bossPrefab;
 

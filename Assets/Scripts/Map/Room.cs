@@ -289,17 +289,7 @@ namespace DreamLU
 
         private void OnKillEnemyInRoom(int count)
         {
-            if (this != _enemySpawnProvider.CurrentRoom) return;
 
-            if (_room.EnemyAmount > 0)
-            {
-                _room.EnemyAmount = _room.EnemyAmount - count;
-
-                if(_room.EnemyAmount <= 0)
-                {
-                    _room.IsClearEnemy = true;
-                }
-            }
         }
 
         private void AddDoors()
@@ -400,6 +390,18 @@ namespace DreamLU
         {
             // this array will be populated during gameplay with any moveable obstacles
             aStarItemObstacles = new int[_room.TemplateUpperBounds.x - _room.TemplateLowerBounds.x + 1, _room.TemplateUpperBounds.y - _room.TemplateLowerBounds.y + 1];
+        }
+
+        public bool IsRoomCombat()
+        {
+            return _room.RoomType switch
+            {
+                RoomType.MediumRoom => true,
+                RoomType.LargeRoom => true,
+                RoomType.SmallRoom => true,
+                // RoomType.BossRoom => true,
+                _ => false
+            };
         }
     }
 }

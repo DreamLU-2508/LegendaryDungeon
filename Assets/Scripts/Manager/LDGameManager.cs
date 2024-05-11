@@ -137,6 +137,11 @@ namespace DreamLU
                     levelManager.CurrentLevel = 999;
                     ProceedToSelectCard();
                 }
+                
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    _enemyManager.KillAll();
+                }
             }
             
             if (Input.GetKeyDown(KeyCode.Escape))

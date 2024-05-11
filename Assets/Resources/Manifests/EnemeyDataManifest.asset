@@ -18,3 +18,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 756d1e4f70ecfad4cbff47c19cf92920, type: 2}
   listBoss:
   - {fileID: 11400000, guid: 0d0516c845699a4478da78cb86dff412, type: 2}
+  tierSelectors:
+  - tier: 1
+    levelMin: 1
+    levelMax: 7
+  - tier: 2
+    levelMin: 7
+    levelMax: 15
