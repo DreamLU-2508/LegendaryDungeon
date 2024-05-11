@@ -21,7 +21,7 @@ MonoBehaviour:
   weaponShootPosition: {x: 1.115, y: 0.277, z: 0}
   weaponPrechargeTime: 0
   ammoData: {fileID: 11400000, guid: dd4d26a399f53074d8abe1851c2e8600, type: 2}
-  damage: 4
-  cooldown: 0.8
+  damage: 5
+  cooldown: 0.6
   timeReload: 0
   _weaponPlayerBasePrefab: {fileID: 1537131022703236176, guid: df33f0e6f6eb41340a3898db99466cdb, type: 3}
