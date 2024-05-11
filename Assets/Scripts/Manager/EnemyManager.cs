@@ -56,7 +56,7 @@ namespace DreamLU
         [ShowInInspector, ReadOnly] 
         private List<Enemy> _enemies = new List<Enemy>();
         private List<BossData> bossDatasExclude = new List<BossData>();
-        private GameObject _bossGameObject;
+        private Boss _boss;
         
         private bool isSpawnEnemy = false;
         private Vector2Int[] spawnPositionArray;
@@ -108,7 +108,7 @@ namespace DreamLU
                     SpawnEnemy();
                 }
             }
-            
+
             ClearEnemies();
         }
 
@@ -180,6 +180,15 @@ namespace DreamLU
                     }
                 }
             }
+            
+            if (_currentRoom != null && _currentRoom.InstancedRoom.RoomType == RoomType.BossRoom &&
+                !_currentRoom.InstancedRoom.IsClearEnemy)
+            {
+                if (_boss != null && _boss.IsDie)
+                {
+                    _currentRoom.InstancedRoom.IsClearEnemy = true;
+                }
+            }
         }
 
         public float GetEnemyMoveSpeed(EnemyData enemyData)
@@ -194,25 +203,26 @@ namespace DreamLU
 
         public void SpawnBoss(Vector3 position)
         {
-            if (_bossGameObject)
+            if (_boss)
             {
-                PoolManager.Release(_bossGameObject);
+                PoolManager.Release(_boss.gameObject);
             }
             
             BossData bossData = manifest.GetBossData(bossDatasExclude);
             if(bossData == null) return;
             // bossDatasExclude.Add(bossData);
             
-            _bossGameObject = PoolManager.GetPool(bossData.bossPrefab).RetrieveObject(position, Quaternion.identity, parentTransform);
+            var _bossGameObject = PoolManager.GetPool(bossData.bossPrefab).RetrieveObject(position, Quaternion.identity, parentTransform);
             Boss boss = _bossGameObject.GetComponent<Boss>();
             boss.BossSetup(bossData);
+            _boss = boss;
         }
 
         public void ClearBoss()
         {
-            if (_bossGameObject)
+            if (_boss)
             {
-                PoolManager.Release(_bossGameObject);
+                PoolManager.Release(_boss.gameObject);
             }
         }
 
@@ -224,6 +234,11 @@ namespace DreamLU
                 {
                     enemy.ShutDown();
                 }
+            }
+            
+            if (_boss != null)
+            {
+                _boss.ShutDown();
             }
         }
 
