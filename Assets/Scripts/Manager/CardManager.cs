@@ -11,9 +11,11 @@ namespace DreamLU
     public class CardManager : MonoBehaviour, ICardProvider
     {
         [SerializeField] private CardsDataManifest _cardsDataManifest;
+        [SerializeField] private int coolDown = 2;
 
         [ShowInInspector, ReadOnly]
         private List<CardData> _cardDatas = new();
+        [ShowInInspector] private int countCoolDown;
 
         private IGameStateProvider _gameStateProvider;
 
@@ -21,10 +23,25 @@ namespace DreamLU
         {
             get
             {
-                return _cardDatas.Count > 0;
+                if (_cardDatas.Count > 0)
+                {
+                    if (countCoolDown <= 0)
+                    {
+                        countCoolDown = coolDown;
+                        return true;
+                    }
+                    else
+                    {
+                        countCoolDown -= 1;
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
-
         private void Awake()
         {
             _gameStateProvider = CoreLifetimeScope.SharedContainer.Resolve<IGameStateProvider>();
