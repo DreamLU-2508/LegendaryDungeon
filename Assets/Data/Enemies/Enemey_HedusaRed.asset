@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453947a6ddd974e4a8d1de7de42e9a7f, type: 3}
-  m_Name: Enemey_Orc
+  m_Name: Enemey_HedusaRed
   m_EditorClassIdentifier: 
-  enemeyID: 1
-  enemyName: Orc
-  prefab: {fileID: 6950451559058744187, guid: 4b4038c5690a48c449b56cf2f70ffa6c, type: 3}
-  weaponID: 0
+  enemyID: 150
+  enemyName: Hedusa Red
+  prefab: {fileID: 5147560052670122829, guid: ddfd2ab7f68fbbd4c955d4932c950acc, type: 3}
+  itemID: 0
   stat:
     maxHealth: 10
     damageBase: 3
@@ -24,3 +24,5 @@ MonoBehaviour:
     isBoss: 0
     isElite: 0
     chaseDistance: 50
+  scoreModifier: 1.2
+  metaTier: 2

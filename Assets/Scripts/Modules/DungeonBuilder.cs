@@ -45,7 +45,7 @@ namespace DreamLU
         }
 
         [Button]
-        public bool GenerateDungeon(LevelData levelData)
+        public bool GenerateDungeon(LevelData levelData, Action<int, List<Room>> callback)
         {
             if (levelData.isChangeTheme)
             {
@@ -89,6 +89,10 @@ namespace DreamLU
                     {
                         // Instantiate Room Gameobjects
                         InstantiateRoomGameobjects();
+                        if (callback != null)
+                        {
+                            callback?.Invoke(levelData.level, rooms);
+                        }
                     }
                 }
             }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace DreamLU
@@ -21,5 +22,9 @@ namespace DreamLU
 
         [Header("Level Config")] 
         public int maxLevel;
+
+        [Header("Spawn Enemy Config")] 
+        public float timeSpawnEnemy;
+        public Ease easeSpawnEnemy;
     }
 }

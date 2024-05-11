@@ -17,7 +17,14 @@ namespace DreamLU
         [ShowIf("isLevelBoss")] public float bossDamageBonus;
         [ShowIf("isLevelBoss")] public float bossHPBonus;
 
-        [Header("Enemy Config")] 
-        public List<EnemeyData> enemeyDatas;
+        /// <summary>
+        /// The global drop chance modifier for this level.
+        /// </summary>
+        public float goldDropChanceMultiplier = 1.0f;
+        
+        [ReadOnly] public float score;
+        [ReadOnly] public float scoreRoomSmall;
+        [ReadOnly] public float scoreRoomMedium;
+        [ReadOnly] public float scoreRoomLarge;
     }
 }
