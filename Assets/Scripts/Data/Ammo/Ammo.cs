@@ -42,6 +42,9 @@ namespace DreamLU
         protected virtual void DisableAmmo()
         {
             PoolManager.Release(this.gameObject);
+            var vfx = Instantiate(ammoData.vfxPrefabHit);
+            vfx.transform.position = this.transform.position;
+            Destroy(vfx,1);
         }
 
         public virtual void OnCreateAmmo(AmmoData data, float aimAngle, float weaponAimAngle, Vector3 weaponAimDir, bool overrideAmmoMovement = false)

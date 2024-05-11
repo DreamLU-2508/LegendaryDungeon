@@ -16,16 +16,15 @@ namespace DreamLU
 
 
         [Header("Infor Ammo")]
-        public int damage = 1;
         public Vector2 minMaxSpeed;
         public float range = 20f;
-        public float rotationSpeed = 1f;
         public Vector2 minMaxSpread;
-        public Vector2 minMaxSpawnAmount;
         public int manaConsumed;
 
         [Header("prefab")]
         public GameObject prefab;
+        public GameObject vfxPrefabSmoke;
+        public GameObject vfxPrefabHit;
     }
 
 }

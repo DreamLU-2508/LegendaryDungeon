@@ -16,10 +16,10 @@ MonoBehaviour:
   ammoName: Pistol Ammo
   isPlayerAmmo: 1
   ammoSprite: {fileID: 0}
-  damage: 2
   minMaxSpeed: {x: 15, y: 15}
   range: 12
-  rotationSpeed: 1
   minMaxSpread: {x: 1, y: 1}
-  minMaxSpawnAmount: {x: 0, y: 0}
+  manaConsumed: 0
   prefab: {fileID: 5691105704421613413, guid: 886dc9ea5499046418f45ee5cfae49dd, type: 3}
+  vfxPrefabSmoke: {fileID: 7255582679228879866, guid: f9e22016a4859774299dba0a216a36ca, type: 3}
+  vfxPrefabHit: {fileID: 7853615770937549561, guid: 7d9410328c5a1fa4c99425b2fab427ca, type: 3}

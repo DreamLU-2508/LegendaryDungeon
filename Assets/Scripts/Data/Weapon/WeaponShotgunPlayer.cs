@@ -25,6 +25,7 @@ namespace DreamLU
                 {
                     SpawnProjectile(mousePos,isSecondWeapon, i, ammoData);
                 }
+                
             }
         }
         
