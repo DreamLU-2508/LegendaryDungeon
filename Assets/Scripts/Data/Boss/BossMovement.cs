@@ -38,16 +38,14 @@ namespace DreamLU
 
         private void Update()
         {
-            if (boss.IsDie || _characterActor.IsHeroDead || !boss.IsMove)
+            if (boss.IsDie || _characterActor.IsHeroDead || !boss.IsMove || boss.IsSpawning)
             {
-                ClearCoroutine();
                 return;
             }
             
             MoveEnemy();
         }
-
-        private bool isMo;
+        
         private void MoveEnemy()
         {
             // Movement cooldown timer

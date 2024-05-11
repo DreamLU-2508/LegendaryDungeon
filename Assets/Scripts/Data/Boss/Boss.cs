@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -18,6 +19,7 @@ namespace DreamLU
     [DisallowMultipleComponent]
     public class Boss : MonoBehaviour, ICaster, ITransformProvider, IDamageProvider, IMovementProvider
     {
+        private SpriteRenderer _spriteRenderer;
         private Animator animator;
         private StatsAniamtion statsAniamtion = StatsAniamtion.None;
 
@@ -34,10 +36,14 @@ namespace DreamLU
         private bool isMove;
         private bool _isExecutingSkill = false;
         private float timeDelaySkill = 0;
+        private bool isSpawning;
+        private Tween _tween;
+        private InstancedMaterialHelper _helper;
 
         public BossData Data => _bossData;
         public bool IsDie => isDie;
         public bool IsMove => isMove;
+        public bool IsSpawning => isSpawning;
 
         public float MoveSpeed => moveSpeed;
 
@@ -47,9 +53,12 @@ namespace DreamLU
         private SkillBase currentSkill = null;
         private float cooldownActiveSkill = 0;
         private ChancefTable<SkillBase> _chancefTable = new ChancefTable<SkillBase>();
+        private static readonly int DissolveAmount = Shader.PropertyToID("DissolveAmount");
+        private static readonly int Disable = Shader.PropertyToID("Disable");
 
         private void Awake()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             isDie = false;
             weaponProvider = CoreLifetimeScope.SharedContainer.Resolve<IWeaponProvider>();
@@ -57,6 +66,7 @@ namespace DreamLU
             characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
             _enemyProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemyProvider>();
             _random = URandom.CreateSeeded();
+            _helper = new InstancedMaterialHelper(_spriteRenderer);
         }
 
         void Start()
@@ -74,6 +84,27 @@ namespace DreamLU
             LoadSkill(_bossData.skills);
             cooldownActiveSkill = _bossData.cooldownActiveSkill;
             collisionDamage = _bossData.stat.collisionDamage;
+            isMove = true;
+            isSpawning = true;
+            if (_helper != null && _helper.InstancedMaterial != null)
+            {
+                _helper.InstancedMaterial.SetFloat(DissolveAmount, 0);
+                KillTween();
+                _tween = DOTween.To(() => 0f, (value) =>
+                    {
+                        // if (_helper.InstancedMaterial.GetInt(Disable) != 0)
+                        // {
+                        //     _helper.InstancedMaterial.SetInt(Disable, 0);
+                        // }
+
+                        _helper.InstancedMaterial.SetFloat(DissolveAmount, value);
+                    }, 1f, LDGameManager.Instance.GameConfig.timeSpawnEnemy)
+                    .SetEase(LDGameManager.Instance.GameConfig.easeSpawnEnemy);
+                _tween.OnComplete(() =>
+                {
+                    isSpawning = false;
+                });
+            }
         }
         
         private void LoadSkill(List<SkillExecuteChance> dataList)
@@ -102,6 +133,8 @@ namespace DreamLU
 
         public void SetAnimationMovement(Vector3 enemyPosition, Vector3 targetPosition)
         {
+            if(isSpawning) return;
+            
             if (statsAniamtion != StatsAniamtion.Move)
             {
                 animator.SetBool(Settings.isMoving, true);
@@ -177,6 +210,8 @@ namespace DreamLU
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if(isSpawning) return;
+            
             var ammo = collision.GetComponent<Ammo>();
             if (ammo != null)
             {
@@ -200,6 +235,8 @@ namespace DreamLU
 
         private void OnTriggerStay2D(Collider2D collision)
         {
+            if(isSpawning) return;
+            
             var character = collision.GetComponent<Character>();
             if (character != null)
             {
@@ -226,7 +263,10 @@ namespace DreamLU
 
         private void Update()
         {
+            Debug.LogError(isSpawning);
             if(isDie) return;
+            
+            if(isSpawning) return;
 
             // if (timeDelaySkill <= 2f)
             // {
@@ -271,6 +311,15 @@ namespace DreamLU
             if (isIdle)
             {
                 SetIdle();
+            }
+        }
+        
+        void KillTween()
+        {
+            if (_tween != null)
+            {
+                _tween.Kill();
+                _tween = null;
             }
         }
     }

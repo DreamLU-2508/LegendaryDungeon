@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d4d8c7d8b6053d4da5edc564d86af2d, type: 3}
-  m_Name: Boss_SlimeBlockKing
+  m_Name: Boss_SlimeBlockKing2
   m_EditorClassIdentifier: 
   enemyID: 5000
   stat:
@@ -21,7 +21,7 @@ MonoBehaviour:
     isBoss: 1
     isElite: 0
     chaseDistance: 50
-  bossPrefab: {fileID: 6552421552492014633, guid: 2c524fb458dda9d45bc97de9f8d869e1, type: 3}
+  bossPrefab: {fileID: 6552421552492014633, guid: 8ee5d379a51f2394a9d607ab5bc6446c, type: 3}
   skills:
   - data: {fileID: 11400000, guid: a8af8484c6b6a8644bad534236012b1d, type: 2}
     chance: 1

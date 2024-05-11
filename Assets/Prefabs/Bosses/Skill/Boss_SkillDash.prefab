@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashEase: 6
-  dashSpeed: 17.5
+  dashSpeed: 10
   minDashDistance: 3
   maxDashDistance: 10
   dashTowardTargetChance: 0.5

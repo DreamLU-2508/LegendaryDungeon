@@ -19,6 +19,8 @@ namespace DreamLU
         [SerializeField] private Transform container;
         [SerializeField] private GameObject vfxTelepos;
         [SerializeField] private RoomData endGameMap;
+        [SerializeField] private bool overrideTestGraph;
+        [SerializeField] private RoomNodeGraph nodeGraphTest;
 
         private bool dungeonBuildSuccessful;
         // private ThemeMapType theme = ThemeMapType.Default;
@@ -77,6 +79,11 @@ namespace DreamLU
                 else
                 {
                     nodeGraph = roomNodeGraphManifest.listRoomNormal[Random.Range(0, roomNodeGraphManifest.listRoomNormal.Count)];
+                }
+
+                if (overrideTestGraph)
+                {
+                    nodeGraph = nodeGraphTest;
                 }
                 
                 if (nodeGraph != null)
