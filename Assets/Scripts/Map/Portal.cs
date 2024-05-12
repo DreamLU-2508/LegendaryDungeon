@@ -17,7 +17,7 @@ namespace DreamLU
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.LogError("OnTriggerEnter2D");
+            // Debug.LogError("OnTriggerEnter2D");
             var character = collision.GetComponent<Character>();
             if (character != null)
             {

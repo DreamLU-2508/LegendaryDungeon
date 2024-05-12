@@ -216,6 +216,7 @@ namespace DreamLU
             Boss boss = _bossGameObject.GetComponent<Boss>();
             boss.BossSetup(bossData);
             _boss = boss;
+            // Debug.LogError("SpawnBoss");
         }
 
         public void ClearBoss()

@@ -263,7 +263,6 @@ namespace DreamLU
 
         private void Update()
         {
-            Debug.LogError(isSpawning);
             if(isDie) return;
             
             if(isSpawning) return;
