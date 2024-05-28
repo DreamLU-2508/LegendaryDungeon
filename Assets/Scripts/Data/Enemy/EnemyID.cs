@@ -24,6 +24,8 @@ namespace DreamLU
        
        // Boss
        Boss_SlimeBlockKing = 5000,
+       Boss_SlimeBlockKing2 = 5001,
+       Boss_SkullKing = 5002,
     }
 
 }
