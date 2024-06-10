@@ -24,6 +24,7 @@ namespace DreamLU
 
         public BossData GetBossData(List<BossData> bossDatasExclude)
         {
+            bossDatasExclude = new List<BossData>();
             if (listBoss.Count > 0)
             {
                 ChancefTable<BossData> chancefTable = new ChancefTable<BossData>();

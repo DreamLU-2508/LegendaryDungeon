@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace DreamLU
 {
-    public interface ICharacterManager
+    [DefaultExecutionOrder(-103)]
+    public class DataManager : MonoBehaviour
     {
-        public CharacterStat CharacterStat { get; }
-    }
 
+    }
 }

@@ -21,7 +21,10 @@ namespace DreamLU
         public bool UseSkillDoubleGun { get; }
 
         public void MinusMana(int manaConsumed, out bool isSuccess);
+        public void AddMana(int mana);
 
         public DropItem DropItem { set; }
+        public float GetDistancePickUp();
+        
     }
 }

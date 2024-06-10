@@ -21,6 +21,7 @@ namespace DreamLU
         [SerializeField] private TextMeshProUGUI textShield;
         [SerializeField] private TextMeshProUGUI textMana;
         [SerializeField] private TextMeshProUGUI nameCharacter;
+        [SerializeField] private TextMeshProUGUI textGoldInGame;
 
         [Header("Image")]
         [SerializeField] private Image icon;
@@ -55,6 +56,11 @@ namespace DreamLU
                 SetUIProgressBar(barMana, (float)characterManager.Mana / (float)characterManager.MaxMana);
                 SetText(textMana, characterManager.MaxMana, characterManager.Mana);
             };
+            
+            characterManager.OnUpdateGoldInGame += () =>
+            {
+                SetText(textGoldInGame, characterManager.GoldInGame);
+            };
 
             root.gameObject.SetActive(false);
         }
@@ -66,6 +72,7 @@ namespace DreamLU
 
             SetText(textHealth, characterManager.MaxHealth, characterManager.Health);
             SetText(textShield, characterManager.MaxHealth, characterManager.Shield);
+            SetText(textGoldInGame, 0);
 
             nameCharacter.text = gameManager.CharacterData.characterName;
             icon.sprite = gameManager.CharacterData.icon;
@@ -79,6 +86,11 @@ namespace DreamLU
         private void SetText(TextMeshProUGUI textMeshPro, int max, int current)
         {
             textMeshPro.text = $"{current}/{max}";
+        }
+        
+        private void SetText(TextMeshProUGUI textMeshPro, int current)
+        {
+            textMeshPro.text = $"{current}";
         }
 
         public void OnStateEnter(StateID stateID)

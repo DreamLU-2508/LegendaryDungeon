@@ -26,5 +26,10 @@ namespace DreamLU
         [Header("Spawn Enemy Config")] 
         public float timeSpawnEnemy;
         public Ease easeSpawnEnemy;
+
+        [Header("Pick up config")] 
+        public float distancePickUpBase = 10f;
+        public int goldPickUp = 1;
+        public int manaPickUp = 2;
     }
 }

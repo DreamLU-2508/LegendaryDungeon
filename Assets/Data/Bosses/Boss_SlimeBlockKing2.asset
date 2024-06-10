@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyID: 5001
   stat:
-    maxHealth: 15
+    maxHealth: 20
     damageBase: 0
-    moveSpeed: 4
+    moveSpeed: 5
     collisionDamage: 2
     isBoss: 1
     isElite: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 6552421552492014633, guid: 8ee5d379a51f2394a9d607ab5bc6446c, type: 3}
   skills:
   - data: {fileID: 11400000, guid: a8af8484c6b6a8644bad534236012b1d, type: 2}
-    chance: 1
+    chance: 0.8
   - data: {fileID: 11400000, guid: 8a7bee97500d7c149b8844e2a78b204b, type: 2}
     chance: 1
   cooldownActiveSkill: 5

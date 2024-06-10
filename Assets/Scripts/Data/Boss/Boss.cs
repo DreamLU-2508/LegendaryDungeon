@@ -303,14 +303,10 @@ namespace DreamLU
             set => collisionDamage = value;
         }
 
-        public void SetCharge(bool stopMove, bool isIdle = false)
+        public void SetCharge(bool stopMove)
         {
             isMove = !stopMove;
-
-            if (isIdle)
-            {
-                SetIdle();
-            }
+            SetIdle();
         }
         
         void KillTween()

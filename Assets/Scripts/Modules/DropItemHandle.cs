@@ -9,11 +9,27 @@ using Random = UnityEngine.Random;
 
 namespace DreamLU
 {
+    public enum TypeResources
+    {
+        None,
+        Gold,
+        Mana,
+    }
+    
+    public class DropData
+    {
+        public GameObject gameObject;
+        public bool isWeapon;
+        public ItemData itemData;
+        public TypeResources typeResources;
+    }
+    
     public interface IDropItemHandle
     {
-        public void DropItem(ItemData data, Vector3 startPosition);
+        public void DropItemChess(ItemData data, Vector3 startPosition);
 
         public GameObject ChestPrefab { get; }
+        public void Drop(Vector3 position);
     }
     
     public class DropItemHandle : MonoBehaviour, IDropItemHandle
@@ -25,14 +41,25 @@ namespace DreamLU
         [SerializeField] private GameObject prefab;
         [SerializeField] private DropDataManifest _dropDataManifest;
         [SerializeField] private GameObject chestPrefab;
+        
+        [Header("Item can drop")]
+        [SerializeField] private GameObject goldPrefab;
+        [SerializeField] private GameObject manaPrefab;
+        [SerializeField] private float speedPickUp;
+
+        [SerializeField] private float goldRate;
+        [SerializeField] private float manaRate;
+        [SerializeField] private float weaponRate;
 
         private CharacterManager characterManager;
+        private LDGameManager ldGameManager;
 
         public GameObject ChestPrefab => chestPrefab;
         
         private void Awake()
         {
             characterManager = GetComponent<CharacterManager>();
+            ldGameManager = LDGameManager.Instance;
         }
 
         [Button]
@@ -60,24 +87,26 @@ namespace DreamLU
                     }
                 }
                 
-                if (_bezier.TryGetP2P3(type, characterManager.CharacterTransform.position, randomPosition,
-                        out var p2, out var p3))
-                {
-                    DOTween.To(() => 0f, x =>
-                    {
-                        item.transform.position =
-                            HelperUtilities.CalculateCubicBezierPoint(x, characterManager.CharacterTransform.position, p2, p3,
-                                randomPosition);
-                    }, 1, 1);
-                }
-                else
-                {
-                    item.transform.DOMove(randomPosition, 1);
-                }
+                // if (_bezier.TryGetP2P3(type, characterManager.CharacterTransform.position, randomPosition,
+                //         out var p2, out var p3))
+                // {
+                //     DOTween.To(() => 0f, x =>
+                //     {
+                //         item.transform.position =
+                //             HelperUtilities.CalculateCubicBezierPoint(x, characterManager.CharacterTransform.position, p2, p3,
+                //                 randomPosition);
+                //     }, 1, 1);
+                // }
+                // else
+                // {
+                //     item.transform.DOMove(randomPosition, 1);
+                // }
+
+                item.transform.position = characterManager.CharacterTransform.position;
             }
         }
         
-        public void DropItem(ItemData data, Vector3 startPosition)
+        public void DropItemChess(ItemData data, Vector3 startPosition)
         {
             var prefabData = data.itemDropPrefab;
 
@@ -89,19 +118,92 @@ namespace DreamLU
             {
                 item.Setup(data);
                 
-                if (_bezier.TryGetP2P3(type, startPosition, randomPosition,
-                        out var p2, out var p3))
+                // if (_bezier.TryGetP2P3(type, startPosition, randomPosition,
+                //         out var p2, out var p3))
+                // {
+                //     DOTween.To(() => 0f, x =>
+                //     {
+                //         item.transform.position =
+                //             HelperUtilities.CalculateCubicBezierPoint(x, startPosition, p2, p3,
+                //                 randomPosition);
+                //     }, 1, 1);
+                // }
+                // else
+                // {
+                //     item.transform.DOMove(randomPosition, 1);
+                // }
+                
+                item.transform.position = characterManager.CharacterTransform.position;
+            }
+        }
+
+        private DropData RollDropItem()
+        {
+            ChancefTable<DropData> chancefTable = new ChancefTable<DropData>();
+            chancefTable.AddRange(goldRate, new DropData()
+            {
+                gameObject = goldPrefab,
+                typeResources = TypeResources.Gold
+            });
+            chancefTable.AddRange(manaRate, new DropData()
+            {
+                gameObject = manaPrefab,
+                typeResources = TypeResources.Mana
+            });
+            
+            Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(new List<Droppable>());
+            if (droppable && droppable is WeaponData itemData)
+            {
+                chancefTable.AddRange(weaponRate, new DropData()
                 {
-                    DOTween.To(() => 0f, x =>
+                    gameObject = itemData.itemDropPrefab,
+                    isWeapon = true,
+                    itemData = itemData,
+                    typeResources = TypeResources.None
+                });
+            }
+
+            if (chancefTable.CanRoll)
+            {
+                var uRandom = URandom.CreateSeeded();
+                chancefTable.TryRoll(uRandom, null, out var result);
+                return result;
+            }
+
+            return null;
+        }
+
+        public void Drop(Vector3 position)
+        {
+            DropData dropObject = RollDropItem();
+            if (dropObject != null)
+            {
+                var item = PoolManager.GetPool(dropObject.gameObject).RetrieveObject(position, Quaternion.identity, PoolManager.Instance.CurrentTransform);
+                if (dropObject.isWeapon)
+                {
+                    var dropItem = item.GetComponent<DropItem>();
+                    if (dropItem != null)
                     {
-                        item.transform.position =
-                            HelperUtilities.CalculateCubicBezierPoint(x, startPosition, p2, p3,
-                                randomPosition);
-                    }, 1, 1);
+                        dropItem.Setup(dropObject.itemData);
+                    }
                 }
                 else
                 {
-                    item.transform.DOMove(randomPosition, 1);
+                    var dropItem = item.GetComponent<DropHandleResources>();
+                    if (dropItem != null)
+                    {
+                        dropItem.Setup(speedPickUp, () =>
+                        {
+                            if (dropObject.typeResources == TypeResources.Gold)
+                            {
+                                characterManager.AddGoldInGame(ldGameManager.GameConfig.goldPickUp);
+                            }
+                            else if (dropObject.typeResources == TypeResources.Mana)
+                            {
+                                characterManager.AddMana(ldGameManager.GameConfig.manaPickUp);
+                            }
+                        });
+                    }
                 }
             }
         }

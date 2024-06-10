@@ -65,7 +65,7 @@ namespace DreamLU
             
             // Setup Animation
             var localDirection = Quaternion.Inverse(_transformProvider.Rotation) * direction;
-            _movementProvider?.SetAnimationMovement(targetPosition, startPosition);
+            _movementProvider?.SetAnimationMovement(startPosition, targetPosition);
 
             // Setup VFX
             // _trailsProvider?.SetActiveTrails(true);

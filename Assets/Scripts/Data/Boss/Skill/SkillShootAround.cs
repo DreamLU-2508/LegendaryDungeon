@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DreamLU;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class SkillShootAround : SkillBase
 {
@@ -23,14 +25,15 @@ public class SkillShootAround : SkillBase
     [CasterProvider(false)] protected IMovementProvider _movementProvider;
     [CasterProvider] protected ITransformProvider _transformProvider;
     
+    
     protected override void OnInit()
     {
-        
+
     }
     
     protected override void OnExecute()
     {
-        _movementProvider?.SetCharge(true, true);
+        _movementProvider?.SetCharge(true);
         sourcePosition = _transformProvider.Position;
         castPerTime = timeExecute / 3;
         castTime = castPerTime;
@@ -42,7 +45,7 @@ public class SkillShootAround : SkillBase
     {
         if (!isExecuting) return;
         
-        if (timeCount >= timeExecute || countRing >= numberOfRings)
+        if (timeCount >= timeExecute)
         {
             Complete();
         }

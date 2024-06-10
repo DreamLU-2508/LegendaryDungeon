@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -76,6 +77,21 @@ namespace DreamLU
                 default:
                     return 0;
             }
+        }
+        
+        public static Dictionary<string, object> GetListStat(CharacterStat stats)
+        {
+            Dictionary<string, object> listStat = new Dictionary<string, object>();
+
+            System.Type type = stats.GetType();
+            FieldInfo[] fields = type.GetFields();
+
+            for (int i = 0; i < fields.Length; i++)
+            {
+                listStat.Add(fields[i].Name, fields[i].GetValue(stats));
+            }
+
+            return listStat;
         }
     }
 }
