@@ -449,6 +449,7 @@ namespace DreamLU
         public void AddGoldInGame(int gold)
         {
             GoldInGame += gold;
+            DataManager.Instance.AddGlobalGameData(gold);
         }
     }
 
