@@ -23,6 +23,7 @@ namespace DreamLU
         public void Setup(ItemData itemData)
         {
             _itemData = itemData;
+            entered = false;
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -38,12 +39,13 @@ namespace DreamLU
             if(entered) return;
 
             entered = true;
-            _characterActor.DropItem = null;
+            _characterActor.DropItem = this;
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             entered = false;
+            _characterActor.DropItem = null;
         }
     }
 }

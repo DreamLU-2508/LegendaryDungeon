@@ -15,8 +15,10 @@ namespace DreamLU
         public CharacterAction action;
     }
 
-    public class CharacterManager : MonoBehaviour, ICharacterActor, IWeaponProvider
+    public class CharacterManager : MonoBehaviour, ICharacterActor, IWeaponProvider, ICharacterManager
     {
+        public static CharacterManager Instance;
+        
         [SerializeField][TableList] private List<CharacterActionDefinition> characterActions;
         [SerializeField] private DropItemHandle _dropItemHandle;
 
@@ -33,6 +35,7 @@ namespace DreamLU
         private int maxMana;
         private int maxHealth;
         private int maxShield;
+        private int goldInGame;
         private CharacterData _characterData;
         private Character _character;
         private float _heroInvulnerableTimer = 0;
@@ -47,6 +50,7 @@ namespace DreamLU
         }
 
         public Character Character => _character;
+        public CharacterStat CharacterStat => _characterStat;
         
         public Transform CharacterTransform => characterTransform;
 
@@ -88,6 +92,17 @@ namespace DreamLU
             { 
                 health = value;
                 OnUpdateHealth?.Invoke();
+            }
+        } 
+        
+        [ShowInInspector, ReadOnly]
+        public int GoldInGame
+        {
+            get { return goldInGame; }
+            set 
+            { 
+                goldInGame = value;
+                OnUpdateGoldInGame?.Invoke();
             }
         } 
         
@@ -169,9 +184,15 @@ namespace DreamLU
         public event System.Action OnUpdateHealth;
         public event System.Action OnUpdateShield;
         public event System.Action OnUpdateMana;
+        public event System.Action OnUpdateGoldInGame;
 
         private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            
             gameManager = FindObjectOfType<LDGameManager>();
             gameManager.OnInitializeCharacter += OnInitializeCharacter;
             Debug.Log("CharacterManager");
@@ -222,6 +243,7 @@ namespace DreamLU
                         if (dropItem.ItemData is WeaponData weaponData && HandleChangeWeapon(weaponData))
                         {
                             PoolManager.Release(dropItem.gameObject);
+                            dropItem = null;
                         }
                     }
                 }
@@ -388,6 +410,11 @@ namespace DreamLU
                 isSuccess = false;
             }
         }
+        
+        public void AddMana(int mana)
+        {
+            Mana += mana;
+        }
 
         [ShowInInspector, ReadOnly]
         private DropItem dropItem = null;
@@ -398,7 +425,12 @@ namespace DreamLU
                 dropItem = value;
             }
         }
-        
+
+        public float GetDistancePickUp()
+        {
+            return LDGameManager.Instance.GameConfig.distancePickUpBase;
+        }
+
         bool HandleChangeWeapon(WeaponData weaponData)
         {
             if(_character == null) return false;
@@ -408,10 +440,15 @@ namespace DreamLU
 
             if (oldWeapon != null)
             {
-                _dropItemHandle.DropItem(oldWeapon, _character.transform.position);
+                _dropItemHandle.DropItemChess(oldWeapon, _character.transform.position);
             }
 
             return true;
+        }
+
+        public void AddGoldInGame(int gold)
+        {
+            GoldInGame += gold;
         }
     }
 

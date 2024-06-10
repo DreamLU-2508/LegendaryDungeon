@@ -412,6 +412,7 @@ namespace DreamLU
                 if (!_cardManager.CanSelectCard)
                 {
                     ProceedToEndLevel();
+                    PoolManager.Instance.DestroyAllPools();
                     return;
                 }
                 
@@ -420,6 +421,8 @@ namespace DreamLU
                     _dungeonBuilder.ClearDungeon();
                 });
             }
+            
+            PoolManager.Instance.DestroyAllPools();
         }
     }
 }

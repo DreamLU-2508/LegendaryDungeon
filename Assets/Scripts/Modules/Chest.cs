@@ -64,7 +64,7 @@ namespace DreamLU
             Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(excludedList);
             if (droppable && droppable is ItemData itemData)
             {
-                _handle.DropItem(itemData, startPos);
+                _handle.DropItemChess(itemData, startPos);
                 animator.SetBool(Settings.useChest, true);
                 opened = true;
             }

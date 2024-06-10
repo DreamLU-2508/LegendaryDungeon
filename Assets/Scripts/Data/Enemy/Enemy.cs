@@ -34,6 +34,7 @@ namespace DreamLU
         private IHeroPositionProvider heroPositionProvider;
         private ICharacterActor characterActor;
         private IEnemyProvider _enemyProvider;
+        private IDropItemHandle _dropItemHandle;
 
         public EnemyData Data => _enemyData;
         public bool CanFire
@@ -61,6 +62,7 @@ namespace DreamLU
             characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
             _enemyProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemyProvider>();
             _helper = new InstancedMaterialHelper(_spriteRenderer);
+            _dropItemHandle = CoreLifetimeScope.SharedContainer.Resolve<IDropItemHandle>();
         }
 
         void Start()
@@ -167,6 +169,7 @@ namespace DreamLU
         public void ShutDown()
         {
             isDie = true;
+            _dropItemHandle.Drop(this.gameObject.transform.position);
             PoolManager.Release(this.gameObject);
         }
 

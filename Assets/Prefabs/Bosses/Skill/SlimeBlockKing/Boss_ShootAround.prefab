@@ -48,6 +48,6 @@ MonoBehaviour:
   numberOfRings: 3
   objectsPerRing: 10
   initialRadius: 2
-  timeExecute: 2
-  speed: 3
-  range: 20
+  timeExecute: 1.5
+  speed: 5
+  range: 50

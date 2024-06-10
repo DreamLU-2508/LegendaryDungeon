@@ -40,6 +40,12 @@ namespace DreamLU
         {
             if (boss.IsDie || _characterActor.IsHeroDead || !boss.IsMove || boss.IsSpawning)
             {
+                boss.SetIdle();
+                if (moveEnemyRoutine != null)
+                {
+                    StopCoroutine(moveEnemyRoutine);
+                    moveEnemyRoutine = null;
+                }
                 return;
             }
             

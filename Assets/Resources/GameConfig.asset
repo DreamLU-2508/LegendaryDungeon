@@ -21,3 +21,4 @@ MonoBehaviour:
   maxLevel: 15
   timeSpawnEnemy: 0.5
   easeSpawnEnemy: 1
+  distancePickUpBase: 4

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_ShootAround
   m_EditorClassIdentifier: 
   prefab: {fileID: 6132339320005664726, guid: 8503769847a960c49800c3219a35bd0b, type: 3}
-  damageScaling: 2
+  damageScaling: 3
   cooldown: 1
   wanderingAfterComplete: 0
   castRange: {x: 0, y: 100}
