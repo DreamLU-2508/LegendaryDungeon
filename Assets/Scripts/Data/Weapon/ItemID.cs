@@ -16,5 +16,8 @@ namespace DreamLU
         
         // Shotgun
         Shotgun1 = 300,
+        
+        // Blueprint
+        BlueprintSniperRifleGold = 2000,
     }
 }

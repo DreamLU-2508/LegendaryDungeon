@@ -117,8 +117,6 @@ namespace DreamLU
             if(room != null)
             {
                 _currentRoom = room;
-                Debug.LogError(room.InstancedRoom.EnemyAmount);
-                Debug.LogError(_currentRoom.InstancedRoom.IsClearEnemy);
                 if (room.InstancedRoom.EnemyAmount > 0 && !_currentRoom.InstancedRoom.IsClearEnemy)
                 {
                     isSpawnEnemy = true;

@@ -245,6 +245,11 @@ namespace DreamLU
                             PoolManager.Release(dropItem.gameObject);
                             dropItem = null;
                         }
+                        else
+                        {
+                            _dropItemHandle.PickUpItem(dropItem);
+                            dropItem = null;
+                        }
                     }
                 }
             }

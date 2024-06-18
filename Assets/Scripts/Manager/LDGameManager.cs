@@ -46,6 +46,7 @@ namespace DreamLU
         private CharacterSkill _characterSkill;
         private CharacterData characterData;
         private bool isEndGameRoom;
+        private bool _isShowInventory;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         [ShowInInspector, ReadOnly]
@@ -65,6 +66,13 @@ namespace DreamLU
                 return StateID.None;
             }
         }
+        
+        public bool IsShowInventory
+        {
+            get => _isShowInventory;
+            set => _isShowInventory = value;
+        }
+
 
         public GameStateMachine stateMachine { get { return gameStateMachine; } }
 
@@ -144,7 +152,7 @@ namespace DreamLU
                 }
             }
             
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !IsShowInventory)
             {
                 if (gameStateMachine.IsState(StateID.Normal))
                 {

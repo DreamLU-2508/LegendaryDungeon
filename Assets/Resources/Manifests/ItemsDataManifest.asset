@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 116985aff1e1c044886ada9e0b599d62, type: 3}
-  m_Name: DropItemsDataManifest
+  m_Script: {fileID: 11500000, guid: d090b7185c58e6044a5f7d9b46b03c8d, type: 3}
+  m_Name: ItemsDataManifest
   m_EditorClassIdentifier: 
-  chestItemsDroppable:
+  itemDatas:
   - {fileID: 11400000, guid: 1e6fabc2c0fafe44aac06f3d1ddeb66f, type: 2}
