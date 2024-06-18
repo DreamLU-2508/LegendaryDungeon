@@ -207,6 +207,20 @@ namespace DreamLU
                 }
             }
         }
+
+        public void PickUpItem(DropItem dropItem)
+        {
+            if(dropItem == null) return;
+            
+            if (dropItem.ItemData.itemType == ItemType.Blueprint)
+            {
+                DataManager.Instance.AddItemInventory(new GlobalItemDataInventory()
+                {
+                    itemID = dropItem.ItemData.itemID
+                });
+                PoolManager.Release(dropItem.gameObject);
+            }
+        }
     }
 
 }

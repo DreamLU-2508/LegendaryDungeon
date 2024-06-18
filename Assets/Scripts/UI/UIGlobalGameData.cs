@@ -26,6 +26,7 @@ namespace DreamLU
         private void Start()
         {
             Show();
+            UpdateGold();
         }
 
         void OnStateEnter(StateID stateID)

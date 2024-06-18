@@ -14,11 +14,14 @@ namespace DreamLU
         
         private const string saveGameFileName = "SaveGame.es3";
         private const string saveKeyGameData = "gameData";
+        private const string saveKeyItemInventory = "itemsInventory";
         
         private GlobalGameData _globalGameData;
-        
+        private List<GlobalItemDataInventory> _itemsInventory = new List<GlobalItemDataInventory>();
+
         public GlobalGameData GlobalGameData => _globalGameData;
-        
+        public List<GlobalItemDataInventory> ItemsInventory => _itemsInventory;
+
         public event System.Action OnChangeGlobalData;
 
         private void Awake()
@@ -49,10 +52,12 @@ namespace DreamLU
             try
             {
                 _globalGameData = ES3.Load<GlobalGameData>(saveKeyGameData, new GlobalGameData());
+                _itemsInventory = ES3.Load<List<GlobalItemDataInventory>>(saveKeyItemInventory, new List<GlobalItemDataInventory>());
             }
             catch (Exception e)
             {
                 _globalGameData = new GlobalGameData();
+                _itemsInventory = new List<GlobalItemDataInventory>();
             }
             // LoadDifficultyCharacterData();
         }
@@ -76,6 +81,76 @@ namespace DreamLU
             
             OnChangeGlobalData?.Invoke();
             Debug.Log("Global Game Data => " + JsonUtility.ToJson(_globalGameData));
+        }
+
+        public bool TryGetGlobalItemDataInventory(ItemID itemID, out GlobalItemDataInventory itemDataInventory)
+        {
+            itemDataInventory = null;
+            if (_itemsInventory != null && _itemsInventory.Count > 0)
+            {
+                var index = _itemsInventory.FindIndex(x => x.itemID == itemID);
+                if (index != -1)
+                {
+                    itemDataInventory = _itemsInventory[index];
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+        public bool TryGetGlobalItemDataInventory(ItemID itemID, out int itemDataInventoryIndex)
+        {
+            itemDataInventoryIndex = -1;
+            if (_itemsInventory != null && _itemsInventory.Count > 0)
+            {
+                var index = _itemsInventory.FindIndex(x => x.itemID == itemID);
+                if (index != -1)
+                {
+                    itemDataInventoryIndex = index;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void AddItemInventory(GlobalItemDataInventory itemDataInventory)
+        {
+            if(itemDataInventory == null) return;
+            
+            if(itemDataInventory.itemID == ItemID.None) return;
+            
+            TryGetGlobalItemDataInventory(itemDataInventory.itemID, out int index);
+            if (index != -1)
+            {
+                _itemsInventory[index].quantity += 1;
+            }
+            else
+            {
+                _itemsInventory.Add(new GlobalItemDataInventory()
+                {
+                    itemID = itemDataInventory.itemID,
+                    quantity = 1,
+                });
+            }
+            ES3.Save(saveKeyItemInventory, _itemsInventory);
+        }
+        
+        public void RemoveItemInventory(ItemID itemID, int quantity)
+        {
+            if(_itemsInventory.Count <= 0) return;
+            
+            TryGetGlobalItemDataInventory(itemID, out int index);
+            if (index != -1)
+            {
+                _itemsInventory[index].quantity -= quantity;
+                if (_itemsInventory[index].quantity <= 0)
+                {
+                    _itemsInventory.RemoveAt(index);
+                }
+                ES3.Save(saveKeyItemInventory, _itemsInventory);
+            }
         }
     }
 }

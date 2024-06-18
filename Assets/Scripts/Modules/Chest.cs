@@ -61,7 +61,20 @@ namespace DreamLU
                 excludedList.Add(_characterManager.Character.WeaponData);
             }
 
+            foreach (var dropData in _dropDataManifest.chestItemsDroppable)
+            {
+                if (dropData is ItemData item && dropData is not WeaponData)
+                {
+                    if (item.itemType == ItemType.Blueprint &&
+                        DataManager.Instance.TryGetGlobalItemDataInventory(item.itemID, out int index))
+                    {
+                        excludedList.Add(dropData);
+                    }
+                }
+            }
+
             Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(excludedList);
+            
             if (droppable && droppable is ItemData itemData)
             {
                 _handle.DropItemChess(itemData, startPos);

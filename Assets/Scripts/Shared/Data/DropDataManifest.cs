@@ -16,7 +16,7 @@ namespace DreamLU
     public class DropDataManifest : ScriptableObject
     {
         [Header("Chest Drop")] 
-        [SerializeField] private List<Droppable> chestItemsDroppable;
+        public List<Droppable> chestItemsDroppable;
 
         [Button]
         public Droppable RandomChestItemsDroppable(List<Droppable> excludedList)
