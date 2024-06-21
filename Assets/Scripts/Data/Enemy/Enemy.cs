@@ -35,6 +35,7 @@ namespace DreamLU
         private ICharacterActor characterActor;
         private IEnemyProvider _enemyProvider;
         private IDropItemHandle _dropItemHandle;
+        private IAggregateDataProvider _aggregateDataProvider;
 
         public EnemyData Data => _enemyData;
         public bool CanFire
@@ -63,6 +64,7 @@ namespace DreamLU
             _enemyProvider = CoreLifetimeScope.SharedContainer.Resolve<IEnemyProvider>();
             _helper = new InstancedMaterialHelper(_spriteRenderer);
             _dropItemHandle = CoreLifetimeScope.SharedContainer.Resolve<IDropItemHandle>();
+            _aggregateDataProvider = CoreLifetimeScope.SharedContainer.Resolve<IAggregateDataProvider>();
         }
 
         void Start()
@@ -181,12 +183,15 @@ namespace DreamLU
             if (ammo != null)
             {
                 int damage = weaponProvider.GetWeaponDamage(heroPositionProvider.WeaponData);
+                _aggregateDataProvider.UpdateDamageCaused(damage);
                 if(damage > 0)
                 {
                     health -= damage;
                     if (health <= 0)
                     {
                         ShutDown();
+                        _aggregateDataProvider.UpdateNumberEnemiesKilled(1);
+                        _aggregateDataProvider.UpdateScore((int)_enemyData.Score);
                     }
                 }
             }

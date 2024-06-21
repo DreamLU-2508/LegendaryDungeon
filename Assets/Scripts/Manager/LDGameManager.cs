@@ -16,8 +16,20 @@ namespace DreamLU
         public CharacterActionID ultimateSkill;
     }
 
+    public interface IAggregateDataProvider
+    {
+        public AggregateData AggregateData { get; set; }
+
+        public void UpdateScore(int score);
+        public void UpdateDamageCaused(int damage);
+        public void UpdateNumberEnemiesKilled(int numberEnemies);
+        public void UpdateWeaponID(ItemID weaponID);
+        public void UpdateRuntime(float time);
+
+    }
+
     [DefaultExecutionOrder(-101)]
-    public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider, IPauseGame 
+    public class LDGameManager : MonoBehaviour, IGameStateProvider, IHeroPositionProvider, IPauseGame, IAggregateDataProvider
     {
         [SerializeField] private CharacterData defaultHeroData;
         [SerializeField] private GameStateMachine gameStateMachine;
@@ -47,6 +59,7 @@ namespace DreamLU
         private CharacterData characterData;
         private bool isEndGameRoom;
         private bool _isShowInventory;
+        private AggregateData _aggregateData;
 
         public GameConfig GameConfig { get { return _gameConfig; } }
         [ShowInInspector, ReadOnly]
@@ -73,6 +86,11 @@ namespace DreamLU
             set => _isShowInventory = value;
         }
 
+        public AggregateData AggregateData
+        {
+            get => _aggregateData;
+            set => _aggregateData = value;
+        }
 
         public GameStateMachine stateMachine { get { return gameStateMachine; } }
 
@@ -163,6 +181,11 @@ namespace DreamLU
                     UnpauseGame();
                 }
             }
+            
+            if (gameStateMachine.CurrentState == StateID.Normal || gameStateMachine.CurrentState == StateID.SelectCard)
+            {
+                UpdateRuntime(Time.deltaTime);
+            }
         }
 
         private void InitializeCharacter(CharacterData character)
@@ -200,6 +223,9 @@ namespace DreamLU
                 defaultSkill = selectedCharacter.defaultAction,
                 ultimateSkill = selectedCharacter.ultimateAction
             };
+
+            _aggregateData = new AggregateData();
+            UpdateWeaponID(character.itemID);
 
             OnInitializeCharacter?.Invoke();
         }
@@ -395,6 +421,7 @@ namespace DreamLU
                         OnEndGame?.Invoke();
                         isEndGameRoom = false;
                         _enemyManager.ClearBoss();
+                        DataManager.Instance.SaveAggregateData(_aggregateData);
                     });  
                 }
                 else
@@ -432,5 +459,34 @@ namespace DreamLU
             
             PoolManager.Instance.DestroyAllPools();
         }
+
+        #region AggregateData
+
+        public void UpdateScore(int score)
+        {
+            _aggregateData.score += score;
+        }
+        
+        public void UpdateDamageCaused(int damage)
+        {
+            _aggregateData.damageCaused += damage;
+        }
+        
+        public void UpdateNumberEnemiesKilled(int numberEnemies)
+        {
+            _aggregateData.numberEnemiesKilled += numberEnemies;
+        }
+        
+        public void UpdateWeaponID(ItemID weaponID)
+        {
+            _aggregateData.weaponID = weaponID;
+        }
+        
+        public void UpdateRuntime(float time)
+        {
+            _aggregateData.time += time;
+        }
+
+        #endregion
     }
 }
