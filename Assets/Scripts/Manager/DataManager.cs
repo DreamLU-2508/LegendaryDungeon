@@ -9,15 +9,19 @@ namespace DreamLU
     [DefaultExecutionOrder(-103)]
     public class DataManager : MonoBehaviour
     {
+        [SerializeField] private int maxAggregateData = 5;
+        
         static DataManager _Instance = null;
         public static DataManager Instance => _Instance;
         
         private const string saveGameFileName = "SaveGame.es3";
         private const string saveKeyGameData = "gameData";
         private const string saveKeyItemInventory = "itemsInventory";
+        private const string saveKeyAggregateData = "aggregateData";
         
         private GlobalGameData _globalGameData;
         private List<GlobalItemDataInventory> _itemsInventory = new List<GlobalItemDataInventory>();
+        private List<AggregateData> _aggregateDatas = new List<AggregateData>();
 
         public GlobalGameData GlobalGameData => _globalGameData;
         public List<GlobalItemDataInventory> ItemsInventory => _itemsInventory;
@@ -53,11 +57,13 @@ namespace DreamLU
             {
                 _globalGameData = ES3.Load<GlobalGameData>(saveKeyGameData, new GlobalGameData());
                 _itemsInventory = ES3.Load<List<GlobalItemDataInventory>>(saveKeyItemInventory, new List<GlobalItemDataInventory>());
+                _aggregateDatas = ES3.Load<List<AggregateData>>(saveKeyAggregateData, new List<AggregateData>());
             }
             catch (Exception e)
             {
                 _globalGameData = new GlobalGameData();
                 _itemsInventory = new List<GlobalItemDataInventory>();
+                _aggregateDatas = new List<AggregateData>();
             }
             // LoadDifficultyCharacterData();
         }
@@ -151,6 +157,21 @@ namespace DreamLU
                 }
                 ES3.Save(saveKeyItemInventory, _itemsInventory);
             }
+        }
+
+        public void SaveAggregateData(AggregateData aggregateData)
+        {
+            if (_aggregateDatas.Count < maxAggregateData)
+            {
+                _aggregateDatas.Add(aggregateData);
+            }
+            else
+            {
+                _aggregateDatas.RemoveAt(0);
+                _aggregateDatas.Add(aggregateData);
+            }
+            
+            ES3.Save(saveKeyAggregateData, _aggregateDatas);
         }
     }
 }

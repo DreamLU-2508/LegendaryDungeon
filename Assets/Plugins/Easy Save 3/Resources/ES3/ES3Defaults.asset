@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     _location: 0
-    path: GoW_Main.es3
+    path: LD_Main.es3
     encryptionType: 0
     compressionType: 0
     encryptionPassword: password
@@ -29,79 +29,22 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - UniTask
-    - ParadoxNotion
-    - MagicaCloth
-    - DOTweenPro.Scripts
+    - VContainer
     - Assembly-CSharp-firstpass
     - Assembly-CSharp
     - DuloGameUI
-    - Dreamteck.Splines
-    - spine-unity
-    - MoreMountains.Tools
-    - AMG.Shared
-    - MoreMountains.Feedbacks
-    - com.rlabrecque.steamworks.net
-    - UniTask.Linq
-    - AMG.DungeonGenerator
-    - MoreMountains.Feedbacks.MMTools
-    - sc.posteffects.runtime
-    - MoreMountains.Feedbacks.NiceVibrations
-    - MoreMountains.Feedbacks.HDRP
-    - AMG.FSM
-    - MoreMountains.Feedbacks.TextMeshPro
-    - VContainer
-    - AMG.System
-    - RootMotion
-    - UniTask.DOTween
+    - Cinemachine
+    - AllIn1SpriteShaderAssembly
     - AllIn1VfxAssmebly
     - TrailsFX
-    - AMG.WeaponSystem
-    - Lofelt.NiceVibrations
-    - Cinemachine
-    - Lofelt.NiceVibrations.Demo
-    - Boxophobic.Utils.Scripts
-    - FastScriptReload.Runtime
-    - MoreMountains.Feedbacks.URP
-    - DOTween.Modules
-    - MoreMountains.Feedbacks.Cinemachine
-    - VoronoiLib
     - AllIn1VfxDemoScriptAssemblies
-    - MoreMountains.Feedbacks.Authorizations
-    - Boxophobic.AtmosphericHeightFog.Runtime
-    - MoreMountains.Feedbacks.PostProcessing
-    - AllIn1SpriteShaderAssembly
-    - Dreamteck.Utilities
-    - XNode
-    - BackendService
-    - Hellmade
     - VContainer.EnableCodeGen
     - AllIn1VfxTexDemoAssembly
-    - UniTask.Addressables
-    - UniTask.TextMeshPro
-    - Rewired_Windows_Functions
-    - RootMotionEditor
-    - MoreMountains.Tools.Editor
-    - Dreamteck.Splines.Editor
-    - DuloGames.Editor
-    - spine-unity-editor
-    - Boxophobic.Utils.Editor
-    - PPv2URPConverters
-    - MoreMountains.Feedbacks.Editor
-    - FastScriptReload.Editor
-    - sc.posteffects.editor
-    - MagicaCloth.Editor
-    - com.rlabrecque.steamworks.net.editor
-    - XNodeEditor
-    - FullscreenEditor
-    - DOTweenPro.EditorScripts
-    - AMG.DungeonGenerator.Editor
-    - VContainer.Editor
-    - Dreamteck.Utilities.Editor
     - TrailsFX.Editor
-    - Boxophobic.AtmosphericHeightFog.Editor
-    - UniTask.Editor
-    - Lofelt.NiceVibrations.Editor
+    - PsdPlugin
+    - DuloGames.Editor
+    - PPv2URPConverters
+    - VContainer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
