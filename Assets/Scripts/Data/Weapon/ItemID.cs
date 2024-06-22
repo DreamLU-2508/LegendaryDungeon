@@ -20,5 +20,6 @@ namespace DreamLU
         
         // Blueprint
         BlueprintSniperRifleGold = 2000,
+        BlueprintQBZ95SMG = 2001,
     }
 }

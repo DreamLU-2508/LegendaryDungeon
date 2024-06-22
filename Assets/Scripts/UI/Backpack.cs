@@ -19,7 +19,7 @@ namespace DreamLU
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && _inventory.ItemData == null)
             {
                 if (root.gameObject.activeSelf)
                 {
@@ -38,7 +38,7 @@ namespace DreamLU
             foreach (var itemDataInventory in DataManager.Instance.ItemsInventory)
             {
                 var data = _itemDataManifest.GetItem(itemDataInventory.itemID);
-                if (data != null)
+                if (data != null && itemDataInventory.isShow)
                 {
                     itemDatas.Add(data);
                 }

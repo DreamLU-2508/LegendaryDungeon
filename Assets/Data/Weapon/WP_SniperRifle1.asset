@@ -17,7 +17,7 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 22ae90703c38c0f4886073fc5585b601, type: 3}
   price: 0
   tier: 0
-  itemDropPrefab: {fileID: 1853344346824876916, guid: 202b4c2e69f244a458146695a9993856, type: 3}
+  itemDropPrefab: {fileID: 1853344346824876916, guid: 6c7c3bbccc33e7c48a04caea528f3f03, type: 3}
   itemType: 0
   quantityLimit: 0
   weaponShootPosition: {x: 1.14, y: 0.06, z: 0}
@@ -25,3 +25,4 @@ MonoBehaviour:
   damage: 10
   cooldown: 2
   _weaponPlayerBasePrefab: {fileID: 1537131022703236176, guid: df33f0e6f6eb41340a3898db99466cdb, type: 3}
+  isLock: 1

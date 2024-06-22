@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace DreamLU
@@ -21,6 +22,7 @@ namespace DreamLU
 
         public GameObject itemDropPrefab;
         public ItemType itemType;
+        [ShowIf("itemType", ItemType.Blueprint)] public ItemID weaponLink;
         public int quantityLimit;
     }
 }

@@ -152,6 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fbef7882991e540baf171b5959286f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAggregateData: 5
+  _weaponDataManifest: {fileID: 11400000, guid: d2faabbdd05baed4ebc7b95a56420cd7, type: 2}
+  _itemDataManifest: {fileID: 0}
+  _dropDataManifest: {fileID: 11400000, guid: fd72a8c61a32043498aac80465df3b23, type: 2}
 --- !u!4 &66725007
 Transform:
   m_ObjectHideFlags: 0
@@ -705,9 +709,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.34203297
-    width: 0.32947585
-    height: 0.3739698
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2678,8 +2682,8 @@ MonoBehaviour:
   goldPrefab: {fileID: 5860379452025718989, guid: 93f0e416d3a0be64a8c42bb2bef2e684, type: 3}
   manaPrefab: {fileID: 8014375108637396812, guid: a3abe529fe556b84dabc957a04a7cecf, type: 3}
   speedPickUp: 12
-  goldRate: 0.4
-  manaRate: 0.5
+  goldRate: 0.3
+  manaRate: 0.2
   weaponRate: 0.02
 --- !u!1 &1936359732
 GameObject:
@@ -4078,6 +4082,30 @@ PrefabInstance:
     - target: {fileID: 7658230844806652329, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
       propertyPath: m_Name
       value: Backpack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349186482535419302, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8783b992c6538004a8d19e9d3444eb57, type: 3}

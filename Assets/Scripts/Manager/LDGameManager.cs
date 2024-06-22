@@ -93,6 +93,9 @@ namespace DreamLU
         }
 
         public GameStateMachine stateMachine { get { return gameStateMachine; } }
+        
+        [ShowInInspector]
+        public StateID StateID => stateMachine.CurrentState;
 
         public CharacterSkill CharacterSkill => _characterSkill;
 

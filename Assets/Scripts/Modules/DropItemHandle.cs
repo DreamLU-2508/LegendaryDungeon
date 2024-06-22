@@ -62,49 +62,49 @@ namespace DreamLU
             ldGameManager = LDGameManager.Instance;
         }
 
-        [Button]
-        public void TestDropItem()
-        {
-            if(characterManager.CharacterTransform == null) return;
-            
-            Vector2 randomDirection = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
-            Vector3 randomPosition = characterManager.CharacterTransform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
-            
-            var item = PoolManager.GetPool(prefab).RetrieveObject(characterManager.CharacterTransform.position, Quaternion.identity, PoolManager.Instance.CurrentTransform).GetComponent<DropItem>();
-            if (item != null)
-            {
-                var spriteRenderer = item.GetComponentInChildren<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    var droppable = _dropDataManifest.RandomChestItemsDroppable(new List<Droppable>()
-                    {
-                        characterManager.Character.WeaponData,
-                    });
-                    if (droppable is ItemData itemData)
-                    {
-                        spriteRenderer.sprite = itemData.itemSprite;
-                        item.Setup(itemData);
-                    }
-                }
-                
-                // if (_bezier.TryGetP2P3(type, characterManager.CharacterTransform.position, randomPosition,
-                //         out var p2, out var p3))
-                // {
-                //     DOTween.To(() => 0f, x =>
-                //     {
-                //         item.transform.position =
-                //             HelperUtilities.CalculateCubicBezierPoint(x, characterManager.CharacterTransform.position, p2, p3,
-                //                 randomPosition);
-                //     }, 1, 1);
-                // }
-                // else
-                // {
-                //     item.transform.DOMove(randomPosition, 1);
-                // }
-
-                item.transform.position = characterManager.CharacterTransform.position;
-            }
-        }
+        // [Button]
+        // public void TestDropItem()
+        // {
+        //     if(characterManager.CharacterTransform == null) return;
+        //     
+        //     Vector2 randomDirection = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
+        //     Vector3 randomPosition = characterManager.CharacterTransform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
+        //     
+        //     var item = PoolManager.GetPool(prefab).RetrieveObject(characterManager.CharacterTransform.position, Quaternion.identity, PoolManager.Instance.CurrentTransform).GetComponent<DropItem>();
+        //     if (item != null)
+        //     {
+        //         var spriteRenderer = item.GetComponentInChildren<SpriteRenderer>();
+        //         if (spriteRenderer != null)
+        //         {
+        //             var droppable = _dropDataManifest.RandomChestItemsDroppable(new List<Droppable>()
+        //             {
+        //                 characterManager.Character.WeaponData,
+        //             });
+        //             if (droppable is ItemData itemData)
+        //             {
+        //                 spriteRenderer.sprite = itemData.itemSprite;
+        //                 item.Setup(itemData);
+        //             }
+        //         }
+        //         
+        //         // if (_bezier.TryGetP2P3(type, characterManager.CharacterTransform.position, randomPosition,
+        //         //         out var p2, out var p3))
+        //         // {
+        //         //     DOTween.To(() => 0f, x =>
+        //         //     {
+        //         //         item.transform.position =
+        //         //             HelperUtilities.CalculateCubicBezierPoint(x, characterManager.CharacterTransform.position, p2, p3,
+        //         //                 randomPosition);
+        //         //     }, 1, 1);
+        //         // }
+        //         // else
+        //         // {
+        //         //     item.transform.DOMove(randomPosition, 1);
+        //         // }
+        //
+        //         item.transform.position = characterManager.CharacterTransform.position;
+        //     }
+        // }
         
         public void DropItemChess(ItemData data, Vector3 startPosition)
         {
@@ -151,7 +151,32 @@ namespace DreamLU
                 typeResources = TypeResources.Mana
             });
             
-            Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(new List<Droppable>());
+            List<Droppable> excludedList = new List<Droppable>();
+            foreach (var dropData in _dropDataManifest.chestItemsDroppable)
+            {
+                if (dropData is ItemData item)
+                {
+                    if (dropData is not WeaponData)
+                    {
+                        if (item.itemType == ItemType.Blueprint )
+                        {
+                            excludedList.Add(dropData);
+                        }
+                    }
+                    
+                    if (DataManager.Instance.WeaponLocks != null)
+                    {
+                        var index = DataManager.Instance.WeaponLocks.FindIndex(x =>
+                            x.weaponID == item.itemID && x.isLock);
+                        if (index != -1)
+                        {
+                            excludedList.Add(dropData);
+                        }
+                    }
+                }
+            }
+            
+            Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(excludedList);
             if (droppable && droppable is WeaponData itemData)
             {
                 chancefTable.AddRange(weaponRate, new DropData()
@@ -219,6 +244,48 @@ namespace DreamLU
                     itemID = dropItem.ItemData.itemID
                 });
                 PoolManager.Release(dropItem.gameObject);
+            }
+        }
+
+        [Button]
+        public void TestDropChest()
+        {
+            var excludedList = new List<Droppable>();
+            if (CharacterManager.Instance.Character.WeaponData != null)
+            {
+                excludedList.Add(CharacterManager.Instance.Character.WeaponData);
+            }
+
+            foreach (var dropData in _dropDataManifest.chestItemsDroppable)
+            {
+                if (dropData is ItemData item)
+                {
+                    if (dropData is not WeaponData)
+                    {
+                        if (item.itemType == ItemType.Blueprint &&
+                            DataManager.Instance.TryGetGlobalItemDataInventory(item.itemID, out int index))
+                        {
+                            excludedList.Add(dropData);
+                        }
+                    }
+                    
+                    if (DataManager.Instance.WeaponLocks != null)
+                    {
+                        var index = DataManager.Instance.WeaponLocks.FindIndex(x =>
+                            x.weaponID == item.itemID && x.isLock);
+                        if (index != -1)
+                        {
+                            excludedList.Add(dropData);
+                        }
+                    }
+                }
+            }
+
+            Droppable droppable = _dropDataManifest.RandomChestItemsDroppable(excludedList);
+            
+            if (droppable && droppable is ItemData itemData)
+            {
+                DropItemChess(itemData, CharacterManager.Instance.CharacterTransform.position);
             }
         }
     }

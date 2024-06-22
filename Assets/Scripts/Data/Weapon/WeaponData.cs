@@ -18,5 +18,7 @@ namespace DreamLU
 
         // [Header("Weapon Player")] 
         public WeaponPlayerBase _weaponPlayerBasePrefab;
+
+        public bool isLock;
     }
 }

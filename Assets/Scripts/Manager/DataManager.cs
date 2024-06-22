@@ -10,6 +10,9 @@ namespace DreamLU
     public class DataManager : MonoBehaviour
     {
         [SerializeField] private int maxAggregateData = 5;
+        [SerializeField] private WeaponDataManifest _weaponDataManifest;
+        [SerializeField] private ItemDataManifest _itemDataManifest;
+        [SerializeField] private DropDataManifest _dropDataManifest;
         
         static DataManager _Instance = null;
         public static DataManager Instance => _Instance;
@@ -18,13 +21,17 @@ namespace DreamLU
         private const string saveKeyGameData = "gameData";
         private const string saveKeyItemInventory = "itemsInventory";
         private const string saveKeyAggregateData = "aggregateData";
+        private const string saveKeyWeaponLocks = "weaponLock";
         
         private GlobalGameData _globalGameData;
         private List<GlobalItemDataInventory> _itemsInventory = new List<GlobalItemDataInventory>();
         private List<AggregateData> _aggregateDatas = new List<AggregateData>();
+        [ShowInInspector]
+        private List<WeaponLock> _weaponLocks = new List<WeaponLock>();
 
         public GlobalGameData GlobalGameData => _globalGameData;
         public List<GlobalItemDataInventory> ItemsInventory => _itemsInventory;
+        public List<WeaponLock> WeaponLocks => _weaponLocks;
 
         public event System.Action OnChangeGlobalData;
 
@@ -52,18 +59,31 @@ namespace DreamLU
         
         void LoadData(bool migrate)
         {
+            var weaponLocks = new List<WeaponLock>();
+            foreach (var weapon in _weaponDataManifest.weapons)
+            {
+                weaponLocks.Add(new WeaponLock()
+                {
+                    weaponID = weapon.itemID,
+                    isLock = weapon.isLock,
+                });
+            }
+            
             // Sample Loading Code
             try
             {
                 _globalGameData = ES3.Load<GlobalGameData>(saveKeyGameData, new GlobalGameData());
                 _itemsInventory = ES3.Load<List<GlobalItemDataInventory>>(saveKeyItemInventory, new List<GlobalItemDataInventory>());
                 _aggregateDatas = ES3.Load<List<AggregateData>>(saveKeyAggregateData, new List<AggregateData>());
+                _weaponLocks = ES3.Load<List<WeaponLock>>(saveKeyWeaponLocks, weaponLocks);
             }
             catch (Exception e)
             {
                 _globalGameData = new GlobalGameData();
                 _itemsInventory = new List<GlobalItemDataInventory>();
                 _aggregateDatas = new List<AggregateData>();
+                _weaponLocks = weaponLocks;
+
             }
             // LoadDifficultyCharacterData();
         }
@@ -138,6 +158,7 @@ namespace DreamLU
                 {
                     itemID = itemDataInventory.itemID,
                     quantity = 1,
+                    isShow = true,
                 });
             }
             ES3.Save(saveKeyItemInventory, _itemsInventory);
@@ -158,6 +179,18 @@ namespace DreamLU
                 ES3.Save(saveKeyItemInventory, _itemsInventory);
             }
         }
+        
+        public void HideItemInventory(ItemID itemID)
+        {
+            if(_itemsInventory.Count <= 0) return;
+            
+            TryGetGlobalItemDataInventory(itemID, out int index);
+            if (index != -1)
+            {
+                _itemsInventory[index].isShow = false;
+                ES3.Save(saveKeyItemInventory, _itemsInventory);
+            }
+        }
 
         public void SaveAggregateData(AggregateData aggregateData)
         {
@@ -172,6 +205,25 @@ namespace DreamLU
             }
             
             ES3.Save(saveKeyAggregateData, _aggregateDatas);
+        }
+        
+        [Button]
+        public void UnlockWeapon(ItemID id)
+        {
+            int index = _weaponLocks.FindIndex(x => x.weaponID == id);
+            if (index != -1 && _weaponLocks[index].isLock)
+            {
+                _weaponLocks[index] = new WeaponLock()
+                {
+                    weaponID = _weaponLocks[index].weaponID,
+                    isLock = false,
+                };
+                ES3.Save(saveKeyWeaponLocks, _weaponLocks);
+            }
+            else
+            {
+                Debug.LogError("Error Save item");
+            }
         }
     }
 }
