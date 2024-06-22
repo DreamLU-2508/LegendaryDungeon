@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e454798868d2d48898452da10de54b, type: 3}
+  m_Name: AMMO_SniperRifle1
+  m_EditorClassIdentifier: 
+  ammoID: 1
+  ammoName: Pistol Ammo
+  isPlayerAmmo: 1
+  ammoSprite: {fileID: 21300000, guid: 903a95884ae4a6441b6c6c32252e8bd6, type: 3}
+  minMaxSpeed: {x: 25, y: 25}
+  range: 12
+  minMaxSpread: {x: 1, y: 1}
+  manaConsumed: 1
+  prefab: {fileID: 2496300576252047035, guid: d5f8a6c24f342994f91e3048f058ce1d, type: 3}
+  vfxPrefabSmoke: {fileID: 7255582679228879866, guid: f9e22016a4859774299dba0a216a36ca, type: 3}
+  vfxPrefabHit: {fileID: 7853615770937549561, guid: 7d9410328c5a1fa4c99425b2fab427ca, type: 3}
