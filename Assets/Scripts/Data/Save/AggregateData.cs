@@ -12,4 +12,10 @@ namespace DreamLU
         public ItemID weaponID;
         public float time;
     }
+    
+    public struct WeaponLock
+    {
+        public ItemID weaponID;
+        public bool isLock;
+    }
 }

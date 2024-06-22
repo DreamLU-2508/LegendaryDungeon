@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e8b64d3d91cbd64d82e4fe1dcfab23e, type: 3}
-  m_Name: ACC_Blueprint_SniperRifleGold
+  m_Name: ACC_Blueprint_QBZ95SMG
   m_EditorClassIdentifier: 
-  itemID: 2000
-  itemName: Blueprint Sniper Rifle Gold
-  itemSprite: {fileID: 21300000, guid: 517b01b734308d9408a2d611a770a66a, type: 3}
-  price: 20
+  itemID: 2001
+  itemName: Blueprint QBZ95 SMG
+  itemSprite: {fileID: 21300000, guid: 4cb0071f428f7be4690e8559a81aa447, type: 3}
+  price: 30
   tier: 0
-  itemDropPrefab: {fileID: 1853344346824876916, guid: de2b21bc805747e4dae9c069868c1c07, type: 3}
+  itemDropPrefab: {fileID: 1853344346824876916, guid: 9506a4c52a4fb1949a288840202dffd7, type: 3}
   itemType: 1
-  weaponLink: 201
+  weaponLink: 200
   quantityLimit: 0

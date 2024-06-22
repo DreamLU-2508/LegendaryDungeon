@@ -18,10 +18,11 @@ MonoBehaviour:
   price: 0
   tier: 0
   itemDropPrefab: {fileID: 1853344346824876916, guid: a7c46b7c67a52eb45ba8c93ed4ad07e0, type: 3}
+  itemType: 0
+  quantityLimit: 0
   weaponShootPosition: {x: 1.13, y: 0.38, z: 0}
-  weaponPrechargeTime: 0
   ammoData: {fileID: 11400000, guid: 2d8793caa7fdae245be2f8c770876624, type: 2}
   damage: 2
   cooldown: 1.1
-  timeReload: 0
   _weaponPlayerBasePrefab: {fileID: 1537131022703236176, guid: dd0cc350710c3fe4e96837edb7e74747, type: 3}
+  isLock: 1

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestItemsDroppable:
   - {fileID: 11400000, guid: 1e6fabc2c0fafe44aac06f3d1ddeb66f, type: 2}
+  - {fileID: 11400000, guid: 810bfd0949554c041be1324905246bff, type: 2}
   - {fileID: 11400000, guid: dce6a017acf7f3a4f94e51a931ae6d00, type: 2}
   - {fileID: 11400000, guid: 981a955ae3a1bc34d80f75fda3f30da8, type: 2}
   - {fileID: 11400000, guid: 9061d47ed65641946b9bee9740acf01a, type: 2}
+  - {fileID: 11400000, guid: 71827fcadb876074d9a5bec7117f433c, type: 2}

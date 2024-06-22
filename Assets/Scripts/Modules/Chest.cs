@@ -63,12 +63,25 @@ namespace DreamLU
 
             foreach (var dropData in _dropDataManifest.chestItemsDroppable)
             {
-                if (dropData is ItemData item && dropData is not WeaponData)
+                if (dropData is ItemData item)
                 {
-                    if (item.itemType == ItemType.Blueprint &&
-                        DataManager.Instance.TryGetGlobalItemDataInventory(item.itemID, out int index))
+                    if (dropData is not WeaponData)
                     {
-                        excludedList.Add(dropData);
+                        if (item.itemType == ItemType.Blueprint &&
+                            DataManager.Instance.TryGetGlobalItemDataInventory(item.itemID, out int index))
+                        {
+                            excludedList.Add(dropData);
+                        }
+                    }
+                    
+                    if (DataManager.Instance.WeaponLocks != null)
+                    {
+                        var index = DataManager.Instance.WeaponLocks.FindIndex(x =>
+                            x.weaponID == item.itemID && x.isLock);
+                        if (index != -1)
+                        {
+                            excludedList.Add(dropData);
+                        }
                     }
                 }
             }

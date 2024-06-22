@@ -9,5 +9,6 @@ namespace DreamLU
     {
         public ItemID itemID;
         public int quantity;
+        public bool isShow;
     }
 }
