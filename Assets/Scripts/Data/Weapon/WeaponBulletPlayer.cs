@@ -9,9 +9,11 @@ namespace DreamLU
     {
         [SerializeField] private bool isColt;
         [ShowIf("isColt"), SerializeField] private int numberColt;
-        
+
         public override void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon, Vector3 mousePos)
         {
+            base.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, isSecondWeapon, mousePos);
+            
             if(_weaponData == null) return;
 
             AmmoData ammoData = _weaponData.ammoData;
@@ -28,14 +30,22 @@ namespace DreamLU
                 var ammo = ammoGO.GetComponent<Ammo>();
                 if (ammo != null)
                 {
+                    if (_weaponData.sound != null)
+                    {
+                        SoundEffectManager.Instance.PlaySoundEffect(_weaponData.sound);
+                    }
                     ammo.OnCreateAmmo(ammoData, aimAngle, weaponAimAngle, weaponAimDirectionVector);
                     count = count - 1;
                 }
                 
                 if (isColt)
                 {
-                    StartCoroutine(WaitShot(() =>
+                    _coroutine = StartCoroutine(WaitShot(() =>
                     {
+                        if (_weaponData.sound != null)
+                        {
+                            SoundEffectManager.Instance.PlaySoundEffect(_weaponData.sound);
+                        }
                         var ammoGO2 = PoolManager.GetPool(ammoPrefab).RetrieveObject(
                             isSecondWeapon
                                 ? _heroPosition.GetWeaponSecondShootPosition()

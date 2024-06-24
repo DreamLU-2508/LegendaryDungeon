@@ -25,6 +25,7 @@ namespace DreamLU
         protected bool _isInAction;
         [ShowInInspector, ReadOnly]
         protected bool _isReady;
+        protected Coroutine _coroutine;
         // private TrailEffect _trailEffect;
         
         protected IWeaponProvider _statProvider;
@@ -89,6 +90,14 @@ namespace DreamLU
             _statProvider = CoreLifetimeScope.SharedContainer.Resolve<IWeaponProvider>();
             _characterActor = CoreLifetimeScope.SharedContainer.Resolve<ICharacterActor>();
             _heroPosition = CoreLifetimeScope.SharedContainer.Resolve<IHeroPositionProvider>();
+            PoolManager.Instance.OnDestroyAllPools += () =>
+            {
+                if (_coroutine != null)
+                {
+                    StopCoroutine(_coroutine);
+                    _coroutine = null;
+                }
+            };
         }
 
         protected virtual void Start()
@@ -181,6 +190,7 @@ namespace DreamLU
         
         public virtual void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon, Vector3 mousePos)
         {
+            
         }
     }
 

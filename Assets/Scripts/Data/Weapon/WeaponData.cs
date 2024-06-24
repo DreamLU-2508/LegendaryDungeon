@@ -20,5 +20,6 @@ namespace DreamLU
         public WeaponPlayerBase _weaponPlayerBasePrefab;
 
         public bool isLock;
+        public SoundEffectSO sound;
     }
 }

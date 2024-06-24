@@ -12,6 +12,8 @@ namespace DreamLU
         public override void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector,
             bool isSecondWeapon, Vector3 mousePos)
         {
+            base.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, isSecondWeapon, mousePos);
+            
             var shots = projectileCount <= 0 ? 1 : projectileCount;
         
             AmmoData ammoData = _weaponData.ammoData;
@@ -20,6 +22,10 @@ namespace DreamLU
                 _characterActor.MinusMana(ammoData.manaConsumed,out bool isSuccess);
                 if(!isSuccess) return;
                 
+                if (_weaponData.sound != null)
+                {
+                    SoundEffectManager.Instance.PlaySoundEffect(_weaponData.sound);
+                }
                 StartCooldown();
                 for (int i = 0; i < shots; i++)
                 {

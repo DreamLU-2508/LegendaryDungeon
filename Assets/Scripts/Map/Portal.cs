@@ -27,7 +27,6 @@ namespace DreamLU
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            Debug.LogError("OnTriggerExit2D");
             var character = collision.GetComponent<Character>();
             if (character != null)
             {

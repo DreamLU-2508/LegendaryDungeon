@@ -45,10 +45,13 @@ namespace DreamLU
         
         public List<PoolSource> predefinedPools;
         public List<DynamicPoolSource> dynamicPools;
-        
+
+        public Action OnDestroyAllPools;
+
         [Button]
         public void DestroyAllPools()
         {
+            OnDestroyAllPools?.Invoke();
             var poolsInstance = this.GetComponentsInChildren<PoolInstanceID>(true);
             if (poolsInstance != null)
             {

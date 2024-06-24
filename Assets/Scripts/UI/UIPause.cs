@@ -20,6 +20,7 @@ namespace DreamLU.UI
             
             gameStateMachine = GameStateMachine.Instance;
             gameStateMachine.onStateEnter += OnStateEnter;
+            _gameStateProvider.OnUISetting += OnUISetting;
         }
 
         private void OnStateEnter(StateID stateID)
@@ -42,6 +43,25 @@ namespace DreamLU.UI
         public void ActionResume()
         {
             _pauseGame.UnpauseGame();
+        }
+        
+        public void ActionOption()
+        {
+            LDGameManager.Instance.ShowUISettings();
+        }
+
+        public void OnUISetting(bool isShow)
+        {
+            if(gameStateMachine.IsState(StateID.GameStart)) return;
+            
+            if (isShow)
+            {
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.gameObject.SetActive(true);
+            }
         }
     }
 

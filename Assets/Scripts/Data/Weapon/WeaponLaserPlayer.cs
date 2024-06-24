@@ -7,9 +7,10 @@ namespace DreamLU
     public class WeaponLaserPlayer : WeaponPlayerBase
     {
         private LaserBase laserBase = null;
-        
+
         public override void Activate(float aimAngle, float weaponAimAngle, Vector3 weaponAimDirectionVector, bool isSecondWeapon, Vector3 mousePos)
         {
+            base.Activate(aimAngle, weaponAimAngle, weaponAimDirectionVector, isSecondWeapon, mousePos);
             if (_attackState != AttackState.Attack)
             {
                 BeginAction();

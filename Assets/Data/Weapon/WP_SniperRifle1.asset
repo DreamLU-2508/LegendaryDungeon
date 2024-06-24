@@ -19,6 +19,7 @@ MonoBehaviour:
   tier: 0
   itemDropPrefab: {fileID: 1853344346824876916, guid: 6c7c3bbccc33e7c48a04caea528f3f03, type: 3}
   itemType: 0
+  weaponLink: 0
   quantityLimit: 0
   weaponShootPosition: {x: 1.14, y: 0.06, z: 0}
   ammoData: {fileID: 11400000, guid: 006a73897f91f2848bf4462e47f1a673, type: 2}
@@ -26,3 +27,4 @@ MonoBehaviour:
   cooldown: 2
   _weaponPlayerBasePrefab: {fileID: 1537131022703236176, guid: df33f0e6f6eb41340a3898db99466cdb, type: 3}
   isLock: 1
+  sound: {fileID: 11400000, guid: 4d8f002f62998d240b073263dc472c2a, type: 2}
