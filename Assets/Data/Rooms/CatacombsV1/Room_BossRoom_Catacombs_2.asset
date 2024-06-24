@@ -15,6 +15,7 @@ MonoBehaviour:
   guid: 97bb3a82baaeb1543b7fca78f02d3860
   prefab: {fileID: 4327421925113694216, guid: 7fcc67dc1627fff47bfa86f5e4c58437, type: 3}
   previousPrefab: {fileID: 4327421925113694216, guid: 7fcc67dc1627fff47bfa86f5e4c58437, type: 3}
+  isRoomEndGame: 0
   roomType: 4
   lowerBounds: {x: -5, y: 0}
   upperBounds: {x: 45, y: 44}
@@ -57,4 +58,8 @@ MonoBehaviour:
     isUnavailable: 0
   spawnPositionArray: []
   enemyAmount: 0
+  positionChest: {x: 0, y: 0}
   positionTele: {x: 21, y: 21}
+  positionSpawnEndGame: {x: 0, y: 0}
+  battleMusic: {fileID: 11400000, guid: 897764aeb49367c4baf446f5776d2b68, type: 2}
+  ambientMusic: {fileID: 11400000, guid: a3b52830a05c1ef4ebad68dd1ce5e302, type: 2}

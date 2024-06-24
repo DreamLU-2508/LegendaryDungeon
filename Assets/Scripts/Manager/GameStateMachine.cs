@@ -16,6 +16,7 @@ namespace DreamLU
         Victory, // end dungeon
         StageVictory, // end game
         SelectCard,
+        Select
     }
 
     public class WaitingState
@@ -45,6 +46,7 @@ namespace DreamLU
 
         public System.Action<StateID> onStateEnter;
         public System.Action<StateID, StateID> onStateExit;
+        public MusicTrackSO music;
 
         public bool IsState(StateID stateID)
         {
@@ -63,6 +65,7 @@ namespace DreamLU
         {
             _currentState = StateID.GameStart;
             onStateEnter?.Invoke(_currentState);
+            MusicManager.Instance.PlayMusic(music, 0.2f, 2f);
         }
 
         public string CurrentStateName()

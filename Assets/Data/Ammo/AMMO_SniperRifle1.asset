@@ -19,7 +19,7 @@ MonoBehaviour:
   minMaxSpeed: {x: 25, y: 25}
   range: 12
   minMaxSpread: {x: 1, y: 1}
-  manaConsumed: 1
+  manaConsumed: 3
   prefab: {fileID: 2496300576252047035, guid: d5f8a6c24f342994f91e3048f058ce1d, type: 3}
   vfxPrefabSmoke: {fileID: 7255582679228879866, guid: f9e22016a4859774299dba0a216a36ca, type: 3}
   vfxPrefabHit: {fileID: 7853615770937549561, guid: 7d9410328c5a1fa4c99425b2fab427ca, type: 3}

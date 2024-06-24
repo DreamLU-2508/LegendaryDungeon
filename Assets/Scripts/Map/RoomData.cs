@@ -47,6 +47,10 @@ namespace DreamLU
         [ShowIf("isRoomEndGame")]
         public Vector2Int positionSpawnEndGame;
 
+        [Header("Music")] 
+        public MusicTrackSO battleMusic;
+        public MusicTrackSO ambientMusic;
+
         #region Validation
 
 #if UNITY_EDITOR

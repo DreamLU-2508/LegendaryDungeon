@@ -98,12 +98,13 @@ namespace DreamLU
             
             if (isSpawnEnemy && _enemies.Count < maxEnemyInRoom && _waveEnemy != null)
             {
-                if (countScore >= _waveEnemy.score)
+                if (countScore >= _waveEnemy.score && _enemies.Count <= 0)
                 {
                     ClearRoom();
+                    MusicManager.Instance.PlayMusic(_currentRoom.InstancedRoom.RoomData.ambientMusic, 0.2f, 2f);
                 }
                 
-                if (timeCount >= timeDelaySpawn)
+                if (timeCount >= timeDelaySpawn && countScore < _waveEnemy.score)
                 {
                     SpawnEnemy();
                 }
@@ -120,6 +121,7 @@ namespace DreamLU
                 if (room.InstancedRoom.EnemyAmount > 0 && !_currentRoom.InstancedRoom.IsClearEnemy)
                 {
                     isSpawnEnemy = true;
+                    MusicManager.Instance.PlayMusic(room.InstancedRoom.RoomData.battleMusic, 0.2f, 2f);
                     spawnPositionArray = room.InstancedRoom.SpawnPositionArray;
                     _waveEnemy = _levelProvider.GetWaveEnemy(_currentRoom.InstancedRoom.RoomType);
                 }

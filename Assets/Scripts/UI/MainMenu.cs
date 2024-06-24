@@ -21,7 +21,7 @@ namespace DreamLU.UI
 
         public void OptionsGame()
         {
-            Debug.LogError("Options Game");
+            LDGameManager.Instance.ShowUISettings();
         }
 
         public void ExitGame()

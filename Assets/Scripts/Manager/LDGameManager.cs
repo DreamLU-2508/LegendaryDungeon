@@ -7,6 +7,7 @@ using DreamLU.AStar;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Audio;
 
 namespace DreamLU
 {
@@ -43,6 +44,7 @@ namespace DreamLU
         [SerializeField] private CardManager _cardManager;
         [SerializeField] private CharacterManager _characterManager;
         [SerializeField] private MiniMap _miniMap;
+        [SerializeField] private UISettings uiSettings;
 
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponDataManifest _weaponDataManifest;
@@ -109,6 +111,7 @@ namespace DreamLU
         public event System.Action OnInitializeCharacter;
         public event System.Action OnStartGame;
         public event System.Action OnEndGame;
+        public event Action<bool> OnUISetting;
 
         private void Awake()
         {
@@ -181,7 +184,15 @@ namespace DreamLU
                 }
                 else if (gameStateMachine.IsState(StateID.Pause))
                 {
-                    UnpauseGame();
+                    if (!uiSettings.IsShown())
+                    {
+                        UnpauseGame();
+                    }
+                    else
+                    {
+                        HideUISettings();
+                    }
+                    return;
                 }
             }
             
@@ -356,6 +367,7 @@ namespace DreamLU
 
         public void OnEnterRoom(Room roomData)
         {
+            MusicManager.Instance.PlayMusic(roomData.InstancedRoom.RoomData.ambientMusic, 0.2f, 2f);
             _enemyManager.OnEnterRoom(roomData);
             if (isTestAStar)
             {
@@ -491,5 +503,22 @@ namespace DreamLU
         }
 
         #endregion
+        
+        public void ShowUISettings()
+        {
+            uiSettings.ShowSelf();
+            OnUISetting?.Invoke(true);
+        }
+
+        public void HideUISettings()
+        {
+            uiSettings.HideSelf();
+            OnUISetting?.Invoke(false);
+
+            if (gameStateMachine.IsState(StateID.Normal))
+            {
+                gameStateMachine.ForceChangeState(StateID.Pause);
+            }
+        }
     }
 }

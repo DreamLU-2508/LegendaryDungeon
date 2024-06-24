@@ -21,5 +21,6 @@ namespace DreamLU
         public event System.Action OnStartGame;
         
         public event System.Action OnEndGame;
+        public event System.Action<bool> OnUISetting;
     }
 }
