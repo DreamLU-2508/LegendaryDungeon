@@ -40,12 +40,15 @@ MonoBehaviour:
     - AllIn1VfxDemoScriptAssemblies
     - VContainer.EnableCodeGen
     - AllIn1VfxTexDemoAssembly
+    - AstarPathfindingProject
     - TrailsFX.Editor
     - PsdPlugin
     - DuloGames.Editor
     - PPv2URPConverters
     - VContainer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
+    - AstarPathfindingProjectEditor
+    - PackageToolsEditor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
